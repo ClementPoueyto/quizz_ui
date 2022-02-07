@@ -9,7 +9,9 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,8 +23,8 @@ public class Main {
 
         CharStream stream = getCharStream(args);
         App theApp = buildModel(stream);
-        exportToCode(theApp);
-
+        //exportToCode(theApp);
+        exportToFile(theApp);
     }
 
     private static CharStream getCharStream(String[] args) throws IOException {
@@ -54,6 +56,17 @@ public class Main {
         Visitor codeGenerator = new ToWiring();
         theApp.accept(codeGenerator);
         System.out.println(codeGenerator.getResult());
+    }
+
+    private static void exportToFile(App theApp) throws IOException {
+        Visitor<StringBuffer> codeGenerator = new ToWiring();
+        theApp.accept(codeGenerator);
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter("output/src/App.js"));
+        StringBuffer buffer = codeGenerator.getResult();
+        writer.write(buffer.toString());
+        System.out.println(buffer);
+        writer.close();
     }
 
 }

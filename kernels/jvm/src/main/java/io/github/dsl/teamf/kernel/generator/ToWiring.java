@@ -21,11 +21,14 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(App app) {
 		context.put("pass", PASS.ONE); //import components
+		w("import { Grommet,");
+		w(" } from 'grommet'\n");
+		context.put("pass", PASS.TWO); //import components
 		w("function App() {\n");
 		w("\treturn (\n");
 		w("\t\t<Grommet>\n");
 		w("\t\t</Grommet>\n");
-		w("\t);\n}");
+		w("\t);\n}\n");
 		w("export default App;\n");
 
 	}
