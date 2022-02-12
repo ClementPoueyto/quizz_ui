@@ -2,10 +2,11 @@ package io.github.dsl.teamf.kernel;
 
 import io.github.dsl.teamf.kernel.generator.Visitor;
 import io.github.dsl.teamf.kernel.generator.Visitable;
+import io.github.dsl.teamf.kernel.structural.Grid;
 
 
 public class App implements NamedElement, Visitable {
-
+	private Grid grid;
 	private String name;
 
 	@Override
@@ -18,6 +19,13 @@ public class App implements NamedElement, Visitable {
 		this.name = name;
 	}
 
+	public Grid getGrid() {
+		return grid;
+	}
+
+	public void setGrid(Grid grid) {
+		this.grid = grid;
+	}
 
 	@Override
 	public void accept(Visitor visitor) {
