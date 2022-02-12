@@ -1,7 +1,6 @@
 import io.github.dsl.teamf.antlr.ModelBuilder;
 import io.github.dsl.teamf.antlr.StopErrorListener;
-import io.github.dsl.teamf.antlr.grammar.ArduinomlLexer;
-import io.github.dsl.teamf.antlr.grammar.ArduinomlParser;
+import io.github.dsl.teamf.antlr.grammar.*;
 import io.github.dsl.teamf.kernel.App;
 import io.github.dsl.teamf.kernel.generator.ToWiring;
 import io.github.dsl.teamf.kernel.generator.Visitor;
@@ -36,11 +35,11 @@ public class Main {
     }
 
     private static App buildModel(CharStream stream) {
-        ArduinomlLexer lexer   = new ArduinomlLexer(stream);
+        QuizzLexer lexer   = new QuizzLexer(stream);
         lexer.removeErrorListeners();
         lexer.addErrorListener(new StopErrorListener());
 
-        ArduinomlParser parser  = new ArduinomlParser(new CommonTokenStream(lexer));
+        QuizzParser parser  = new QuizzParser(new CommonTokenStream(lexer));
         parser.removeErrorListeners();
         parser.addErrorListener(new StopErrorListener());
 

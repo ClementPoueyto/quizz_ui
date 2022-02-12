@@ -4,6 +4,6 @@ package io.github.dsl.teamf.kernel.structural;
  * ( il en manque )
  * */
 public enum Color {
-    red, blue, green, yellow, orange, grey, violet, pink
+    RED, BLUE, GREEN, YELLOW, ORANGE, GREY, VIOLET, PINK
 
 }

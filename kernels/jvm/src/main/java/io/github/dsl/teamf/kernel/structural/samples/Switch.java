@@ -33,7 +33,7 @@ public class Switch {
 		header.setName("test");
 		header.setStart(new int[]{0, 1});
 		header.setEnd(new int[]{0, 1});
-		header.setColor(Color.blue);
+		header.setColor(Color.BLUE);
 		grid.getZones().add(header);
 		theSwitch.setGrid(grid);
 		// Generating Code
