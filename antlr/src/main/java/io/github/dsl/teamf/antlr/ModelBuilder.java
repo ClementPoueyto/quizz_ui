@@ -2,7 +2,6 @@ package io.github.dsl.teamf.antlr;
 
 import io.github.dsl.teamf.antlr.grammar.*;
 import io.github.dsl.teamf.kernel.App;
-import io.github.dsl.teamf.kernel.structural.Color;
 import io.github.dsl.teamf.kernel.structural.Grid;
 import io.github.dsl.teamf.kernel.structural.Size;
 import io.github.dsl.teamf.kernel.structural.Zone;
@@ -79,7 +78,7 @@ public class ModelBuilder extends QuizzBaseListener {
     @Override
     public void enterZone(QuizzParser.ZoneContext ctx) {
         Zone zone = new Zone();
-        zone.setColor(Color.valueOf(ctx.color.getText()));
+        zone.setColor(ctx.color.getText());
         zone.setName(ctx.name.getText());
         zone.setStart(new int[]{Integer.parseInt(ctx.column_start.getText()),Integer.parseInt(ctx.row_start.getText())});
         zone.setEnd(new int[]{Integer.parseInt(ctx.column_end.getText()),Integer.parseInt(ctx.row_end.getText())});

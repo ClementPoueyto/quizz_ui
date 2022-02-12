@@ -1,8 +1,10 @@
 package io.github.dsl.teamf.kernel.generator;
 
 import io.github.dsl.teamf.kernel.App;
+import io.github.dsl.teamf.kernel.behavioral.QuizInfo;
 import io.github.dsl.teamf.kernel.structural.Grid;
 import io.github.dsl.teamf.kernel.structural.Size;
+import io.github.dsl.teamf.kernel.structural.Theme;
 import io.github.dsl.teamf.kernel.structural.Zone;
 
 
@@ -85,5 +87,15 @@ public class ToWiring extends Visitor<StringBuffer> {
 			}
 			w("\t\t\t</Grid>\n");
 		}
+	}
+
+	@Override
+	public void visit(Theme theme) {
+
+	}
+
+	@Override
+	public void visit(QuizInfo quizInfo) {
+
 	}
 }

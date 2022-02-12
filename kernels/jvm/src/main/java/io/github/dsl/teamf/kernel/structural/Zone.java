@@ -1,6 +1,7 @@
 package io.github.dsl.teamf.kernel.structural;
 
 import io.github.dsl.teamf.kernel.NamedElement;
+import io.github.dsl.teamf.kernel.behavioral.QuizElement;
 import io.github.dsl.teamf.kernel.generator.Visitable;
 import io.github.dsl.teamf.kernel.generator.Visitor;
 
@@ -8,9 +9,10 @@ import io.github.dsl.teamf.kernel.generator.Visitor;
 public class Zone implements NamedElement, Visitable {
 
     private String name;
-    private Color color;
+    private String color;
     private int[] start;
     private int[] end;
+    private QuizElement quizElement;
 
     @Override
     public void setName(String name) {
@@ -27,11 +29,11 @@ public class Zone implements NamedElement, Visitable {
         visitor.visit(this);
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
@@ -49,5 +51,13 @@ public class Zone implements NamedElement, Visitable {
 
     public void setEnd(int[] end) {
         this.end = end;
+    }
+
+    public QuizElement getQuizElement() {
+        return quizElement;
+    }
+
+    public void setQuizElement(QuizElement quizElement) {
+        this.quizElement = quizElement;
     }
 }
