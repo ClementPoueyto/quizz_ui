@@ -7,6 +7,7 @@ public class TextComponent extends UiComponent{
     private Size size;
     private TextAlign textAlign = TextAlign.center;
     private String color;
+    private String variableName;
 
     public Size getSize() {
         return size;
@@ -30,6 +31,14 @@ public class TextComponent extends UiComponent{
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getVariableName() {
+        return variableName;
+    }
+
+    public void setVariableName(String variableName) {
+        this.variableName = variableName;
     }
 
     @Override

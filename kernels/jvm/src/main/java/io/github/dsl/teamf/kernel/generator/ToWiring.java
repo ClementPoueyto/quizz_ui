@@ -27,37 +27,43 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(App app) {
 		context.put("pass", PASS.ONE); //import components
+		w("import React, { Component } from 'react'\n");
 		w("import { Grommet, ");
 		app.getGrid().accept(this);
 		w(" } from 'grommet'\n");
+		w("var data = require('./quiz.json');\n\n");
+		w("export default class App extends Component {\n\n");
+		w("\tconstructor() {\n" +
+				"\t\tsuper();\n" +
+				"\t\tthis.state = data\n" +
+				"\t}\n\n");
 		context.put("pass", PASS.TWO); //describe components
-		w("function App() {\n");
-		w("\treturn (\n");
-		w("\t\t<Grommet>\n");
+		w("\trender() {\n");
+		w("\t\treturn (\n");
+		w("\t\t\t<Grommet>\n");
 
 		app.getGrid().accept(this);
 		context.put("pass", PASS.THREE); //describe components
 		app.getGrid().accept(this);
 
 
-		w("\t\t</Grommet>\n");
-		w("\t);\n}\n");
-		w("export default App;\n");
+		w("\t\t\t</Grommet>\n");
+		w("\t\t);\n\t}\n}\n");
 
 	}
 
 	@Override
 	public void visit(Zone zone) {
 		if(context.get("pass") == PASS.TWO) {
-			w(String.format("\t\t\t\t\t{ name: \'%s\', start: [%d, %d], end: [%d, %d] },\n", zone.getName(), zone.getStart()[0], zone.getStart()[1], zone.getEnd()[0], zone.getEnd()[1]));
+			w(String.format("\t\t\t\t\t\t{ name: \'%s\', start: [%d, %d], end: [%d, %d] },\n", zone.getName(), zone.getStart()[0], zone.getStart()[1], zone.getEnd()[0], zone.getEnd()[1]));
 		}
 		if(context.get("pass") == PASS.THREE){
-			w(String.format("\t\t\t\t<Box gridArea=\'%s\' background=\'%s\' >\n", zone.getName(), zone.getColor()));
+			w(String.format("\t\t\t\t\t<Box gridArea=\'%s\' background=\'%s\' >\n", zone.getName(), zone.getColor()));
 
 			if(zone.getQuizElement()!=null){
 				zone.getQuizElement().accept(this);
 			}
-			w("\t\t\t\t</Box>\n");
+			w("\t\t\t\t\t</Box>\n");
 		}
 
 
@@ -69,29 +75,29 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w("Grid, Box, Text");
 		}
 		if (context.get("pass") == PASS.TWO) {
-			w("\t\t\t<Grid\n");
-			w("\t\t\t\trows={[");
+			w("\t\t\t\t<Grid\n");
+			w("\t\t\t\t\trows={[");
 			for (Size row : grid.getRows()) {
 				w(String.format("\'%s\',", row));
 			}
 			w("]}\n");
-			w("\t\t\t\tcolumns={[");
+			w("\t\t\t\t\tcolumns={[");
 			for (Size col : grid.getColumns()) {
 				w(String.format("\'%s\',", col));
 			}
 			w("]}\n");
-			w(String.format("\t\t\t\tgap=\'%s\'\n", grid.getGap()));
-			w("\t\t\t\tareas={[\n");
+			w(String.format("\t\t\t\t\tgap=\'%s\'\n", grid.getGap()));
+			w("\t\t\t\t\tareas={[\n");
 			for (Zone zone : grid.getZones()) {
 				zone.accept(this);
 			}
-			w("\t\t\t\t]}\n\t\t\t>\n");
+			w("\t\t\t\t\t]}\n\t\t\t\t>\n");
 		}
 		if (context.get("pass") == PASS.THREE) {
 			for (Zone zone : grid.getZones()) {
 				zone.accept(this);
 			}
-			w("\t\t\t</Grid>\n");
+			w("\t\t\t\t</Grid>\n");
 		}
 	}
 
@@ -115,14 +121,17 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(TextComponent textComponent) {
 		if(context.get("pass") == PASS.THREE) {
-			w("\t\t\t\t\t<Text");
+			w("\t\t\t\t\t\t<Text");
 			if (textComponent.getSize() != null) {
 				w(String.format(" size=\'%s\' ", textComponent.getSize()));
 			}
 			if (textComponent.getTextAlign() != null) {
 				w(String.format(" textAlign=\'%s\' ", textComponent.getTextAlign()));
 			}
-			w(String.format(" >simple text</Text>\n"));
+			if (textComponent.getColor() != null) {
+				w(String.format(" color=\'%s\' ", textComponent.getColor()));
+			}
+			w(String.format(" >{this.state.%s}</Text>\n", textComponent.getVariableName()));
 		}
 
 	}

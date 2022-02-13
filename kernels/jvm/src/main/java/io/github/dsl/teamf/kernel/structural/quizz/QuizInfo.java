@@ -18,6 +18,7 @@ public class QuizInfo extends QuizElement {
     }
 
     public void setTitle(TextComponent title) {
+        title.setVariableName("title");
         this.title = title;
     }
 
@@ -26,6 +27,7 @@ public class QuizInfo extends QuizElement {
     }
 
     public void setTheme(TextComponent theme) {
+        theme.setVariableName("theme");
         this.theme = theme;
     }
 }

@@ -21,7 +21,7 @@ public class Switch {
 		App theSwitch = new App();
 		theSwitch.setName("Switch!");
 		Grid grid = new Grid();
-		Size row1 = Size.medium;
+		Size row1 = Size.small;
 		Size row2 = Size.medium;
 
 		Size col1 = Size.small;
@@ -44,8 +44,15 @@ public class Switch {
 		header.setName("header");
 		header.setStart(new int[]{0, 0});
 		header.setEnd(new int[]{1, 0});
-		header.setColor("blue");
+		header.setColor("light-5");
 		grid.getZones().add(header);
+
+		Zone middle = new Zone();
+		middle.setName("middle");
+		middle.setStart(new int[]{1,1});
+		middle.setEnd(new int[]{1,1});
+		middle.setColor("light-3");
+		grid.getZones().add(middle);
 
 		Zone left = new Zone();
 		left.setName("left");
