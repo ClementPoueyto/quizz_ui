@@ -1,7 +1,7 @@
-package io.github.dsl.teamf.kernel.structural;
+package io.github.dsl.teamf.kernel.structural.ui;
 
 import io.github.dsl.teamf.kernel.NamedElement;
-import io.github.dsl.teamf.kernel.behavioral.QuizElement;
+import io.github.dsl.teamf.kernel.structural.quizz.QuizElement;
 import io.github.dsl.teamf.kernel.generator.Visitable;
 import io.github.dsl.teamf.kernel.generator.Visitor;
 

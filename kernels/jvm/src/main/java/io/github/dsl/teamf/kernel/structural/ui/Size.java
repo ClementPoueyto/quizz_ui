@@ -1,4 +1,4 @@
-package io.github.dsl.teamf.kernel.structural;
+package io.github.dsl.teamf.kernel.structural.ui;
 
 /**
  * Taille d'un bloc dans la grille

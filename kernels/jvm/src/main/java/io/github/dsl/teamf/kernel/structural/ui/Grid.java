@@ -1,4 +1,4 @@
-package io.github.dsl.teamf.kernel.structural;
+package io.github.dsl.teamf.kernel.structural.ui;
 
 import io.github.dsl.teamf.kernel.generator.Visitable;
 import io.github.dsl.teamf.kernel.generator.Visitor;

@@ -2,7 +2,7 @@ package io.github.dsl.teamf.kernel;
 
 import io.github.dsl.teamf.kernel.generator.Visitor;
 import io.github.dsl.teamf.kernel.generator.Visitable;
-import io.github.dsl.teamf.kernel.structural.Grid;
+import io.github.dsl.teamf.kernel.structural.ui.Grid;
 
 
 public class App implements NamedElement, Visitable {

@@ -1,18 +1,22 @@
-import { Grommet, Grid, Box } from 'grommet'
+import { Grommet, Grid, Box, Text } from 'grommet'
 function App() {
 	return (
 		<Grommet>
 			<Grid
-				rows={['small','medium','large','small',]}
-				columns={['large','small','medium','xsmall',]}
-				gap='xxsmall'
+				rows={['medium','medium',]}
+				columns={['small','large',]}
+				gap='null'
 				areas={[
-					{ name: 'first', start: [0, 0], end: [1, 2] },
-					{ name: 'second', start: [2, 2], end: [3, 3] },
+					{ name: 'header', start: [0, 0], end: [1, 0] },
+					{ name: 'left', start: [0, 0], end: [0, 1] },
 				]}
 			>
-				<Box gridArea='first' background='RED' />
-				<Box gridArea='second' background='BLUE' />
+				<Box gridArea='header' background='blue' >
+					<Text size='large'  textAlign='center'  >simple text</Text>
+					<Text size='medium'  textAlign='center'  >simple text</Text>
+				</Box>
+				<Box gridArea='left' background='brand' >
+				</Box>
 			</Grid>
 		</Grommet>
 	);

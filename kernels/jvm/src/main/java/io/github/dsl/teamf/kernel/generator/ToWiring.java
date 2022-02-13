@@ -1,11 +1,12 @@
 package io.github.dsl.teamf.kernel.generator;
 
 import io.github.dsl.teamf.kernel.App;
-import io.github.dsl.teamf.kernel.behavioral.QuizInfo;
-import io.github.dsl.teamf.kernel.structural.Grid;
-import io.github.dsl.teamf.kernel.structural.Size;
-import io.github.dsl.teamf.kernel.structural.Theme;
-import io.github.dsl.teamf.kernel.structural.Zone;
+import io.github.dsl.teamf.kernel.behavioral.TextComponent;
+import io.github.dsl.teamf.kernel.structural.quizz.QuizInfo;
+import io.github.dsl.teamf.kernel.structural.ui.Grid;
+import io.github.dsl.teamf.kernel.structural.ui.Size;
+import io.github.dsl.teamf.kernel.structural.ui.Theme;
+import io.github.dsl.teamf.kernel.structural.ui.Zone;
 
 
 /**
@@ -51,7 +52,12 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w(String.format("\t\t\t\t\t{ name: \'%s\', start: [%d, %d], end: [%d, %d] },\n", zone.getName(), zone.getStart()[0], zone.getStart()[1], zone.getEnd()[0], zone.getEnd()[1]));
 		}
 		if(context.get("pass") == PASS.THREE){
-			w(String.format("\t\t\t\t<Box gridArea=\'%s\' background=\'%s\' />\n", zone.getName(), zone.getColor()));
+			w(String.format("\t\t\t\t<Box gridArea=\'%s\' background=\'%s\' >\n", zone.getName(), zone.getColor()));
+
+			if(zone.getQuizElement()!=null){
+				zone.getQuizElement().accept(this);
+			}
+			w("\t\t\t\t</Box>\n");
 		}
 
 
@@ -60,7 +66,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(Grid grid) {
 		if (context.get("pass") == PASS.ONE) {
-			w("Grid, Box");
+			w("Grid, Box, Text");
 		}
 		if (context.get("pass") == PASS.TWO) {
 			w("\t\t\t<Grid\n");
@@ -96,6 +102,28 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(QuizInfo quizInfo) {
+		if(quizInfo.getTitle()!=null){
+			quizInfo.getTitle().accept(this);
+		}
+		if(quizInfo.getTheme()!=null){
+			quizInfo.getTheme().accept(this);
+		}
+
+
+	}
+
+	@Override
+	public void visit(TextComponent textComponent) {
+		if(context.get("pass") == PASS.THREE) {
+			w("\t\t\t\t\t<Text");
+			if (textComponent.getSize() != null) {
+				w(String.format(" size=\'%s\' ", textComponent.getSize()));
+			}
+			if (textComponent.getTextAlign() != null) {
+				w(String.format(" textAlign=\'%s\' ", textComponent.getTextAlign()));
+			}
+			w(String.format(" >simple text</Text>\n"));
+		}
 
 	}
 }

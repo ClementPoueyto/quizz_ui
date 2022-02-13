@@ -1,11 +1,14 @@
 package io.github.dsl.teamf.kernel.structural.samples;
 
 import io.github.dsl.teamf.kernel.App;
+import io.github.dsl.teamf.kernel.behavioral.TextAlign;
+import io.github.dsl.teamf.kernel.behavioral.TextComponent;
 import io.github.dsl.teamf.kernel.generator.ToWiring;
 import io.github.dsl.teamf.kernel.generator.Visitor;
-import io.github.dsl.teamf.kernel.structural.Grid;
-import io.github.dsl.teamf.kernel.structural.Size;
-import io.github.dsl.teamf.kernel.structural.Zone;
+import io.github.dsl.teamf.kernel.structural.quizz.QuizInfo;
+import io.github.dsl.teamf.kernel.structural.ui.Grid;
+import io.github.dsl.teamf.kernel.structural.ui.Size;
+import io.github.dsl.teamf.kernel.structural.ui.Zone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,25 +40,32 @@ public class Switch {
 		grid.setColumns(cols);
 
 		Zone header = new Zone();
-<<<<<<< Updated upstream
-		header.setName("test");
-		header.setStart(new int[]{0, 1});
-		header.setEnd(new int[]{0, 1});
-		header.setColor(Color.BLUE);
-=======
+
 		header.setName("header");
 		header.setStart(new int[]{0, 0});
 		header.setEnd(new int[]{1, 0});
 		header.setColor("blue");
->>>>>>> Stashed changes
 		grid.getZones().add(header);
 
 		Zone left = new Zone();
 		left.setName("left");
 		left.setStart(new int[]{0, 0});
 		left.setEnd(new int[]{0, 1});
-		left.setColor("red");
+		left.setColor("brand");
 		grid.getZones().add(left);
+
+		QuizInfo quizInfo = new QuizInfo();
+		TextComponent title = new TextComponent();
+		title.setSize(Size.large);
+		title.setTextAlign(TextAlign.center);
+		quizInfo.setTitle(title);
+
+		TextComponent theme = new TextComponent();
+		theme.setSize(Size.medium);
+		theme.setTextAlign(TextAlign.center);
+		quizInfo.setTheme(theme);
+
+		header.setQuizElement(quizInfo);
 
 		theSwitch.setGrid(grid);
 
