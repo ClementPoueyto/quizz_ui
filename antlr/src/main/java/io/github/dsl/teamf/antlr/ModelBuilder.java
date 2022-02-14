@@ -2,9 +2,9 @@ package io.github.dsl.teamf.antlr;
 
 import io.github.dsl.teamf.antlr.grammar.*;
 import io.github.dsl.teamf.kernel.App;
-import io.github.dsl.teamf.kernel.structural.Grid;
-import io.github.dsl.teamf.kernel.structural.Size;
-import io.github.dsl.teamf.kernel.structural.Zone;
+import io.github.dsl.teamf.kernel.structural.ui.Grid;
+import io.github.dsl.teamf.kernel.structural.ui.Size;
+import io.github.dsl.teamf.kernel.structural.ui.Zone;
 
 
 import java.util.*;
