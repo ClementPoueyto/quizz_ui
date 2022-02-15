@@ -1,11 +1,15 @@
 package io.github.dsl.teamf.kernel.structural.samples;
 
 import io.github.dsl.teamf.kernel.App;
+import io.github.dsl.teamf.kernel.behavioral.ButtonComponent;
 import io.github.dsl.teamf.kernel.behavioral.TextAlign;
 import io.github.dsl.teamf.kernel.behavioral.TextComponent;
 import io.github.dsl.teamf.kernel.generator.ToWiring;
 import io.github.dsl.teamf.kernel.generator.Visitor;
+import io.github.dsl.teamf.kernel.structural.quizz.Answer;
+import io.github.dsl.teamf.kernel.structural.quizz.Question;
 import io.github.dsl.teamf.kernel.structural.quizz.QuizInfo;
+import io.github.dsl.teamf.kernel.structural.quizz.Statement;
 import io.github.dsl.teamf.kernel.structural.ui.Grid;
 import io.github.dsl.teamf.kernel.structural.ui.Size;
 import io.github.dsl.teamf.kernel.structural.ui.Zone;
@@ -73,6 +77,27 @@ public class Switch {
 		quizInfo.setTheme(theme);
 
 		header.setQuizElement(quizInfo);
+
+		//QUESTION
+		Question question= new Question();
+		Answer answer = new Answer();
+		Statement statement = new Statement();
+
+		TextComponent textStatement = new TextComponent();
+		textStatement.setSize(Size.medium);
+		statement.setStatement(textStatement);
+
+		ButtonComponent answerButton = new ButtonComponent();
+		answerButton.setMargin(Size.xsmall);
+		answerButton.setSize(Size.large);
+		answer.setAnswer(answerButton);
+		answerButton.setColor("dark-2");
+		question.setAnswer(answer);
+		question.setStatement(statement);
+
+		middle.setQuizElement(question);
+
+
 
 		theSwitch.setGrid(grid);
 

@@ -1,6 +1,7 @@
 package io.github.dsl.teamf.kernel.generator;
 
 import io.github.dsl.teamf.kernel.App;
+import io.github.dsl.teamf.kernel.behavioral.ButtonComponent;
 import io.github.dsl.teamf.kernel.behavioral.TextComponent;
 import io.github.dsl.teamf.kernel.structural.quizz.Answer;
 import io.github.dsl.teamf.kernel.structural.quizz.Question;
@@ -25,6 +26,7 @@ public abstract class Visitor<T> {
 	public abstract void visit(Statement statement);
 
 	public abstract void visit(TextComponent textComponent);
+	public abstract void visit(ButtonComponent buttonComponent);
 
 	/***********************
 	 ** Helper mechanisms **

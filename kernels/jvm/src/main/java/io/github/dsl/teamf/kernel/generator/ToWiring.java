@@ -1,8 +1,12 @@
 package io.github.dsl.teamf.kernel.generator;
 
 import io.github.dsl.teamf.kernel.App;
+import io.github.dsl.teamf.kernel.behavioral.ButtonComponent;
 import io.github.dsl.teamf.kernel.behavioral.TextComponent;
+import io.github.dsl.teamf.kernel.structural.quizz.Answer;
+import io.github.dsl.teamf.kernel.structural.quizz.Question;
 import io.github.dsl.teamf.kernel.structural.quizz.QuizInfo;
+import io.github.dsl.teamf.kernel.structural.quizz.Statement;
 import io.github.dsl.teamf.kernel.structural.ui.Grid;
 import io.github.dsl.teamf.kernel.structural.ui.Size;
 import io.github.dsl.teamf.kernel.structural.ui.Theme;
@@ -72,7 +76,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(Grid grid) {
 		if (context.get("pass") == PASS.ONE) {
-			w("Grid, Box, Text");
+			w("Grid, Box, Text, Button");
 		}
 		if (context.get("pass") == PASS.TWO) {
 			w("\t\t\t\t<Grid\n");
@@ -119,6 +123,25 @@ public class ToWiring extends Visitor<StringBuffer> {
 	}
 
 	@Override
+	public void visit(Question question) {
+		question.getStatement().accept(this);
+		question.getAnswer().accept(this);
+	}
+
+	@Override
+	public void visit(Answer answer) {
+		w("\t\t\t\t\t\t{this.state.answers.map((item,index)=>{\n\t\t\t\t\t\t\treturn ");
+		answer.getAnswer().accept(this);
+		w("\t\t\t\t\t\t})}\n");
+
+	}
+
+	@Override
+	public void visit(Statement statement) {
+		statement.getStatement().accept(this);
+	}
+
+	@Override
 	public void visit(TextComponent textComponent) {
 		if(context.get("pass") == PASS.THREE) {
 			w("\t\t\t\t\t\t<Text");
@@ -134,5 +157,27 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w(String.format(" >{this.state.%s}</Text>\n", textComponent.getVariableName()));
 		}
 
+	}
+
+	@Override
+	public void visit(ButtonComponent buttonComponent) {
+		if(context.get("pass") == PASS.THREE) {
+			w("<Button");
+			w(String.format(" primary={%s} ", buttonComponent.getPrimary()));
+
+			if (buttonComponent.getSize() != null) {
+				w(String.format(" size=\'%s\' ", buttonComponent.getSize()));
+			}
+			if (buttonComponent.getMargin() != null) {
+				w(String.format(" margin=\'%s\' ", buttonComponent.getMargin()));
+			}
+			if (buttonComponent.getColor() != null) {
+				w(String.format(" color=\'%s\' ", buttonComponent.getColor()));
+			}
+
+			w(" label={this.state.answers[index]} ");
+
+			w(String.format(" />\n", buttonComponent.getVariableName()));
+		}
 	}
 }

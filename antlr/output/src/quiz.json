@@ -1,6 +1,6 @@
 {
   "title": "My Original Quiz",
   "theme": "Animals",
-  "question":"",
-  "answers": []
+  "statement":"Quel animal est le plus moche ?" ,
+  "answers": ["le scorpion", "le pikachu", "le renard", "la loutre"]
 }
