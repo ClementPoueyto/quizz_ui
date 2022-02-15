@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grommet, Grid, Box, Text } from 'grommet'
+import { Grommet, Grid, Box, Text, Heading } from 'grommet'
 var data = require('./quiz.json');
 
 export default class App extends Component {
@@ -23,7 +23,7 @@ export default class App extends Component {
 					]}
 				>
 					<Box gridArea='header' background='light-5' >
-						<Text size='large'  textAlign='center'  >{this.state.title}</Text>
+						<Heading size='medium'  textAlign='center'  >{this.state.title}</Heading>
 						<Text size='medium'  textAlign='center'  >{this.state.theme}</Text>
 					</Box>
 					<Box gridArea='middle' background='light-3' >
