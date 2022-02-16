@@ -1,15 +1,10 @@
 package io.github.dsl.teamf.kernel.structural.samples;
 
 import io.github.dsl.teamf.kernel.App;
-import io.github.dsl.teamf.kernel.behavioral.ButtonComponent;
-import io.github.dsl.teamf.kernel.behavioral.TextAlign;
-import io.github.dsl.teamf.kernel.behavioral.TextComponent;
+import io.github.dsl.teamf.kernel.behavioral.*;
 import io.github.dsl.teamf.kernel.generator.ToWiring;
 import io.github.dsl.teamf.kernel.generator.Visitor;
-import io.github.dsl.teamf.kernel.structural.quizz.Answer;
-import io.github.dsl.teamf.kernel.structural.quizz.Question;
-import io.github.dsl.teamf.kernel.structural.quizz.QuizInfo;
-import io.github.dsl.teamf.kernel.structural.quizz.Statement;
+import io.github.dsl.teamf.kernel.structural.quizz.*;
 import io.github.dsl.teamf.kernel.structural.ui.Grid;
 import io.github.dsl.teamf.kernel.structural.ui.Size;
 import io.github.dsl.teamf.kernel.structural.ui.Zone;
@@ -17,7 +12,7 @@ import io.github.dsl.teamf.kernel.structural.ui.Zone;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Switch {
+public class Mock {
 
 	public static void main(String[] args) {
 
@@ -97,7 +92,14 @@ public class Switch {
 
 		middle.setQuizElement(question);
 
+		Timer timer = new Timer();
+		ClockComponent clockComponent = new ClockComponent();
+		clockComponent.setClockDirection(ClockDirection.backward);
+		clockComponent.setSize(Size.large);
+		clockComponent.setStartChrono("00:01:00");
+		timer.setClockComponent(clockComponent);
 
+		left.setQuizElement(timer);
 
 		theSwitch.setGrid(grid);
 

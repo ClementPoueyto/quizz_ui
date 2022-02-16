@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grommet, Grid, Box, Text, Button } from 'grommet'
+import { Grommet, Grid, Box, Text, Button, Clock } from 'grommet'
 var data = require('./quiz.json');
 
 export default class App extends Component {
@@ -7,6 +7,10 @@ export default class App extends Component {
 	constructor() {
 		super();
 		this.state = data
+	}
+
+	onTimerChange(time){
+		console.log(time);
 	}
 
 	render() {
@@ -33,9 +37,11 @@ export default class App extends Component {
 						})}
 					</Box>
 					<Box gridArea='left' background='brand' >
+						<Clock run='backward'  type='digital'  size='large'  time='T00:01:00'  alignSelf='center'  precision='seconds' onChange={this.onTimerChange} />
 					</Box>
 				</Grid>
 			</Grommet>
 		);
 	}
 }
+

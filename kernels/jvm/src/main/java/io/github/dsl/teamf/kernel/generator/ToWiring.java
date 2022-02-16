@@ -2,11 +2,9 @@ package io.github.dsl.teamf.kernel.generator;
 
 import io.github.dsl.teamf.kernel.App;
 import io.github.dsl.teamf.kernel.behavioral.ButtonComponent;
+import io.github.dsl.teamf.kernel.behavioral.ClockComponent;
 import io.github.dsl.teamf.kernel.behavioral.TextComponent;
-import io.github.dsl.teamf.kernel.structural.quizz.Answer;
-import io.github.dsl.teamf.kernel.structural.quizz.Question;
-import io.github.dsl.teamf.kernel.structural.quizz.QuizInfo;
-import io.github.dsl.teamf.kernel.structural.quizz.Statement;
+import io.github.dsl.teamf.kernel.structural.quizz.*;
 import io.github.dsl.teamf.kernel.structural.ui.Grid;
 import io.github.dsl.teamf.kernel.structural.ui.Size;
 import io.github.dsl.teamf.kernel.structural.ui.Theme;
@@ -76,7 +74,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(Grid grid) {
 		if (context.get("pass") == PASS.ONE) {
-			w("Grid, Box, Text, Button");
+			w("Grid, Box, Text, Button, Clock");
 		}
 		if (context.get("pass") == PASS.TWO) {
 			w("\t\t\t\t<Grid\n");
@@ -142,6 +140,11 @@ public class ToWiring extends Visitor<StringBuffer> {
 	}
 
 	@Override
+	public void visit(Timer timer) {
+		timer.getClockComponent().accept(this);
+	}
+
+	@Override
 	public void visit(TextComponent textComponent) {
 		if(context.get("pass") == PASS.THREE) {
 			w("\t\t\t\t\t\t<Text");
@@ -177,7 +180,26 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 			w(" label={this.state.answers[index]} ");
 
-			w(String.format(" />\n", buttonComponent.getVariableName()));
+			w(String.format(" />\n"));
+		}
+	}
+
+	@Override
+	public void visit(ClockComponent clockComponent) {
+		if(context.get("pass") == PASS.THREE) {
+			w("\t\t\t\t\t\t<Clock");
+			w(String.format(" run=\'%s\' ", clockComponent.getClockDirection()));
+			w(String.format(" type=\'%s\' ", clockComponent.getType()));
+			if (clockComponent.getSize() != null) {
+				w(String.format(" size=\'%s\' ", clockComponent.getSize()));
+			}
+			w(String.format(" time=\'T%s\' ", clockComponent.getStartChrono()));
+			w(String.format(" alignSelf=\'%s\' ", clockComponent.getSelfAlign()));
+			w(String.format(" precision=\'%s\' ", clockComponent.getPrecision()));
+			w(String.format(" precision=\'%s\' ", clockComponent.getPrecision()));
+
+
+			w(String.format(" />\n"));
 		}
 	}
 }
