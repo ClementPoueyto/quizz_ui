@@ -9,39 +9,32 @@ export default class App extends Component {
 		this.state = data
 	}
 
-	onTimerChange(time){
-		console.log(time);
-	}
-
 	render() {
 		return (
 			<Grommet>
 				<Grid
-					rows={['small','medium',]}
-					columns={['small','large',]}
-					gap='null'
+					rows={['small','medium','large','small',]}
+					columns={['large','small','medium','xsmall',]}
+					gap='xxsmall'
 					areas={[
-						{ name: 'header', start: [0, 0], end: [1, 0] },
-						{ name: 'middle', start: [1, 1], end: [1, 1] },
-						{ name: 'left', start: [0, 0], end: [0, 1] },
+						{ name: 'first', start: [0, 0], end: [1, 2] },
+						{ name: 'second', start: [2, 2], end: [3, 3] },
 					]}
 				>
-					<Box gridArea='header' background='light-5' >
-						<Text size='large'  textAlign='center'  >{this.state.title}</Text>
-						<Text size='medium'  textAlign='center'  >{this.state.theme}</Text>
-					</Box>
-					<Box gridArea='middle' background='light-3' >
-						<Text size='medium'  textAlign='center'  >{this.state.statement}</Text>
+					<Box gridArea='first' background='RED' >
+						<Text size='medium'  textAlign='center'  color='BLUE'  >{this.state.statement}</Text>
 						{this.state.answers.map((item,index)=>{
-							return <Button primary={true}  size='large'  margin='xsmall'  color='dark-2'  label={this.state.answers[index]}  />
+							return <Button primary={true}  size='small'  margin='small'  color='RED'  label={this.state.answers[index]}  />
 						})}
 					</Box>
-					<Box gridArea='left' background='brand' >
-						<Clock run='backward'  type='digital'  size='large'  time='T00:01:00'  alignSelf='center'  precision='seconds' onChange={this.onTimerChange} />
+					<Box gridArea='second' background='BLUE' >
+						<Text size='medium'  textAlign='center'  color='RED'  >{this.state.statement}</Text>
+						{this.state.answers.map((item,index)=>{
+							return <Button primary={true}  size='small'  margin='small'  color='RED'  label={this.state.answers[index]}  />
+						})}
 					</Box>
 				</Grid>
 			</Grommet>
 		);
 	}
 }
-

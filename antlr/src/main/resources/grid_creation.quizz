@@ -4,17 +4,22 @@ application gridCreation
 grid : {
 zone: first
     background RED
-    col_start  0
-    row_start  0
-    col_end  1
-    row_end  2
+    cols 0 : 1
+    rows 0 : 2
+    statement : size MEDIUM  align CENTER color : BLUE
+    answer :
+        color : RED size : SMALL margin : SMALL
+#size SMALL  align CENTER color : BLUE
+
 
 zone: second
     background BLUE
-    col_start 2
-    row_start 2
-    col_end 3
-    row_end 3
+    cols 2 : 3
+    rows 2 : 3
+    statement : size MEDIUM  align CENTER color : RED
+    answer :
+      color : RED size : SMALL margin : SMALL
+
 
 gap XXSMALL
 
