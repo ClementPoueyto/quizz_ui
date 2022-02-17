@@ -8,10 +8,7 @@ import io.github.dsl.teamf.kernel.behavioral.TextComponent;
 //import io.github.dsl.teamf.kernel.structural.quizz.Question;
 //import io.github.dsl.teamf.kernel.structural.quizz.Statement;
 import io.github.dsl.teamf.kernel.behavioral.UiComponent;
-import io.github.dsl.teamf.kernel.structural.quizz.Answer;
-import io.github.dsl.teamf.kernel.structural.quizz.Question;
-import io.github.dsl.teamf.kernel.structural.quizz.QuizElement;
-import io.github.dsl.teamf.kernel.structural.quizz.Statement;
+import io.github.dsl.teamf.kernel.structural.quizz.*;
 import io.github.dsl.teamf.kernel.structural.ui.Grid;
 import io.github.dsl.teamf.kernel.structural.ui.Size;
 import io.github.dsl.teamf.kernel.structural.ui.Zone;
@@ -40,7 +37,6 @@ public class ModelBuilder extends QuizzBaseListener {
      *******************/
 
 
-    private Map<String, List<Binding>>  bindings  = new HashMap<>();
     private Grid grid = null;
     private Map<String, Zone>   zones= new HashMap<>();
     private List<Size> rows= new ArrayList<>();
@@ -48,15 +44,15 @@ public class ModelBuilder extends QuizzBaseListener {
     private Question ques;
     private Statement statement;
     private Answer answer;
+    private QuizInfo quizInfo;
     private Zone zone;
     private List<QuizElement> quizElement = new ArrayList<>();
     private List<UiComponent> componentList=new ArrayList<>();
 
-    private class Binding { // used to support state resolution for transitions
-        String to; // name of the next state, as its instance might not have been compiled yet
+    private TextComponent textComponent;
+    private ButtonComponent buttonComponent;
 
-    }
-
+    private QuizElement currentQuizElement;
 
     /**************************
      ** Listening mechanisms **
@@ -93,6 +89,7 @@ public class ModelBuilder extends QuizzBaseListener {
 
     @Override
     public void enterZone(QuizzParser.ZoneContext ctx) {
+        currentQuizElement = null;
         zone = new Zone();
         zone.setColor(ctx.color.getText().toLowerCase());
         zone.setName(ctx.name.getText());
@@ -101,7 +98,9 @@ public class ModelBuilder extends QuizzBaseListener {
 
     }
     @Override public void exitZone(QuizzParser.ZoneContext ctx) {
-        zone.setQuizElement(ques);
+        if(currentQuizElement!=null){
+            zone.setQuizElement(currentQuizElement);
+        }
         this.grid.getZones().add(zone);
     }
 
@@ -131,20 +130,47 @@ public class ModelBuilder extends QuizzBaseListener {
     @Override public void enterQuestion(QuizzParser.QuestionContext ctx) {
          ques=new Question();
     }
+    @Override public void exitQuestion(QuizzParser.QuestionContext ctx) {
+        currentQuizElement = ques;
+        ques.setStatement(statement);
+        quizElement.add(ques);
+    }
 
+    @Override
+    public void enterQuiz_info(QuizzParser.Quiz_infoContext ctx) {
+        this.quizInfo = new QuizInfo();
+    }
+    @Override
+    public void exitQuiz_info(QuizzParser.Quiz_infoContext ctx) {
+        if(ctx.description!=null){
+            this.quizInfo.setTitle((TextComponent) this.componentList.get(this.componentList.size()-2));
+            this.quizInfo.setTheme((TextComponent) this.componentList.get(this.componentList.size()-1));
+        }
+        else{
+            this.quizInfo.setTitle((TextComponent) this.componentList.get(this.componentList.size()-1));
+        }
+        this.currentQuizElement = this.quizInfo;
+    }
 
     @Override public void enterStatement(QuizzParser.StatementContext ctx) {
         statement= new Statement();
     }
+    @Override public void exitStatement(QuizzParser.StatementContext ctx) {
+        statement.setStatement(textComponent);
+    }
 
     @Override public void enterText(QuizzParser.TextContext ctx) {
         TextComponent textComponent= new TextComponent();
-        textComponent.setColor(ctx.color.getText().toLowerCase());
-        textComponent.setTextAlign(TextAlign.valueOf(ctx.textAlign.getText().toLowerCase()));
+        if(ctx.color!=null){
+            textComponent.setColor(ctx.color.getText().toLowerCase());
+        }
+        if(ctx.textAlign!=null){
+            textComponent.setTextAlign(TextAlign.valueOf(ctx.textAlign.getText().toLowerCase()));
+        }
         textComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
-        statement.setStatement(textComponent);
-        ques.setStatement(statement);
-        componentList.add(textComponent);
+        this.textComponent = textComponent;
+        this.componentList.add(textComponent);
+
     }
 
     @Override public void enterAnswer(QuizzParser.AnswerContext ctx) {
@@ -152,7 +178,9 @@ public class ModelBuilder extends QuizzBaseListener {
     }
     @Override public void enterButton(QuizzParser.ButtonContext ctx) {
         ButtonComponent buttonComponent= new ButtonComponent();
-        buttonComponent.setColor(ctx.color.getText().toLowerCase());
+        if(ctx.color!=null){
+            buttonComponent.setColor(ctx.color.getText().toLowerCase());
+        }
         buttonComponent.setMargin(Size.valueOf(ctx.margin.getText().toLowerCase()));
         buttonComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
         answer.setAnswer(buttonComponent);
@@ -160,9 +188,6 @@ public class ModelBuilder extends QuizzBaseListener {
         componentList.add(buttonComponent);
     }
 
-    @Override public void exitQuestion(QuizzParser.QuestionContext ctx) {
-        quizElement.add(ques);
-    }
 
 
 

@@ -13,25 +13,26 @@ export default class App extends Component {
 		return (
 			<Grommet>
 				<Grid
-					rows={['small','medium','large','small',]}
-					columns={['large','small','medium','xsmall',]}
+					rows={['small','medium',]}
+					columns={['small','large',]}
 					gap='xxsmall'
 					areas={[
-						{ name: 'first', start: [0, 0], end: [1, 2] },
-						{ name: 'second', start: [2, 2], end: [3, 3] },
+						{ name: 'header', start: [0, 0], end: [1, 1] },
+						{ name: 'middle', start: [1, 1], end: [1, 1] },
+						{ name: 'left', start: [0, 0], end: [0, 1] },
 					]}
 				>
-					<Box gridArea='first' background='red' >
+					<Box gridArea='header' background='light-3' >
+						<Text size='large'  textAlign='center'  color='blue'  >{this.state.title}</Text>
+						<Text size='large'  textAlign='center'  >{this.state.theme}</Text>
+					</Box>
+					<Box gridArea='middle' background='dark-2' >
 						<Text size='medium'  textAlign='center'  color='blue'  >{this.state.statement}</Text>
 						{this.state.answers.map((item,index)=>{
 							return <Button primary={true}  size='small'  margin='small'  color='red'  label={this.state.answers[index]}  />
 						})}
 					</Box>
-					<Box gridArea='second' background='blue' >
-						<Text size='medium'  textAlign='center'  color='red'  >{this.state.statement}</Text>
-						{this.state.answers.map((item,index)=>{
-							return <Button primary={true}  size='small'  margin='small'  color='red'  label={this.state.answers[index]}  />
-						})}
+					<Box gridArea='left' background='brand' >
 					</Box>
 				</Grid>
 			</Grommet>

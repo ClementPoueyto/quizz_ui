@@ -4,12 +4,12 @@ application gridCreation
 grid : {
 zone: header
     background LIGHT-3
-    cols 1 : 0
+    cols 0 : 1
     rows 0 : 1
     element :
-        statement : size MEDIUM  align CENTER color : BLUE
-        answer :
-            color : RED size : SMALL margin : SMALL
+            title : size LARGE  align CENTER color : BLUE
+            description : size LARGE
+
 
 
 zone: middle
@@ -17,9 +17,10 @@ zone: middle
     cols 1 : 1
     rows 1 : 1
     element :
-        statement : size MEDIUM  align CENTER color : RED
-        answer :
-            color : GREY size : SMALL margin : SMALL
+            statement : size MEDIUM  align CENTER color : BLUE
+            answer :
+                color : RED size : SMALL margin : SMALL
+
 zone: left
     background BRAND
     cols 0 : 0

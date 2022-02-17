@@ -18,14 +18,14 @@ grid            :   'grid' ':' '{'zone+ gap? rows columns '}';
         column  :   'col' value=NUMBER 'size' size=SIZE;
 
 quizz_element   : question | quiz_info;
-    quiz_info: 'title' ':' title=text 'description' ':' description=text;
+    quiz_info: ('title' ':' title=text) ('description' ':' description=text)?;
     question: statement+ 'answer' ':' answer+;
     statement : 'statement' ':' text;
     answer:  button;
 
 uiElement : button | text;
-    text :  'size' size=SIZE  'align' textAlign=ALIGN 'color' ':' color=(COLOR|HEX|SHADE);
-    button : 'color' ':' color=(COLOR|HEX|SHADE) 'size' ':' size=SIZE 'margin' ':' margin=SIZE ;
+    text :  'size' size=SIZE  ('align' textAlign=ALIGN)? ('color' ':' color=(COLOR|HEX|SHADE))?;
+    button : ('color' ':' color=(COLOR|HEX|SHADE))? 'size' ':' size=SIZE ('margin' ':' margin=SIZE)?;
 
 
 //quizPage        :   quizElement+;
