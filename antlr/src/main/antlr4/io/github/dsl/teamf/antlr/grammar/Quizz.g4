@@ -17,16 +17,17 @@ grid            :   'grid' ':' '{'zone+ gap? rows columns '}';
     columns     :   column+;
         column  :   'col' value=NUMBER 'size' size=SIZE;
 
-quizz_element   : question | quiz_info;
+quizz_element   : question | quiz_info | timer;
     quiz_info: ('title' ':' title=text) ('description' ':' description=text)?;
     question: statement+ 'answer' ':' answer+;
     statement : 'statement' ':' text;
     answer:  button;
+    timer : 'timer' ':' clock;
 
-uiElement : button | text;
+uiElement : button | text | clock;
     text :  'size' size=SIZE  ('align' textAlign=ALIGN)? ('color' ':' color=(COLOR|HEX|SHADE))?;
     button : ('color' ':' color=(COLOR|HEX|SHADE))? 'size' ':' size=SIZE ('margin' ':' margin=SIZE)?;
-
+    clock : 'size' size=SIZE ('align' textAlign=ALIGN)? ('direction' direction=('FORWARD'|'BACKWARD'))? ('start' startTime=TIME)? ('type' type=('DIGITAL'|'ANALOG'))?;
 
 //quizPage        :   quizElement+;
 //    quizElement :   (questionBlock   |   quizInfo |   navigationQuestion  |   progress    |   timer) zone;
@@ -39,6 +40,7 @@ uiElement : button | text;
  *****************/
 //sPORT_NUMBER     :   [1-9] | '11' | '12';
 NUMBER          :   [0-9]+;
+TIME            : [0-2][0-3]':'[0-5][0-9]':'[0-5][0-9];
 IDENTIFIER      :   LOWERCASE (LOWERCASE|UPPERCASE)+;
 SIZE            :   'XXSMALL' | 'XSMALL' | 'SMALL' | 'MEDIUM' | 'LARGE' | 'XLARGE';
 //QUESTION_UI     :   IMAGE   |   TEXT;

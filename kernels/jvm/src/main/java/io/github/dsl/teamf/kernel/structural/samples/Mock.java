@@ -103,6 +103,9 @@ public class Mock {
 
 		theSwitch.setGrid(grid);
 
+		theSwitch.getQuizElementList().add(question);
+		theSwitch.getQuizElementList().add(timer);
+
 		// Generating Code
 		Visitor codeGenerator = new ToWiring();
 		theSwitch.accept(codeGenerator);

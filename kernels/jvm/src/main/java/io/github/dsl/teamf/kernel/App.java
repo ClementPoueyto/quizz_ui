@@ -6,14 +6,15 @@ import io.github.dsl.teamf.kernel.generator.Visitable;
 import io.github.dsl.teamf.kernel.structural.quizz.QuizElement;
 import io.github.dsl.teamf.kernel.structural.ui.Grid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class App implements NamedElement, Visitable {
 	private Grid grid;
 	private String name;
-	private List<UiComponent> componentList;
-	private List<QuizElement> quizElementList;
+	private List<UiComponent> componentList = new ArrayList<>();
+	private List<QuizElement> quizElementList = new ArrayList<>();
 
 	@Override
 	public String getName() {

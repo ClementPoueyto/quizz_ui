@@ -17,7 +17,7 @@ zone: middle
     cols 1 : 1
     rows 1 : 1
     element :
-            statement : size MEDIUM  align CENTER color : BLUE
+            statement : size MEDIUM  align CENTER
             answer :
                 color : RED size : SMALL margin : SMALL
 
@@ -25,15 +25,17 @@ zone: left
     background BRAND
     cols 0 : 0
     rows 0 : 1
+    element :
+        timer : size LARGE direction FORWARD start 00:00:00 type DIGITAL
 
 
-gap XXSMALL
+gap SMALL
 
-row 0 size SMALL
+row 0 size XSMALL
 row 1 size MEDIUM
 
 col 0 size SMALL
-col 1 size LARGE
+col 1 size XLARGE
 
 
 }

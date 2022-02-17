@@ -17,6 +17,8 @@ public class Answer extends QuestionElement{
     }
 
     public void setAnswer(ButtonComponent answer) {
+        answer.setFunctionName("onAnswerClick(item,index)");
+        answer.setVariableName("answers");
         this.answer = answer;
     }
 }

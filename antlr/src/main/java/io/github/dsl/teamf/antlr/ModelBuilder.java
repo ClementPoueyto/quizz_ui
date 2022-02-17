@@ -2,19 +2,17 @@ package io.github.dsl.teamf.antlr;
 
 import io.github.dsl.teamf.antlr.grammar.*;
 import io.github.dsl.teamf.kernel.App;
-import io.github.dsl.teamf.kernel.behavioral.ButtonComponent;
-import io.github.dsl.teamf.kernel.behavioral.TextAlign;
-import io.github.dsl.teamf.kernel.behavioral.TextComponent;
+import io.github.dsl.teamf.kernel.behavioral.*;
 //import io.github.dsl.teamf.kernel.structural.quizz.Question;
 //import io.github.dsl.teamf.kernel.structural.quizz.Statement;
-import io.github.dsl.teamf.kernel.behavioral.UiComponent;
+import io.github.dsl.teamf.kernel.behavioral.TextComponent;
 import io.github.dsl.teamf.kernel.structural.quizz.*;
+import io.github.dsl.teamf.kernel.structural.quizz.Timer;
 import io.github.dsl.teamf.kernel.structural.ui.Grid;
 import io.github.dsl.teamf.kernel.structural.ui.Size;
 import io.github.dsl.teamf.kernel.structural.ui.Zone;
 
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -45,12 +43,15 @@ public class ModelBuilder extends QuizzBaseListener {
     private Statement statement;
     private Answer answer;
     private QuizInfo quizInfo;
+    private Timer timer;
+
     private Zone zone;
-    private List<QuizElement> quizElement = new ArrayList<>();
+    private List<QuizElement> quizElements = new ArrayList<>();
     private List<UiComponent> componentList=new ArrayList<>();
 
     private TextComponent textComponent;
     private ButtonComponent buttonComponent;
+    private ClockComponent clockComponent;
 
     private QuizElement currentQuizElement;
 
@@ -80,6 +81,10 @@ public class ModelBuilder extends QuizzBaseListener {
 
         grid = new Grid();
         this.theApp.setGrid(grid);
+    }
+
+    @Override public void exitGrid(QuizzParser.GridContext ctx) {
+        this.theApp.setQuizElementList(quizElements);
     }
 
     @Override
@@ -124,16 +129,14 @@ public class ModelBuilder extends QuizzBaseListener {
         grid.setColumns(this.cols);
     }
 
-    @Override public void exitGrid(QuizzParser.GridContext ctx) {
-    }
-
     @Override public void enterQuestion(QuizzParser.QuestionContext ctx) {
          ques=new Question();
     }
     @Override public void exitQuestion(QuizzParser.QuestionContext ctx) {
         currentQuizElement = ques;
         ques.setStatement(statement);
-        quizElement.add(ques);
+        ques.setAnswer(answer);
+        quizElements.add(ques);
     }
 
     @Override
@@ -150,6 +153,20 @@ public class ModelBuilder extends QuizzBaseListener {
             this.quizInfo.setTitle((TextComponent) this.componentList.get(this.componentList.size()-1));
         }
         this.currentQuizElement = this.quizInfo;
+        this.quizElements.add(quizInfo);
+
+    }
+
+    @Override
+    public void enterTimer(QuizzParser.TimerContext ctx){
+        this.timer = new Timer();
+    }
+    @Override
+    public void exitTimer(QuizzParser.TimerContext ctx){
+        this.timer.setClockComponent(clockComponent);
+        this.currentQuizElement = timer;
+        this.quizElements.add(timer);
+
     }
 
     @Override public void enterStatement(QuizzParser.StatementContext ctx) {
@@ -176,6 +193,9 @@ public class ModelBuilder extends QuizzBaseListener {
     @Override public void enterAnswer(QuizzParser.AnswerContext ctx) {
         answer=new Answer();
     }
+    @Override public void exitAnswer(QuizzParser.AnswerContext ctx) {
+        answer.setAnswer(buttonComponent);
+    }
     @Override public void enterButton(QuizzParser.ButtonContext ctx) {
         ButtonComponent buttonComponent= new ButtonComponent();
         if(ctx.color!=null){
@@ -183,11 +203,28 @@ public class ModelBuilder extends QuizzBaseListener {
         }
         buttonComponent.setMargin(Size.valueOf(ctx.margin.getText().toLowerCase()));
         buttonComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
-        answer.setAnswer(buttonComponent);
-        ques.setAnswer(answer);
+        this.buttonComponent = buttonComponent;
         componentList.add(buttonComponent);
     }
 
+    @Override public void enterClock(QuizzParser.ClockContext ctx) {
+        ClockComponent clock = new ClockComponent();
+        clock.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
+        if(ctx.textAlign!=null){
+            clock.setSelfAlign(TextAlign.valueOf(ctx.textAlign.getText().toLowerCase()));
+        }
+        if(ctx.direction!=null){
+            clock.setClockDirection(ClockDirection.valueOf(ctx.direction.getText().toLowerCase()));
+        }
+        if(ctx.type!=null){
+            clock.setType(ClockType.valueOf(ctx.type.getText().toLowerCase()));
+        }
+        if(ctx.startTime!=null){
+            clock.setStartChrono(ctx.startTime.getText());
+        }
+        this.componentList.add(clock);
+        this.clockComponent = clock;
+    }
 
 
 

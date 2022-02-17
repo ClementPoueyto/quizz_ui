@@ -17,8 +17,7 @@ public class ClockComponent extends UiComponent{
 
     private String precision = "seconds";
 
-    private String variableName = "timer";
-
+    private String functionName;
 
     @Override
     public void accept(Visitor visitor) {
@@ -73,5 +72,11 @@ public class ClockComponent extends UiComponent{
         this.precision = precision;
     }
 
+    public String getFunctionName() {
+        return functionName;
+    }
 
+    public void setFunctionName(String functionName) {
+        this.functionName = functionName;
+    }
 }

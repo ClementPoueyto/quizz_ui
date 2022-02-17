@@ -7,10 +7,10 @@ public class ButtonComponent extends UiComponent{
 
     private Size size;
     private String color;
-    private String variableName;
+    private String functionName;
     private Size margin;
     private Boolean primary=true;
-    private String functionNameOnClick;
+    private String variableName;
 
     @Override
     public void accept(Visitor visitor) {
@@ -41,14 +41,6 @@ public class ButtonComponent extends UiComponent{
         this.variableName = variableName;
     }
 
-    public String getFunctionNameOnClick() {
-        return functionNameOnClick;
-    }
-
-    public void setFunctionNameOnClick(String functionNameOnClick) {
-        this.functionNameOnClick = functionNameOnClick;
-    }
-
     public Size getMargin() {
         return margin;
     }
@@ -63,5 +55,13 @@ public class ButtonComponent extends UiComponent{
 
     public void setPrimary(Boolean primary) {
         this.primary = primary;
+    }
+
+    public String getFunctionName() {
+        return functionName;
+    }
+
+    public void setFunctionName(String functionName) {
+        this.functionName = functionName;
     }
 }

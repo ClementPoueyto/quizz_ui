@@ -30,6 +30,11 @@ public class ToWiring extends Visitor<StringBuffer> {
 	public void visit(App app) {
 		context.put("pass", PASS.ONE); //import components
 		w("import React, { Component } from 'react'\n");
+		w("import { ");
+		for(QuizElement quizElement : app.getQuizElementList()){
+			quizElement.accept(this);
+		}
+		w("} from './functions'\n");
 		w("import { Grommet, ");
 		app.getGrid().accept(this);
 		w(" } from 'grommet'\n");
@@ -128,20 +133,33 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(Answer answer) {
-		w("\t\t\t\t\t\t{this.state.answers.map((item,index)=>{\n\t\t\t\t\t\t\treturn ");
-		answer.getAnswer().accept(this);
-		w("\t\t\t\t\t\t})}\n");
+		if(context.get("pass") == PASS.ONE) {
+			w(String.format(" onAnswerClick, "));
+		}
+		if(context.get("pass") == PASS.THREE) {
+			w("\t\t\t\t\t\t{this.state.answers.map((item,index)=>{\n\t\t\t\t\t\t\treturn ");
+			answer.getAnswer().accept(this);
+			w("\t\t\t\t\t\t})}\n");
+		}
+
 
 	}
 
 	@Override
 	public void visit(Statement statement) {
+
 		statement.getStatement().accept(this);
 	}
 
 	@Override
 	public void visit(Timer timer) {
-		timer.getClockComponent().accept(this);
+		if(context.get("pass") == PASS.ONE) {
+			w(String.format(" onTimerChange, "));
+		}
+		if(context.get("pass") == PASS.THREE) {
+			timer.getClockComponent().accept(this);
+		}
+
 	}
 
 	@Override
@@ -177,8 +195,9 @@ public class ToWiring extends Visitor<StringBuffer> {
 			if (buttonComponent.getColor() != null) {
 				w(String.format(" color=\'%s\' ", buttonComponent.getColor()));
 			}
+			w(String.format(" onClick={()=>{%s}} ", buttonComponent.getFunctionName()));
 
-			w(" label={this.state.answers[index]} ");
+			w(String.format(" label={this.state.%s[index]} ", buttonComponent.getVariableName()));
 
 			w(String.format(" />\n"));
 		}
@@ -186,6 +205,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(ClockComponent clockComponent) {
+
 		if(context.get("pass") == PASS.THREE) {
 			w("\t\t\t\t\t\t<Clock");
 			w(String.format(" run=\'%s\' ", clockComponent.getClockDirection()));
@@ -196,8 +216,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w(String.format(" time=\'T%s\' ", clockComponent.getStartChrono()));
 			w(String.format(" alignSelf=\'%s\' ", clockComponent.getSelfAlign()));
 			w(String.format(" precision=\'%s\' ", clockComponent.getPrecision()));
-			w(String.format(" precision=\'%s\' ", clockComponent.getPrecision()));
-
+			w(String.format(" onChange={%s} ", clockComponent.getFunctionName()));
 
 			w(String.format(" />\n"));
 		}
