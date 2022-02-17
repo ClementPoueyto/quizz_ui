@@ -21,16 +21,16 @@ export default class App extends Component {
 						{ name: 'second', start: [2, 2], end: [3, 3] },
 					]}
 				>
-					<Box gridArea='first' background='RED' >
-						<Text size='medium'  textAlign='center'  color='BLUE'  >{this.state.statement}</Text>
+					<Box gridArea='first' background='red' >
+						<Text size='medium'  textAlign='center'  color='blue'  >{this.state.statement}</Text>
 						{this.state.answers.map((item,index)=>{
-							return <Button primary={true}  size='small'  margin='small'  color='RED'  label={this.state.answers[index]}  />
+							return <Button primary={true}  size='small'  margin='small'  color='red'  label={this.state.answers[index]}  />
 						})}
 					</Box>
-					<Box gridArea='second' background='BLUE' >
-						<Text size='medium'  textAlign='center'  color='RED'  >{this.state.statement}</Text>
+					<Box gridArea='second' background='blue' >
+						<Text size='medium'  textAlign='center'  color='red'  >{this.state.statement}</Text>
 						{this.state.answers.map((item,index)=>{
-							return <Button primary={true}  size='small'  margin='small'  color='RED'  label={this.state.answers[index]}  />
+							return <Button primary={true}  size='small'  margin='small'  color='red'  label={this.state.answers[index]}  />
 						})}
 					</Box>
 				</Grid>

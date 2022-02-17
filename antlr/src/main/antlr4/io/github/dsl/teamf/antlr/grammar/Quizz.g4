@@ -9,21 +9,23 @@ root            :   declaration grid EOF;
 
 declaration     :   'application' name=IDENTIFIER;
 
-grid            :   'grid' ':' '{'zone+ gap rows columns '}';
-    zone        :   'zone' ':' name=IDENTIFIER 'background' color=(COLOR|HEX) 'cols' column_start=NUMBER ':' column_end=NUMBER 'rows' row_start=NUMBER ':' row_end=NUMBER quizz_element;
+grid            :   'grid' ':' '{'zone+ gap? rows columns '}';
+    zone        :   'zone' ':' name=IDENTIFIER 'background' color=(COLOR|HEX|SHADE) 'cols' column_start=NUMBER ':' column_end=NUMBER 'rows' row_start=NUMBER ':' row_end=NUMBER ('element' ':' quizz_element)?;
     gap         :   'gap' value=SIZE;
     rows        :   row+;
         row     :   'row' value=NUMBER 'size' size=SIZE;
     columns     :   column+;
         column  :   'col' value=NUMBER 'size' size=SIZE;
 
-    quizz_element   : question;
+quizz_element   : question | quiz_info;
+    quiz_info: 'title' ':' title=text 'description' ':' description=text;
     question: statement+ 'answer' ':' answer+;
     statement : 'statement' ':' text;
     answer:  button;
-    uiElement : button | text;
-    text :  'size' size=SIZE  'align' textAlign=ALIGN 'color' ':' color=(COLOR|HEX);
-    button : 'color' ':' color=(COLOR|HEX) 'size' ':' size=SIZE 'margin' ':' margin=SIZE ;
+
+uiElement : button | text;
+    text :  'size' size=SIZE  'align' textAlign=ALIGN 'color' ':' color=(COLOR|HEX|SHADE);
+    button : 'color' ':' color=(COLOR|HEX|SHADE) 'size' ':' size=SIZE 'margin' ':' margin=SIZE ;
 
 
 //quizPage        :   quizElement+;
@@ -47,8 +49,8 @@ TEXT            :   UPPERCASE (IDENTIFIER WS* NEWLINE)+;
 LETTER          :   (LOWERCASE|UPPERCASE);
 CHAR            :   (NUMBER|LETTER);
 HEX             :   '#' CHAR+;
-COLOR           :   'RED' | 'BLUE' | 'GREEN' | 'YELLOW' | 'ORANGE' | 'GREY' |'VIOLET' | 'PINK';
-
+COLOR           :   'RED' | 'BLUE' | 'GREEN' | 'YELLOW' | 'ORANGE' | 'GREY' |'VIOLET' | 'PINK' | 'BRAND';
+SHADE           :   ('DARK' | 'LIGHT')'-'[1-6];
 TYPE            :   'BUTTON'|'TEXT';
 ALIGN           :   'CENTER'|'LEFT'|'RIGHT';
 /*************

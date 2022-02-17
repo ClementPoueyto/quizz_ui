@@ -6,7 +6,7 @@ zone: first
     background RED
     cols 0 : 1
     rows 0 : 2
-    statement : size MEDIUM  align CENTER color : BLUE
+    element : statement : size MEDIUM  align CENTER color : BLUE
     answer :
         color : RED size : SMALL margin : SMALL
 #size SMALL  align CENTER color : BLUE
@@ -16,7 +16,7 @@ zone: second
     background BLUE
     cols 2 : 3
     rows 2 : 3
-    statement : size MEDIUM  align CENTER color : RED
+    element : statement : size MEDIUM  align CENTER color : RED
     answer :
       color : RED size : SMALL margin : SMALL
 

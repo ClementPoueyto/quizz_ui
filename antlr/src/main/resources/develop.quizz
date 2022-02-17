@@ -1,0 +1,43 @@
+application gridCreation
+
+# Declaring grid
+grid : {
+zone: header
+    background LIGHT-3
+    cols 1 : 0
+    rows 0 : 1
+    element :
+        statement : size MEDIUM  align CENTER color : BLUE
+        answer :
+            color : RED size : SMALL margin : SMALL
+
+
+zone: middle
+    background DARK-2
+    cols 1 : 1
+    rows 1 : 1
+    element :
+        statement : size MEDIUM  align CENTER color : RED
+        answer :
+            color : GREY size : SMALL margin : SMALL
+zone: left
+    background BRAND
+    cols 0 : 0
+    rows 0 : 1
+
+
+gap XXSMALL
+
+row 0 size SMALL
+row 1 size MEDIUM
+
+col 0 size SMALL
+col 1 size LARGE
+
+
+}
+
+
+
+
+

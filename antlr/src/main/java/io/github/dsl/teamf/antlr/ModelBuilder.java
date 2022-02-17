@@ -94,7 +94,7 @@ public class ModelBuilder extends QuizzBaseListener {
     @Override
     public void enterZone(QuizzParser.ZoneContext ctx) {
         zone = new Zone();
-        zone.setColor(ctx.color.getText());
+        zone.setColor(ctx.color.getText().toLowerCase());
         zone.setName(ctx.name.getText());
         zone.setStart(new int[]{Integer.parseInt(ctx.column_start.getText()),Integer.parseInt(ctx.row_start.getText())});
         zone.setEnd(new int[]{Integer.parseInt(ctx.column_end.getText()),Integer.parseInt(ctx.row_end.getText())});
@@ -139,7 +139,7 @@ public class ModelBuilder extends QuizzBaseListener {
 
     @Override public void enterText(QuizzParser.TextContext ctx) {
         TextComponent textComponent= new TextComponent();
-        textComponent.setColor(ctx.color.getText());
+        textComponent.setColor(ctx.color.getText().toLowerCase());
         textComponent.setTextAlign(TextAlign.valueOf(ctx.textAlign.getText().toLowerCase()));
         textComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
         statement.setStatement(textComponent);
@@ -152,7 +152,7 @@ public class ModelBuilder extends QuizzBaseListener {
     }
     @Override public void enterButton(QuizzParser.ButtonContext ctx) {
         ButtonComponent buttonComponent= new ButtonComponent();
-        buttonComponent.setColor(ctx.color.getText());
+        buttonComponent.setColor(ctx.color.getText().toLowerCase());
         buttonComponent.setMargin(Size.valueOf(ctx.margin.getText().toLowerCase()));
         buttonComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
         answer.setAnswer(buttonComponent);
