@@ -3,9 +3,10 @@ export function onTimerChange(state,time){
 }
 
 export function onAnswerClick(state,item, index){
-    console.log(state)
-    state.answers[index] = " jai clique dessus"
-    console.log(item)
-    console.log(index)
+    state.questions[state.indexQuestion].answers[index] = " jai clique dessus"
+    if(item == state.questions[state.indexQuestion].rightAnswer){
+        state.score = state.score +1;
+        state.indexQuestion = state.indexQuestion +1;
+    }
     return state;
 }

@@ -28,9 +28,9 @@ export default class App extends Component {
 						<Text size='large'  textAlign='center'  >{this.state.quiz.theme}</Text>
 					</Box>
 					<Box gridArea='middle' background='dark-2' >
-						<Text size='medium'  textAlign='center'  >{this.state.quiz.statement}</Text>
-						{this.state.quiz.answers.map((item,index)=>{
-							return <Button primary={true}  size='small'  margin='small'  color='red'  onClick={()=>{ this.setState({ quiz : onAnswerClick(this.state.quiz,item,index)})}}  label={this.state.quiz.answers[index]}  />
+						<Text size='medium'  textAlign='center'  >{this.state.quiz.questions[this.state.quiz.indexQuestion].statement}</Text>
+						{this.state.quiz.questions[this.state.quiz.indexQuestion].answers.map((item,index)=>{
+							return <Button primary={true}  size='small'  margin='small'  color='red'  onClick={()=>{ this.setState({ quiz : onAnswerClick(this.state.quiz,item,index)})}}  label={this.state.quiz.questions[this.state.quiz.indexQuestion].answers[index]}  />
 						})}
 					</Box>
 					<Box gridArea='left' background='brand' >
