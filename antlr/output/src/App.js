@@ -7,7 +7,7 @@ export default class App extends Component {
 
 	constructor() {
 		super();
-		this.state = data
+		this.state = { quiz : data }
 	}
 
 	render() {
@@ -24,17 +24,17 @@ export default class App extends Component {
 					]}
 				>
 					<Box gridArea='header' background='light-3' >
-						<Text size='large'  textAlign='center'  color='blue'  >{this.state.title}</Text>
-						<Text size='large'  textAlign='center'  >{this.state.theme}</Text>
+						<Text size='large'  textAlign='center'  color='blue'  >{this.state.quiz.title}</Text>
+						<Text size='large'  textAlign='center'  >{this.state.quiz.theme}</Text>
 					</Box>
 					<Box gridArea='middle' background='dark-2' >
-						<Text size='medium'  textAlign='center'  >{this.state.statement}</Text>
-						{this.state.answers.map((item,index)=>{
-							return <Button primary={true}  size='small'  margin='small'  color='red'  onClick={()=>{onAnswerClick(item,index)}}  label={this.state.answers[index]}  />
+						<Text size='medium'  textAlign='center'  >{this.state.quiz.statement}</Text>
+						{this.state.quiz.answers.map((item,index)=>{
+							return <Button primary={true}  size='small'  margin='small'  color='red'  onClick={()=>{ this.setState({ quiz : onAnswerClick(this.state.quiz,item,index)})}}  label={this.state.quiz.answers[index]}  />
 						})}
 					</Box>
 					<Box gridArea='left' background='brand' >
-						<Clock run='forward'  type='digital'  size='large'  time='T00:00:00'  alignSelf='center'  precision='seconds'  onChange={onTimerChange}  />
+						<Clock run='backward'  type='digital'  size='large'  time='T00:01:00'  alignSelf='center'  precision='seconds'  onChange={onTimerChange}  />
 					</Box>
 				</Grid>
 			</Grommet>

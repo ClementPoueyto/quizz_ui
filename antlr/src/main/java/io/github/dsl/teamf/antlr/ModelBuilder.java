@@ -213,14 +213,20 @@ public class ModelBuilder extends QuizzBaseListener {
         if(ctx.textAlign!=null){
             clock.setSelfAlign(TextAlign.valueOf(ctx.textAlign.getText().toLowerCase()));
         }
-        if(ctx.direction!=null){
-            clock.setClockDirection(ClockDirection.valueOf(ctx.direction.getText().toLowerCase()));
+        if(ctx.chrono!=null&&ctx.chrono.getText().equals("countdown")){
+            clock.setClockDirection(ClockDirection.backward);
+        }
+        else{
+            clock.setClockDirection(ClockDirection.forward);
         }
         if(ctx.type!=null){
             clock.setType(ClockType.valueOf(ctx.type.getText().toLowerCase()));
         }
         if(ctx.startTime!=null){
             clock.setStartChrono(ctx.startTime.getText());
+        }
+        else{
+            clock.setStartChrono(clock.getClockDirection()==ClockDirection.backward?"00:01:00":"00:00:00");
         }
         this.componentList.add(clock);
         this.clockComponent = clock;

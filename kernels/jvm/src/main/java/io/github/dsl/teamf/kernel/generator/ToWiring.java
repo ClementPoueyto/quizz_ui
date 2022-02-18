@@ -42,7 +42,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 		w("export default class App extends Component {\n\n");
 		w("\tconstructor() {\n" +
 				"\t\tsuper();\n" +
-				"\t\tthis.state = data\n" +
+				"\t\tthis.state = { quiz : data }\n" +
 				"\t}\n\n");
 		context.put("pass", PASS.TWO); //describe components
 		w("\trender() {\n");
@@ -137,7 +137,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w(String.format(" onAnswerClick, "));
 		}
 		if(context.get("pass") == PASS.THREE) {
-			w("\t\t\t\t\t\t{this.state.answers.map((item,index)=>{\n\t\t\t\t\t\t\treturn ");
+			w("\t\t\t\t\t\t{this.state.quiz.answers.map((item,index)=>{\n\t\t\t\t\t\t\treturn ");
 			answer.getAnswer().accept(this);
 			w("\t\t\t\t\t\t})}\n");
 		}
@@ -175,7 +175,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 			if (textComponent.getColor() != null) {
 				w(String.format(" color=\'%s\' ", textComponent.getColor()));
 			}
-			w(String.format(" >{this.state.%s}</Text>\n", textComponent.getVariableName()));
+			w(String.format(" >{this.state.quiz.%s}</Text>\n", textComponent.getVariableName()));
 		}
 
 	}
@@ -195,9 +195,9 @@ public class ToWiring extends Visitor<StringBuffer> {
 			if (buttonComponent.getColor() != null) {
 				w(String.format(" color=\'%s\' ", buttonComponent.getColor()));
 			}
-			w(String.format(" onClick={()=>{%s}} ", buttonComponent.getFunctionName()));
+			w(String.format(" onClick={()=>{ this.setState({ quiz : %s})}} ", buttonComponent.getFunctionName()));
 
-			w(String.format(" label={this.state.%s[index]} ", buttonComponent.getVariableName()));
+			w(String.format(" label={this.state.quiz.%s[index]} ", buttonComponent.getVariableName()));
 
 			w(String.format(" />\n"));
 		}
