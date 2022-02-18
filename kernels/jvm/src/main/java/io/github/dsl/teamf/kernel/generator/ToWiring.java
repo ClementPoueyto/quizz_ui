@@ -137,7 +137,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w(String.format(" onAnswerClick, "));
 		}
 		if(context.get("pass") == PASS.THREE) {
-			w("\t\t\t\t\t\t{this.state.quiz.answers.map((item,index)=>{\n\t\t\t\t\t\t\treturn ");
+			w("\t\t\t\t\t\t{this.state.quiz.questions[this.state.quiz.indexQuestion].answers.map((item,index)=>{\n\t\t\t\t\t\t\treturn ");
 			answer.getAnswer().accept(this);
 			w("\t\t\t\t\t\t})}\n");
 		}
@@ -175,7 +175,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 			if (textComponent.getColor() != null) {
 				w(String.format(" color=\'%s\' ", textComponent.getColor()));
 			}
-			w(String.format(" >{this.state.quiz.%s}</Text>\n", textComponent.getVariableName()));
+			w(String.format(" >{%s}</Text>\n", textComponent.getVariableName()));
 		}
 
 	}
@@ -197,7 +197,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 			}
 			w(String.format(" onClick={()=>{ this.setState({ quiz : %s})}} ", buttonComponent.getFunctionName()));
 
-			w(String.format(" label={this.state.quiz.%s[index]} ", buttonComponent.getVariableName()));
+			w(String.format(" label={%s} ", buttonComponent.getVariableName()));
 
 			w(String.format(" />\n"));
 		}

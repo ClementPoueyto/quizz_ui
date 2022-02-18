@@ -16,7 +16,7 @@ public class Statement extends QuestionElement{
     }
 
     public void setStatement(TextComponent statement) {
-        statement.setVariableName("statement");
+        statement.setVariableName("this.state.quiz.questions[this.state.quiz.indexQuestion].statement");
         this.statement = statement;
     }
 }

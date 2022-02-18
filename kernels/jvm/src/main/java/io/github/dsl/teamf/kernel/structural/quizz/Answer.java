@@ -18,7 +18,7 @@ public class Answer extends QuestionElement{
 
     public void setAnswer(ButtonComponent answer) {
         answer.setFunctionName("onAnswerClick(this.state.quiz,item,index)");
-        answer.setVariableName("answers");
+        answer.setVariableName("this.state.quiz.questions[this.state.quiz.indexQuestion].answers[index]");
         this.answer = answer;
     }
 }
