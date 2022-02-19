@@ -9,12 +9,12 @@ import io.github.dsl.teamf.kernel.behavioral.TextComponent;
 import io.github.dsl.teamf.kernel.structural.quizz.*;
 import io.github.dsl.teamf.kernel.structural.quizz.Timer;
 import io.github.dsl.teamf.kernel.structural.ui.Grid;
+import io.github.dsl.teamf.kernel.structural.ui.Layout;
 import io.github.dsl.teamf.kernel.structural.ui.Size;
 import io.github.dsl.teamf.kernel.structural.ui.Zone;
 
 
 import java.util.*;
-import java.util.List;
 
 public class ModelBuilder extends QuizzBaseListener {
 
@@ -36,16 +36,16 @@ public class ModelBuilder extends QuizzBaseListener {
 
 
     private Grid grid = null;
+    private List<Layout> layouts = new ArrayList<>();
     private Map<String, Zone>   zones= new HashMap<>();
-    private List<Size> rows= new ArrayList<>();
-    private List<Size> cols= new ArrayList<>();
     private Question ques;
     private Statement statement;
     private Answer answer;
     private QuizInfo quizInfo;
     private Timer timer;
 
-    private Zone zone;
+    private Zone currentZone;
+
     private List<QuizElement> quizElements = new ArrayList<>();
     private List<UiComponent> componentList=new ArrayList<>();
 
@@ -54,6 +54,11 @@ public class ModelBuilder extends QuizzBaseListener {
     private ClockComponent clockComponent;
 
     private QuizElement currentQuizElement;
+    private Layout currenLayout;
+    private List<Size> currentRows = new ArrayList<>();
+    private List<Size> currentColumn = new ArrayList<>();
+    private int countLineArrangement;
+    private List<List<Zone>> arrangement =null; 
 
     /**************************
      ** Listening mechanisms **
@@ -78,9 +83,41 @@ public class ModelBuilder extends QuizzBaseListener {
 
     @Override
     public void enterGrid(QuizzParser.GridContext ctx) {
-
         grid = new Grid();
+        grid.setLayouts(layouts);
         this.theApp.setGrid(grid);
+    }
+
+    @Override
+    public void enterLayout(QuizzParser.LayoutContext ctx){
+        currenLayout = new Layout();
+        currentColumn = new ArrayList<>();
+        currentRows = new ArrayList<>();
+    }
+
+    @Override
+    public void exitLayout(QuizzParser.LayoutContext ctx){
+        currenLayout.setColumns(currentColumn);
+        currenLayout.setRows(currentRows);
+        currenLayout.setArrangement(arrangement);
+        grid.getLayouts().add(currenLayout);
+    }
+
+    @Override
+    public void enterArrangement(QuizzParser.ArrangementContext ctx){
+        countLineArrangement = -1;
+        arrangement = new ArrayList<>();
+    }
+
+    @Override
+    public void enterLine(QuizzParser.LineContext ctx){
+        countLineArrangement++;
+        arrangement.add(new ArrayList<>());
+    }
+
+    @Override
+    public void enterZone_name(QuizzParser.Zone_nameContext ctx){
+        arrangement.get(countLineArrangement).add(zones.get(ctx.IDENTIFIER().getText()));
     }
 
     @Override public void exitGrid(QuizzParser.GridContext ctx) {
@@ -89,49 +126,59 @@ public class ModelBuilder extends QuizzBaseListener {
 
     @Override
     public void enterGap(QuizzParser.GapContext ctx) {
-        grid.setGap(Size.valueOf(ctx.value.getText().toLowerCase()));
+       currenLayout.setGap(Size.valueOf(ctx.value.getText().toLowerCase()));
+    }
+
+    @Override
+    public void enterScreen_condition(QuizzParser.Screen_conditionContext ctx){
+        ScreenSize screenSize =ScreenSize.valueOf(ctx.media.getText());
+        ScreenCondition screenCondition = new ScreenCondition();
+        screenCondition.setScreenSize(screenSize);
+        currenLayout.setScreenCondition(screenCondition);
     }
 
     @Override
     public void enterZone(QuizzParser.ZoneContext ctx) {
         currentQuizElement = null;
-        zone = new Zone();
+        Zone zone = new Zone();
         zone.setColor(ctx.color.getText().toLowerCase());
         zone.setName(ctx.name.getText());
-        zone.setStart(new int[]{Integer.parseInt(ctx.column_start.getText()),Integer.parseInt(ctx.row_start.getText())});
-        zone.setEnd(new int[]{Integer.parseInt(ctx.column_end.getText()),Integer.parseInt(ctx.row_end.getText())});
-
+        currentZone = zone;
     }
     @Override public void exitZone(QuizzParser.ZoneContext ctx) {
         if(currentQuizElement!=null){
-            zone.setQuizElement(currentQuizElement);
+            currentZone.setQuizElement(currentQuizElement);
         }
-        this.grid.getZones().add(zone);
+        this.grid.getZones().add(currentZone);
+        zones.put(ctx.name.getText(),currentZone);
     }
 
     @Override
     public void enterRow(QuizzParser.RowContext ctx) {
-        rows.add(Integer.parseInt(ctx.value.getText()),Size.valueOf(ctx.size.getText().toLowerCase()));
+        currentRows.add(Integer.parseInt(ctx.value.getText()),Size.valueOf(ctx.size.getText().toLowerCase()));
     }
 
     @Override
     public void enterColumn(QuizzParser.ColumnContext ctx) {
-        cols.add(Integer.parseInt(ctx.value.getText()),Size.valueOf(ctx.size.getText().toLowerCase()));
+        currentColumn.add(Integer.parseInt(ctx.value.getText()),Size.valueOf(ctx.size.getText().toLowerCase()));
     }
 
     @Override
     public void exitRows(QuizzParser.RowsContext ctx) {
-        grid.setRows(this.rows);
+        //grid.setRows(this.rows);
+        currenLayout.setRows(currentRows);
     }
 
     @Override
     public void exitColumns(QuizzParser.ColumnsContext ctx) {
-        grid.setColumns(this.cols);
+        //grid.setColumns(this.cols);
+        currenLayout.setColumns(currentColumn);
     }
 
     @Override public void enterQuestion(QuizzParser.QuestionContext ctx) {
          ques=new Question();
     }
+
     @Override public void exitQuestion(QuizzParser.QuestionContext ctx) {
         currentQuizElement = ques;
         ques.setStatement(statement);

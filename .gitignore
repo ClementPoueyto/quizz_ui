@@ -25,3 +25,6 @@ hs_err_pid*
 .idea/workspace.xml
 antlr/.idea/libraries/Maven__org_antlr_antlr4_runtime_4_7.xml
 antlr/.idea/libraries/Maven__org_antlr_antlr4_runtime_4_7.xml
+.idea
+gen
+

@@ -9,13 +9,20 @@ root            :   declaration grid EOF;
 
 declaration     :   'application' name=IDENTIFIER;
 
-grid            :   'grid' ':' '{'zone+ gap? rows columns '}';
-    zone        :   'zone' ':' name=IDENTIFIER 'background' color=(COLOR|HEX|SHADE) 'cols' column_start=NUMBER ':' column_end=NUMBER 'rows' row_start=NUMBER ':' row_end=NUMBER ('element' ':' quizz_element)?;
+grid            :   'grid' ':' '{'zone+ layout+ '}';
+    zone        :   'zone' ':' name=IDENTIFIER 'background' color=(COLOR|HEX|SHADE) ('element' ':' quizz_element)?;
+    
+layout          :   'layout' ':' '{' screen_condition? gap? rows columns arrangement '}';
+    screen_condition : 'when screen is ' media=MEDIA; 
     gap         :   'gap' value=SIZE;
     rows        :   row+;
-        row     :   'row' value=NUMBER 'size' size=SIZE;
+    row         :   'row' value=NUMBER 'size' size=SIZE;
     columns     :   column+;
-        column  :   'col' value=NUMBER 'size' size=SIZE;
+    column      :   'col' value=NUMBER 'size' size=SIZE;
+
+arrangement     :   'arrangement' '{' line+ '}';
+    line        :   zone_name+ ',';
+    zone_name   :   IDENTIFIER ;
 
 quizz_element   : question | quiz_info | timer;
     quiz_info: ('title' ':' title=text) ('description' ':' description=text)?;
@@ -55,6 +62,7 @@ COLOR           :   'RED' | 'BLUE' | 'GREEN' | 'YELLOW' | 'ORANGE' | 'GREY' |'VI
 SHADE           :   ('DARK' | 'LIGHT')'-'[1-6];
 TYPE            :   'BUTTON'|'TEXT';
 ALIGN           :   'CENTER'|'LEFT'|'RIGHT';
+MEDIA           :   'PHONE' | 'COMPUTER' | 'TABLET';
 /*************
  ** Helpers **
  *************/

@@ -4,8 +4,6 @@ application gridCreation
 grid : {
 zone: header
     background LIGHT-3
-    cols 0 : 1
-    rows 0 : 1
     element :
             title : size LARGE  align CENTER color : BLUE
             description : size LARGE
@@ -14,8 +12,6 @@ zone: header
 
 zone: middle
     background DARK-2
-    cols 1 : 1
-    rows 1 : 1
     element :
             statement : size MEDIUM  align CENTER
             answer :
@@ -23,21 +19,32 @@ zone: middle
 
 zone: left
     background BRAND
-    cols 0 : 0
-    rows 0 : 1
     element :
         timer : size LARGE direction FORWARD start 00:00:00 type DIGITAL
 
+layout : {
+    gap SMALL
+    row 0 size SMALL
+    row 1 size MEDIUM
+    col 0 size MEDIUM
+    col 1 size LARGE
+    arrangement{
+        left header,
+        left middle,
+    }
+}
 
-gap SMALL
-
-row 0 size XSMALL
-row 1 size MEDIUM
-
-col 0 size SMALL
-col 1 size XLARGE
-
-
+layout : {
+    when screen is PHONE
+    row 0 size SMALL
+    row 1 size MEDIUM
+    col 0 size MEDIUM
+    arrangement
+    {
+        header,
+        middle,
+    }
+}
 }
 
 

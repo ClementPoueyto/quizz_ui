@@ -6,10 +6,12 @@ import io.github.dsl.teamf.kernel.generator.ToWiring;
 import io.github.dsl.teamf.kernel.generator.Visitor;
 import io.github.dsl.teamf.kernel.structural.quizz.*;
 import io.github.dsl.teamf.kernel.structural.ui.Grid;
+import io.github.dsl.teamf.kernel.structural.ui.Layout;
 import io.github.dsl.teamf.kernel.structural.ui.Size;
 import io.github.dsl.teamf.kernel.structural.ui.Zone;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Mock {
@@ -25,54 +27,78 @@ public class Mock {
 
 		Size col1 = Size.small;
 		Size col2 = Size.large;
-		List<Size> rows = new ArrayList<>();
-		rows.add(row1);
-		rows.add(row2);
+		
+		
+		grid.setLayouts(new ArrayList<>());
 
-		List<Size> cols = new ArrayList<>();
-		cols.add(col1);
-		cols.add(col2);
-
-		grid.setColumns(cols);
-		grid.setColumns(rows);
-		grid.setRows(rows);
-		grid.setColumns(cols);
-
+		ScreenCondition screenCondition = new ScreenCondition();
+		screenCondition.setScreenSize(ScreenSize.PHONE);
+		
 		Zone header = new Zone();
-
 		header.setName("header");
-		header.setStart(new int[]{0, 0});
-		header.setEnd(new int[]{1, 0});
 		header.setColor("light-5");
 		grid.getZones().add(header);
-
+		
 		Zone middle = new Zone();
-		middle.setName("middle");
-		middle.setStart(new int[]{1,1});
-		middle.setEnd(new int[]{1,1});
 		middle.setColor("light-3");
 		grid.getZones().add(middle);
-
+		
 		Zone left = new Zone();
+		middle.setName("middle");
 		left.setName("left");
-		left.setStart(new int[]{0, 0});
-		left.setEnd(new int[]{0, 1});
 		left.setColor("brand");
 		grid.getZones().add(left);
+		
+		
+		List<Size> rowsDefault = new ArrayList<>();
+		rowsDefault.add(row1);
+		rowsDefault.add(row2);
 
+		List<Size> colsDefault = new ArrayList<>();
+		colsDefault.add(col1);
+		colsDefault.add(col2);
+
+		Layout defaultLayout = new Layout();
+		defaultLayout.setArrangement(new ArrayList());
+		defaultLayout.getArrangement().add(Arrays.asList(header,header));
+		defaultLayout.getArrangement().add(Arrays.asList(left,middle));
+		defaultLayout.setColumns(colsDefault);
+		defaultLayout.setRows(rowsDefault);
+		grid.getLayouts().add(defaultLayout);
+
+
+		List<Size> rowsPhone = new ArrayList<>();
+		rowsPhone.add(row1);
+		rowsPhone.add(row2);
+
+		List<Size> colsPhone = new ArrayList<>();
+		rowsPhone.add(col2);
+
+		Layout phoneLayout = new Layout();
+		phoneLayout.setArrangement(new ArrayList());
+		phoneLayout.getArrangement().add(Arrays.asList(header));
+		phoneLayout.getArrangement().add(Arrays.asList(middle));
+		phoneLayout.setColumns(colsPhone);
+		phoneLayout.setRows(rowsPhone);
+		phoneLayout.setScreenCondition(screenCondition);
+		grid.getLayouts().add(phoneLayout);
+		//grid.setColumns(rows);
+		//grid.setColumns(cols);
+;
 		QuizInfo quizInfo = new QuizInfo();
 		TextComponent title = new TextComponent();
 		title.setSize(Size.large);
 		title.setTextAlign(TextAlign.center);
 		quizInfo.setTitle(title);
-
+		
 		TextComponent theme = new TextComponent();
 		theme.setSize(Size.medium);
 		theme.setTextAlign(TextAlign.center);
 		quizInfo.setTheme(theme);
-
+		
 		header.setQuizElement(quizInfo);
-
+		
+		
 		//QUESTION
 		Question question= new Question();
 		Answer answer = new Answer();

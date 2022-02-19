@@ -9,9 +9,8 @@ import java.util.List;
 public class Grid implements Visitable {
 
     private List<Zone> zones = new ArrayList<>();
-    private Size gap;
-    private List<Size> rows;
-    private List<Size> columns;
+    private List<Layout> layouts;
+    //private Layout defaultLayout;
 
     @Override
     public void accept(Visitor visitor) {
@@ -26,27 +25,21 @@ public class Grid implements Visitable {
         this.zones = zones;
     }
 
-    public Size getGap() {
-        return gap;
+    public List<Layout> getLayouts() {
+        return layouts;
     }
 
-    public void setGap(Size gap) {
-        this.gap = gap;
+    public void setLayouts(List<Layout> layouts) {
+        this.layouts = layouts;
     }
 
-    public List<Size> getRows() {
-        return rows;
+    public boolean isResponsiveGrid(){
+        for(Layout layout: layouts){
+            if(layout.getScreenCondition()!=null){
+                return true;
+            }
+        }
+        return false;
     }
-
-    public void setRows(List<Size> rows) {
-        this.rows = rows;
-    }
-
-    public List<Size> getColumns() {
-        return columns;
-    }
-
-    public void setColumns(List<Size> columns) {
-        this.columns = columns;
-    }
+    
 }

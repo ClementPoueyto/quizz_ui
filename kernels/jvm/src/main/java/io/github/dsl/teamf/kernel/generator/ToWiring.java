@@ -1,11 +1,16 @@
 package io.github.dsl.teamf.kernel.generator;
 
+import java.io.Console;
+import java.util.List;
+
 import io.github.dsl.teamf.kernel.App;
 import io.github.dsl.teamf.kernel.behavioral.ButtonComponent;
 import io.github.dsl.teamf.kernel.behavioral.ClockComponent;
+import io.github.dsl.teamf.kernel.behavioral.ScreenCondition;
 import io.github.dsl.teamf.kernel.behavioral.TextComponent;
 import io.github.dsl.teamf.kernel.structural.quizz.*;
 import io.github.dsl.teamf.kernel.structural.ui.Grid;
+import io.github.dsl.teamf.kernel.structural.ui.Layout;
 import io.github.dsl.teamf.kernel.structural.ui.Size;
 import io.github.dsl.teamf.kernel.structural.ui.Theme;
 import io.github.dsl.teamf.kernel.structural.ui.Zone;
@@ -15,7 +20,7 @@ import io.github.dsl.teamf.kernel.structural.ui.Zone;
  * Quick and dirty visitor to support the generation of Wiring code
  */
 public class ToWiring extends Visitor<StringBuffer> {
-	enum PASS {ONE, TWO, THREE, FOUR, FIVE, SIX}
+	enum PASS {ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN}
 
 
 	public ToWiring() {
@@ -38,6 +43,8 @@ public class ToWiring extends Visitor<StringBuffer> {
 		w("import { Grommet, ");
 		app.getGrid().accept(this);
 		w(" } from 'grommet'\n");
+		w("import { deepMerge } from \"grommet/utils\";");
+		w("import { grommet } from \"grommet/themes\";");
 		w("var data = require('./quiz.json');\n\n");
 		w("export default class App extends Component {\n\n");
 		w("\tconstructor() {\n" +
@@ -46,15 +53,13 @@ public class ToWiring extends Visitor<StringBuffer> {
 				"\t}\n\n");
 		context.put("pass", PASS.TWO); //describe components
 		w("\trender() {\n");
+		app.getGrid().accept(this);
 		w("\t\treturn (\n");
-		w("\t\t\t<Grommet>\n");
-
-		app.getGrid().accept(this);
-		context.put("pass", PASS.THREE); //describe components
+		context.put("pass", PASS.FIVE); //describe components
 		app.getGrid().accept(this);
 
 
-		w("\t\t\t</Grommet>\n");
+		w("\t\t</Grommet>\n");
 		w("\t\t);\n\t}\n}\n");
 
 	}
@@ -62,11 +67,12 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(Zone zone) {
 		if(context.get("pass") == PASS.TWO) {
-			w(String.format("\t\t\t\t\t\t{ name: \'%s\', start: [%d, %d], end: [%d, %d] },\n", zone.getName(), zone.getStart()[0], zone.getStart()[1], zone.getEnd()[0], zone.getEnd()[1]));
+			w(String.format("\"%s\",",zone.getName()));
 		}
-		if(context.get("pass") == PASS.THREE){
-			w(String.format("\t\t\t\t\t<Box gridArea=\'%s\' background=\'%s\' >\n", zone.getName(), zone.getColor()));
+		
+		if(context.get("pass") == PASS.FIVE){
 
+			w(String.format("\t\t\t\t\t<Box gridArea=\'%s\' background=\'%s\' >\n", zone.getName(), zone.getColor()));
 			if(zone.getQuizElement()!=null){
 				zone.getQuizElement().accept(this);
 			}
@@ -75,39 +81,112 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 
 	}
+	@Override
+	public void visit(ScreenCondition displayCondition) {
+	}
 
 	@Override
 	public void visit(Grid grid) {
 		if (context.get("pass") == PASS.ONE) {
-			w("Grid, Box, Text, Button, Clock");
+			w("Grid, Box, Text, Button, Clock, ResponsiveContext");
 		}
-		if (context.get("pass") == PASS.TWO) {
-			w("\t\t\t\t<Grid\n");
-			w("\t\t\t\t\trows={[");
-			for (Size row : grid.getRows()) {
-				w(String.format("\'%s\',", row));
+		if(context.get("pass") == PASS.TWO){
+			if(grid.isResponsiveGrid()){
+				w("\t\tvar customBreakpoints = deepMerge(grommet, {\n");
+				w("\t\t\tglobal: {\n");
+				w("\t\t\t\tbreakpoints: {\n");	
+				w("\t\t\t\t\tsmall: {\n");	
+				w("\t\t\t\t\t\t value: 600\n");	
+				w("\t\t\t\t\t},\n");
+				w("\t\t\t\t\tmedium: {\n");
+				w("\t\t\t\t\t\tvalue: 950\n");
+				w("\t\t\t\t\t},\n");
+				w("\t\t\t\t\tlarge: 3000\n");
+				w("\t\t\t\t}\n");
+				w("\t\t\t}\n");
+				w("\t\t});\n");
 			}
-			w("]}\n");
-			w("\t\t\t\t\tcolumns={[");
-			for (Size col : grid.getColumns()) {
-				w(String.format("\'%s\',", col));
+			w("\t\tconst areas = {\n");
+			
+			for(Layout layout: grid.getLayouts()){
+				layout.accept(this);
 			}
-			w("]}\n");
-			w(String.format("\t\t\t\t\tgap=\'%s\'\n", grid.getGap()));
-			w("\t\t\t\t\tareas={[\n");
-			for (Zone zone : grid.getZones()) {
-				zone.accept(this);
+			w("\t\t}\n");
+			context.put("pass", PASS.THREE);
+			w("\t\tconst rows = {\n");
+			
+			for(Layout layout: grid.getLayouts()){
+				layout.accept(this);
 			}
-			w("\t\t\t\t\t]}\n\t\t\t\t>\n");
+			w("\t\t}\n");
+	
+			context.put("pass", PASS.FOUR);
+			w("\t\tconst columns = {\n");
+			
+			for(Layout layout: grid.getLayouts()){
+				layout.accept(this);
+			}
+			w("}\n");
 		}
-		if (context.get("pass") == PASS.THREE) {
+		if (context.get("pass") == PASS.FIVE) {
+			if(grid.isResponsiveGrid()){
+				w("\t\t\t<Grommet theme={customBreakpoints}>\n");
+			}else{
+				w("\t\t\t<Grommet>\n");
+			}
+			w("\t\t\t\t<ResponsiveContext.Consumer>\n");
+			w("\t\t\t\t\t{size =>\n");
+			w("\t\t\t\t\t<Grid\n");
+			w("\t\t\t\t\t\trows={rows[size] ? rows[size] : rows[\"default\"]}\n");
+			w("\t\t\t\t\t\tcolumns={columns[size] ? columns[size] : columns[\"default\"]}\n");
+			w(String.format("\t\t\t\t\tgap=\'%s\'\n", "null"));
+			w("\t\t\t\t\t\tareas={areas[size] ? areas[size] : areas[\"default\"]}\n");
+			w("\t\t\t\t>\n");
 			for (Zone zone : grid.getZones()) {
 				zone.accept(this);
 			}
 			w("\t\t\t\t</Grid>\n");
+			w("\t\t\t}\n");
+			w("\t\t\t</ResponsiveContext.Consumer>\n");
 		}
 	}
 
+	
+	@Override
+	public void visit(Layout layout) {
+		if (context.get("pass") == PASS.TWO) {
+			if(layout.getScreenCondition() !=null){
+				w(String.format("\t\t\t%s: [\n",layout.getScreenCondition().getScreenConditionName()));
+			}else{
+				w("\t\t\tdefault: [\n");
+			}
+			for(List<Zone> row : layout.getArrangement()){
+				w("\t\t\t\t[");
+				for(Zone zone : row){
+					zone.accept(this);
+				}
+				w("],\n");
+			}
+			w("\t\t\t],\n");
+		}else{
+			if(layout.getScreenCondition() !=null){
+				w(String.format("\t\t\t%s:[",layout.getScreenCondition().getScreenConditionName()));
+			}else{
+				w("\t\t\tdefault:[");
+			}
+			if (context.get("pass") == PASS.THREE) {
+				for(Size rowSize :layout.getRows()){
+					w(String.format("\'%s\',",rowSize));
+				}
+			}
+			if (context.get("pass") == PASS.FOUR) {
+				for(Size colSize :layout.getColumns()){
+					w(String.format("\'%s\',",colSize));
+				}
+			}
+			w("],\n");
+		}
+	}
 	@Override
 	public void visit(Theme theme) {
 
@@ -136,7 +215,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 		if(context.get("pass") == PASS.ONE) {
 			w(String.format(" onAnswerClick, "));
 		}
-		if(context.get("pass") == PASS.THREE) {
+		if(context.get("pass") == PASS.FIVE) {
 			w("\t\t\t\t\t\t{this.state.answers.map((item,index)=>{\n\t\t\t\t\t\t\treturn ");
 			answer.getAnswer().accept(this);
 			w("\t\t\t\t\t\t})}\n");
@@ -164,7 +243,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(TextComponent textComponent) {
-		if(context.get("pass") == PASS.THREE) {
+		if(context.get("pass") == PASS.FIVE) {
 			w("\t\t\t\t\t\t<Text");
 			if (textComponent.getSize() != null) {
 				w(String.format(" size=\'%s\' ", textComponent.getSize()));
@@ -182,7 +261,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(ButtonComponent buttonComponent) {
-		if(context.get("pass") == PASS.THREE) {
+		if(context.get("pass") == PASS.FIVE) {
 			w("<Button");
 			w(String.format(" primary={%s} ", buttonComponent.getPrimary()));
 
@@ -206,7 +285,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(ClockComponent clockComponent) {
 
-		if(context.get("pass") == PASS.THREE) {
+		if(context.get("pass") == PASS.FIVE) {
 			w("\t\t\t\t\t\t<Clock");
 			w(String.format(" run=\'%s\' ", clockComponent.getClockDirection()));
 			w(String.format(" type=\'%s\' ", clockComponent.getType()));
@@ -221,4 +300,5 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w(String.format(" />\n"));
 		}
 	}
+
 }

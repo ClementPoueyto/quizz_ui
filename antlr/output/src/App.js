@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {  onAnswerClick,  onTimerChange, } from './functions'
-import { Grommet, Grid, Box, Text, Button, Clock } from 'grommet'
-var data = require('./quiz.json');
+import { Grommet, Grid, Box, Text, Button, Clock, ResponsiveContext } from 'grommet'
+import { deepMerge } from "grommet/utils";import { grommet } from "grommet/themes";var data = require('./quiz.json');
 
 export default class App extends Component {
 
@@ -11,17 +11,46 @@ export default class App extends Component {
 	}
 
 	render() {
+		var customBreakpoints = deepMerge(grommet, {
+			global: {
+				breakpoints: {
+					small: {
+						 value: 600
+					},
+					medium: {
+						value: 950
+					},
+					large: 3000
+				}
+			}
+		});
+		const areas = {
+			default: [
+				["left","header",],
+				["left","middle",],
+			],
+			small: [
+				["header",],
+				["middle",],
+			],
+		}
+		const rows = {
+			default:['small','medium',],
+			small:['small','medium',],
+		}
+		const columns = {
+			default:['medium','large',],
+			small:['medium',],
+}
 		return (
-			<Grommet>
-				<Grid
-					rows={['xsmall','medium',]}
-					columns={['small','xlarge',]}
-					gap='small'
-					areas={[
-						{ name: 'header', start: [0, 0], end: [1, 1] },
-						{ name: 'middle', start: [1, 1], end: [1, 1] },
-						{ name: 'left', start: [0, 0], end: [0, 1] },
-					]}
+			<Grommet theme={customBreakpoints}>
+				<ResponsiveContext.Consumer>
+					{size =>
+					<Grid
+						rows={rows[size] ? rows[size] : rows["default"]}
+						columns={columns[size] ? columns[size] : columns["default"]}
+					gap='null'
+						areas={areas[size] ? areas[size] : areas["default"]}
 				>
 					<Box gridArea='header' background='light-3' >
 						<Text size='large'  textAlign='center'  color='blue'  >{this.state.title}</Text>
@@ -34,10 +63,11 @@ export default class App extends Component {
 						})}
 					</Box>
 					<Box gridArea='left' background='brand' >
-						<Clock run='forward'  type='digital'  size='large'  time='T00:00:00'  alignSelf='center'  precision='seconds'  onChange={onTimerChange}  />
 					</Box>
 				</Grid>
-			</Grommet>
+			}
+			</ResponsiveContext.Consumer>
+		</Grommet>
 		);
 	}
 }
