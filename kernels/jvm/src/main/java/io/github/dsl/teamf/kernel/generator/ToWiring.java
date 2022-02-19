@@ -189,7 +189,6 @@ public class ToWiring extends Visitor<StringBuffer> {
 	}
 	@Override
 	public void visit(Theme theme) {
-
 	}
 
 	@Override

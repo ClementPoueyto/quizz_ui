@@ -5,12 +5,14 @@ grammar Quizz;
  ** Parser rules **
  ******************/
 
-root            :   declaration grid EOF;
+root            :   declaration theme? grid EOF;
 
 declaration     :   'application' name=IDENTIFIER;
 
+theme           :   'theme' ':' ('primary color' ':')? primary=(COLOR|HEX|SHADE) ('secondary color' ':')? secondary=(COLOR|HEX|SHADE) ('font' ':')? font;
+font            :   '{' 'family' ':' family=FONTFAM ('size' ':' size=NUMBER 'px')? '}';
 grid            :   'grid' ':' '{'zone+ layout+ '}';
-    zone        :   'zone' ':' name=IDENTIFIER 'background' color=(COLOR|HEX|SHADE) ('element' ':' quizz_element)?;
+    zone        :   'zone' ':' name=IDENTIFIER ('background' color=(COLOR|HEX|SHADE))? ('element' ':' quizz_element)?;
     
 layout          :   'layout' ':' '{' screen_condition? gap? rows columns arrangement '}';
     screen_condition : 'when screen is ' media=MEDIA; 
@@ -63,6 +65,7 @@ SHADE           :   ('DARK' | 'LIGHT')'-'[1-6];
 TYPE            :   'BUTTON'|'TEXT';
 ALIGN           :   'CENTER'|'LEFT'|'RIGHT';
 MEDIA           :   'PHONE' | 'COMPUTER' | 'TABLET';
+FONTFAM         :   'SERIF' | 'SANS-SERIF' | 'SCRIPT' | 'DISPLAY';
 /*************
  ** Helpers **
  *************/

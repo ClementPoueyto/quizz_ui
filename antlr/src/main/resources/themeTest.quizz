@@ -1,0 +1,56 @@
+application gridCreation
+
+theme :
+    primary color : #dbd825
+    secondary color : #1edaeb
+    font : {
+        family : SERIF }
+
+# Declaring grid
+grid : {
+zone: header
+    element :
+            title : size LARGE  align CENTER color : BLUE
+            description : size LARGE
+
+zone: middle
+    background DARK-2
+    element :
+            statement : size MEDIUM  align CENTER
+            answer :
+                size : SMALL margin : SMALL
+
+zone: left
+    background BRAND
+    element :
+        timer : countdown size LARGE type DIGITAL
+
+layout : {
+    gap SMALL
+    row 0 size XSMALL
+    row 1 size MEDIUM
+    col 0 size MEDIUM
+    col 1 size LARGE
+    arrangement{
+        left header,
+        left middle,
+    }
+}
+
+layout : {
+    when screen is PHONE
+    row 0 size SMALL
+    row 1 size MEDIUM
+    col 0 size MEDIUM
+    arrangement
+    {
+        header,
+        middle,
+    }
+   }
+}
+
+
+
+
+

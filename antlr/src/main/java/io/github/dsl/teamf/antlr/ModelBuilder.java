@@ -8,10 +8,7 @@ import io.github.dsl.teamf.kernel.behavioral.*;
 import io.github.dsl.teamf.kernel.behavioral.TextComponent;
 import io.github.dsl.teamf.kernel.structural.quizz.*;
 import io.github.dsl.teamf.kernel.structural.quizz.Timer;
-import io.github.dsl.teamf.kernel.structural.ui.Grid;
-import io.github.dsl.teamf.kernel.structural.ui.Layout;
-import io.github.dsl.teamf.kernel.structural.ui.Size;
-import io.github.dsl.teamf.kernel.structural.ui.Zone;
+import io.github.dsl.teamf.kernel.structural.ui.*;
 
 
 import java.util.*;
@@ -141,7 +138,15 @@ public class ModelBuilder extends QuizzBaseListener {
     public void enterZone(QuizzParser.ZoneContext ctx) {
         currentQuizElement = null;
         Zone zone = new Zone();
+        if(ctx.color==null)
+            System.out.printf("IT's NULL");
+        else
+        System.out.printf("COLOR"+ctx.color.getText());
+        if(ctx.color!=null)
         zone.setColor(ctx.color.getText().toLowerCase());
+        else
+            if (theApp.getTheme()!=null)
+                zone.setColor(theApp.getTheme().getPrimaryColor());
         zone.setName(ctx.name.getText());
         currentZone = zone;
     }
@@ -248,6 +253,9 @@ public class ModelBuilder extends QuizzBaseListener {
         if(ctx.color!=null){
             buttonComponent.setColor(ctx.color.getText().toLowerCase());
         }
+        else
+            if(theApp.getTheme()!=null)
+                buttonComponent.setColor(theApp.getTheme().getSecondaryColor());
         buttonComponent.setMargin(Size.valueOf(ctx.margin.getText().toLowerCase()));
         buttonComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
         this.buttonComponent = buttonComponent;
@@ -279,6 +287,13 @@ public class ModelBuilder extends QuizzBaseListener {
         this.clockComponent = clock;
     }
 
+    @Override public void enterTheme(QuizzParser.ThemeContext ctx) {
+        Theme theme =new Theme();
+        theme.setPrimaryColor(ctx.primary.getText());
+        theme.setSecondaryColor(ctx.secondary.getText());
+        theme.setFontStyle(ctx.font().family.getText());
+        theApp.setTheme(theme);
+    }
 
 
 
