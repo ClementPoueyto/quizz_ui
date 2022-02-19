@@ -8,8 +8,6 @@ zone: header
             title : size LARGE  align CENTER color : BLUE
             description : size LARGE
 
-
-
 zone: middle
     background DARK-2
     element :
@@ -24,7 +22,7 @@ zone: left
 
 layout : {
     gap SMALL
-    row 0 size SMALL
+    row 0 size XSMALL
     row 1 size MEDIUM
     col 0 size MEDIUM
     col 1 size LARGE
@@ -44,7 +42,7 @@ layout : {
         header,
         middle,
     }
-}
+   }
 }
 
 

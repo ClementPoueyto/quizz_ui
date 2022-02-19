@@ -235,7 +235,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 		if(context.get("pass") == PASS.ONE) {
 			w(String.format(" onTimerChange, "));
 		}
-		if(context.get("pass") == PASS.THREE) {
+		if(context.get("pass") == PASS.FIVE) {
 			timer.getClockComponent().accept(this);
 		}
 

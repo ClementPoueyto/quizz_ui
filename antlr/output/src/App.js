@@ -35,7 +35,7 @@ export default class App extends Component {
 			],
 		}
 		const rows = {
-			default:['small','medium',],
+			default:['xsmall','large',],
 			small:['small','medium',],
 		}
 		const columns = {
