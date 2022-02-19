@@ -1,6 +1,19 @@
 {
   "title": "My Original Quiz",
   "theme": "Animals",
-  "statement":"Quel animal est le plus moche ?" ,
-  "answers": ["le scorpion", "le pikachu", "le renard", "la loutre"]
+  "questions" : [
+    {
+      "statement":"Quel animal est le plus moche ?" ,
+      "answers": ["le scorpion", "le pikachu", "le renard", "la loutre"],
+      "rightAnswer": ["le scorpion"]
+    },
+    {
+      "statement":"quel animal a des moustaches ?" ,
+      "answers": ["le chat", "le requin"],
+      "rightAnswer": ["le chat"]
+    }
+
+  ],
+  "indexQuestion" : 0,
+  "score": 0
 }

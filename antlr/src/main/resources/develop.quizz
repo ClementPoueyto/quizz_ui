@@ -20,7 +20,7 @@ zone: middle
 zone: left
     background BRAND
     element :
-        timer : size LARGE direction FORWARD start 00:00:00 type DIGITAL
+        timer : countdown size LARGE type DIGITAL
 
 layout : {
     gap SMALL

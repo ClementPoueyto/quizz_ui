@@ -34,7 +34,7 @@ quizz_element   : question | quiz_info | timer;
 uiElement : button | text | clock;
     text :  'size' size=SIZE  ('align' textAlign=ALIGN)? ('color' ':' color=(COLOR|HEX|SHADE))?;
     button : ('color' ':' color=(COLOR|HEX|SHADE))? 'size' ':' size=SIZE ('margin' ':' margin=SIZE)?;
-    clock : 'size' size=SIZE ('align' textAlign=ALIGN)? ('direction' direction=('FORWARD'|'BACKWARD'))? ('start' startTime=TIME)? ('type' type=('DIGITAL'|'ANALOG'))?;
+    clock :  (chrono=('chrono'|'countdown'))? 'size' size=SIZE ('align' textAlign=ALIGN)? ('start' startTime=TIME)? ('type' type=('DIGITAL'|'ANALOG'))?;
 
 //quizPage        :   quizElement+;
 //    quizElement :   (questionBlock   |   quizInfo |   navigationQuestion  |   progress    |   timer) zone;
