@@ -5,7 +5,6 @@ import java.util.List;
 import io.github.dsl.teamf.kernel.behavioral.ScreenCondition;
 import io.github.dsl.teamf.kernel.generator.Visitable;
 import io.github.dsl.teamf.kernel.generator.Visitor;
-import javafx.stage.Screen;
 
 public class Layout implements Visitable{
     private ScreenCondition screenCondition;

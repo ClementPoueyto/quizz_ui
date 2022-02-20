@@ -11,8 +11,9 @@ declaration     :   'application' name=IDENTIFIER;
 
 theme           :   'theme' ':' ('primary color' ':')? primary=(COLOR|HEX|SHADE) ('secondary color' ':')? secondary=(COLOR|HEX|SHADE) ('font' ':')? font;
 font            :   '{' 'family' ':' family=FONTFAM ('size' ':' size=NUMBER 'px')? '}';
+
 grid            :   'grid' ':' '{'zone+ layout+ '}';
-    zone        :   'zone' ':' name=IDENTIFIER ('background' color=(COLOR|HEX|SHADE))? ('element' ':' quizz_element)?;
+    zone        :   'zone' ':' name=IDENTIFIER ('alignment' alignement=ALIGN)? ('background' color=(COLOR|HEX|SHADE))? ('element' ':' quizz_element)?;
     
 layout          :   'layout' ':' '{' screen_condition? gap? rows columns arrangement '}';
     screen_condition : 'when screen is ' media=MEDIA; 
@@ -27,17 +28,19 @@ arrangement     :   'arrangement' '{' line+ '}';
     zone_name   :   IDENTIFIER ;
 
 quizz_element   : question | quiz_info | timer;
-    quiz_info: ('title' ':' title=text) ('description' ':' description=text)?;
-    question: statement+ 'answer' ':' answer+;
-    statement : 'statement' ':' text;
-    answer:  button;
-    timer : 'timer' ':' clock;
+    quiz_info   : ('title' ':' title=text) ('description' ':' description=text)?;
+    question    : statement+ 'answer' ':' answer+;
+    statement   : 'statement' ':' text;
+    answer      : single_answer | multiple_answer;
+    single_answer:  'single' button;
+    multiple_answer : 'multiple' checkboxgroup;
+    timer       : 'timer' ':' clock;
 
-uiElement : button | text | clock;
+uiElement : button | text | clock | checkboxgroup ;
+    checkboxgroup : ('gap' gapanswer=SIZE)?;
     text :  'size' size=SIZE  ('align' textAlign=ALIGN)? ('color' ':' color=(COLOR|HEX|SHADE))?;
     button : ('color' ':' color=(COLOR|HEX|SHADE))? 'size' ':' size=SIZE ('margin' ':' margin=SIZE)?;
     clock :  (chrono=('chrono'|'countdown'))? 'size' size=SIZE ('align' textAlign=ALIGN)? ('start' startTime=TIME)? ('type' type=('DIGITAL'|'ANALOG'))?;
-
 //quizPage        :   quizElement+;
 //    quizElement :   (questionBlock   |   quizInfo |   navigationQuestion  |   progress    |   timer) zone;
 //    question    :   statement+ answer+;
@@ -63,9 +66,10 @@ HEX             :   '#' CHAR+;
 COLOR           :   'RED' | 'BLUE' | 'GREEN' | 'YELLOW' | 'ORANGE' | 'GREY' |'VIOLET' | 'PINK' | 'BRAND';
 SHADE           :   ('DARK' | 'LIGHT')'-'[1-6];
 TYPE            :   'BUTTON'|'TEXT';
-ALIGN           :   'CENTER'|'LEFT'|'RIGHT';
+ALIGN           :   'CENTER'|'START'|'END';
 MEDIA           :   'PHONE' | 'COMPUTER' | 'TABLET';
 FONTFAM         :   'SERIF' | 'SANS-SERIF' | 'SCRIPT' | 'DISPLAY';
+
 /*************
  ** Helpers **
  *************/

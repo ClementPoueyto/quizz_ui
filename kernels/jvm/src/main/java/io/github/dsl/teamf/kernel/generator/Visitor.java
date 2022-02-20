@@ -1,10 +1,7 @@
 package io.github.dsl.teamf.kernel.generator;
 
 import io.github.dsl.teamf.kernel.App;
-import io.github.dsl.teamf.kernel.behavioral.ButtonComponent;
-import io.github.dsl.teamf.kernel.behavioral.ClockComponent;
-import io.github.dsl.teamf.kernel.behavioral.ScreenCondition;
-import io.github.dsl.teamf.kernel.behavioral.TextComponent;
+import io.github.dsl.teamf.kernel.behavioral.*;
 import io.github.dsl.teamf.kernel.structural.quizz.*;
 import io.github.dsl.teamf.kernel.structural.ui.Grid;
 import io.github.dsl.teamf.kernel.structural.ui.Layout;
@@ -23,12 +20,14 @@ public abstract class Visitor<T> {
 	public abstract void visit(Theme theme);
 	public abstract void visit(QuizInfo quizInfo);
 	public abstract void visit(Question question);
-	public abstract void visit(Answer answer);
+	public abstract void visit(SingleAnswer singleAnswer);
+	public abstract void visit(MultipleAnswer multipleAnswer);
 	public abstract void visit(Statement statement);
 	public abstract void visit(Timer timer);
 
 	public abstract void visit(TextComponent textComponent);
 	public abstract void visit(ButtonComponent buttonComponent);
+	public abstract void visit(CheckBoxComponent checkBoxComponent);
 	public abstract void visit(ClockComponent clockComponent);
 	public abstract void visit(ScreenCondition DisplayCondition);
 

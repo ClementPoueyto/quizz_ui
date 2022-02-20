@@ -2,6 +2,7 @@ package io.github.dsl.teamf.kernel.structural.ui;
 
 import io.github.dsl.teamf.kernel.NamedElement;
 import io.github.dsl.teamf.kernel.behavioral.ScreenCondition;
+import io.github.dsl.teamf.kernel.behavioral.TextAlign;
 import io.github.dsl.teamf.kernel.structural.quizz.QuizElement;
 import io.github.dsl.teamf.kernel.generator.Visitable;
 import io.github.dsl.teamf.kernel.generator.Visitor;
@@ -10,6 +11,7 @@ import io.github.dsl.teamf.kernel.generator.Visitor;
 public class Zone implements NamedElement, Visitable {
     private String name;
     private String color;
+    private TextAlign alignement = TextAlign.center;
     private QuizElement quizElement;
 
     @Override
@@ -41,5 +43,13 @@ public class Zone implements NamedElement, Visitable {
 
     public void setQuizElement(QuizElement quizElement) {
         this.quizElement = quizElement;
+    }
+
+    public TextAlign getAlignement() {
+        return alignement;
+    }
+
+    public void setAlignement(TextAlign alignement) {
+        this.alignement = alignement;
     }
 }
