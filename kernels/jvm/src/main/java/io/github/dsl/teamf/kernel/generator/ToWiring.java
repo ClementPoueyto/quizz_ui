@@ -66,6 +66,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w("\t\t\t\t\tlarge: 3000\n");
 			w("\t\t\t\t},\n");
 		}
+
 		app.getTheme().accept(this);
 			w("\t\t\t}\n");
 			w("\t\t});\n");
