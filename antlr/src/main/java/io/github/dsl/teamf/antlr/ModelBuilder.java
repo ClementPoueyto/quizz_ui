@@ -41,6 +41,7 @@ public class ModelBuilder extends QuizzBaseListener {
     private MultipleAnswer multipleAnswer;
     private QuizInfo quizInfo;
     private Timer timer;
+    private Theme theme;
 
     private Zone currentZone;
 
@@ -314,11 +315,22 @@ public class ModelBuilder extends QuizzBaseListener {
         this.clockComponent = clock;
     }
 
+    @Override public void enterFont(QuizzParser.FontContext ctx) {
+        FontStyle font =new FontStyle();
+        font.setFamily(ctx.family.getText());
+        if(ctx.size!=null)
+           font.setSize(Integer.parseInt(ctx.size.getText()));
+        theme.setFontStyle(font);
+    }
+
     @Override public void enterTheme(QuizzParser.ThemeContext ctx) {
-        Theme theme =new Theme();
+        theme =new Theme();
         theme.setPrimaryColor(ctx.primary.getText());
         theme.setSecondaryColor(ctx.secondary.getText());
-        theme.setFontStyle(ctx.font().family.getText());
+
+    }
+
+    @Override public void exitTheme(QuizzParser.ThemeContext ctx) {
         theApp.setTheme(theme);
     }
 

@@ -4,7 +4,7 @@ theme :
     primary color : #dbd825
     secondary color : #1edaeb
     font : {
-        family : SERIF }
+        family : SCRIPT }
 
 # Declaring grid
 grid : {

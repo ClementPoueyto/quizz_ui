@@ -50,6 +50,27 @@ public class ToWiring extends Visitor<StringBuffer> {
 				"\t}\n\n");
 		context.put("pass", PASS.TWO); //describe components
 		w("\trender() {\n");
+
+
+
+			w("\t\tvar customBreakpoints = deepMerge(grommet, {\n");
+			w("\t\t\tglobal: {\n");
+		if(app.getGrid().isResponsiveGrid()){
+			w("\t\t\t\tbreakpoints: {\n");
+			w("\t\t\t\t\tsmall: {\n");
+			w("\t\t\t\t\t\t value: 600\n");
+			w("\t\t\t\t\t},\n");
+			w("\t\t\t\t\tmedium: {\n");
+			w("\t\t\t\t\t\tvalue: 950\n");
+			w("\t\t\t\t\t},\n");
+			w("\t\t\t\t\tlarge: 3000\n");
+			w("\t\t\t\t},\n");
+		}
+		app.getTheme().accept(this);
+			w("\t\t\t}\n");
+			w("\t\t});\n");
+
+
 		app.getGrid().accept(this);
 		w("\t\treturn (\n");
 		context.put("pass", PASS.FIVE); //describe components
@@ -88,21 +109,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w("Grid, Box, CheckBoxGroup, Text, Button, Clock, ResponsiveContext");
 		}
 		if(context.get("pass") == PASS.TWO){
-			if(grid.isResponsiveGrid()){
-				w("\t\tvar customBreakpoints = deepMerge(grommet, {\n");
-				w("\t\t\tglobal: {\n");
-				w("\t\t\t\tbreakpoints: {\n");	
-				w("\t\t\t\t\tsmall: {\n");	
-				w("\t\t\t\t\t\t value: 600\n");	
-				w("\t\t\t\t\t},\n");
-				w("\t\t\t\t\tmedium: {\n");
-				w("\t\t\t\t\t\tvalue: 950\n");
-				w("\t\t\t\t\t},\n");
-				w("\t\t\t\t\tlarge: 3000\n");
-				w("\t\t\t\t}\n");
-				w("\t\t\t}\n");
-				w("\t\t});\n");
-			}
+
 			w("\t\tconst areas = {\n");
 			
 			for(Layout layout: grid.getLayouts()){
@@ -186,6 +193,13 @@ public class ToWiring extends Visitor<StringBuffer> {
 	}
 	@Override
 	public void visit(Theme theme) {
+
+		w("\t\t\t\tfont: {\n");
+		w("\t\t\t\t\tfamily: '" + theme.getFontStyle().getFamily() +"'\n");
+		if(theme.getFontStyle().getSize()!=0)
+		w("\t\t\t\t\t,size: '"+ theme.getFontStyle().getSize()+"px'\n");
+		w("\t\t\t\t}\n");
+
 	}
 
 	@Override
