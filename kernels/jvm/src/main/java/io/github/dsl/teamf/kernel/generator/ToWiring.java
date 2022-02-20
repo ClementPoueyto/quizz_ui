@@ -244,7 +244,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 		if(context.get("pass") == PASS.ONE) {
 			w(String.format(" onMultipleAnswerChange, "));
 		}
-		if(context.get("pass") == PASS.FIVE) {
+		if(context.get("pass") == PASS.SIX) {
 			multipleAnswer.getAnswer().accept(this);
 		}
 	}
@@ -309,7 +309,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(CheckBoxComponent checkBoxComponent) {
-		if(context.get("pass") == PASS.FIVE) {
+		if(context.get("pass") == PASS.SIX) {
 			w("<CheckBoxGroup");
 			w(String.format(" options = { %s }", checkBoxComponent.getVariableName()));
 			w(String.format(" onChange={ ({ value, option }) => { this.setState ({ quiz : %s}) } }", checkBoxComponent.getFunctionName()));
