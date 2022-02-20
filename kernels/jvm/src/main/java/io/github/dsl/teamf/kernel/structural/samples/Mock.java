@@ -101,7 +101,7 @@ public class Mock {
 		
 		//QUESTION
 		Question question= new Question();
-		Answer answer = new Answer();
+		MultipleAnswer answer = new MultipleAnswer();
 		Statement statement = new Statement();
 
 		TextComponent textStatement = new TextComponent();
@@ -111,8 +111,13 @@ public class Mock {
 		ButtonComponent answerButton = new ButtonComponent();
 		answerButton.setMargin(Size.xsmall);
 		answerButton.setSize(Size.large);
-		answer.setAnswer(answerButton);
 		answerButton.setColor("dark-2");
+
+		CheckBoxComponent checkBoxComponent = new CheckBoxComponent();
+
+		answer.setAnswer(checkBoxComponent);
+
+
 		question.setAnswer(answer);
 		question.setStatement(statement);
 

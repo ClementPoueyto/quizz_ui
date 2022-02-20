@@ -4,10 +4,7 @@ import java.io.Console;
 import java.util.List;
 
 import io.github.dsl.teamf.kernel.App;
-import io.github.dsl.teamf.kernel.behavioral.ButtonComponent;
-import io.github.dsl.teamf.kernel.behavioral.ClockComponent;
-import io.github.dsl.teamf.kernel.behavioral.ScreenCondition;
-import io.github.dsl.teamf.kernel.behavioral.TextComponent;
+import io.github.dsl.teamf.kernel.behavioral.*;
 import io.github.dsl.teamf.kernel.structural.quizz.*;
 import io.github.dsl.teamf.kernel.structural.ui.Grid;
 import io.github.dsl.teamf.kernel.structural.ui.Layout;
@@ -58,8 +55,10 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 			w("\t\tvar customBreakpoints = deepMerge(grommet, {\n");
 			w("\t\t\tglobal: {\n");
+
 		app.getGrid().accept(this);
 		context.put("pass",PASS.THREE);
+
 		app.getTheme().accept(this);
 			w("\t\t\t}\n");
 			w("\t\t});\n");
@@ -84,7 +83,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 		
 		if(context.get("pass") == PASS.SIX){
 
-			w(String.format("\t\t\t\t\t<Box gridArea=\'%s\' background=\'%s\' >\n", zone.getName(), zone.getColor()));
+			w(String.format("\t\t\t\t\t<Box gridArea=\'%s\' align=\'%s\' background=\'%s\' >\n", zone.getName(),zone.getAlignement(), zone.getColor()));
 			if(zone.getQuizElement()!=null){
 				zone.getQuizElement().accept(this);
 			}
@@ -100,7 +99,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(Grid grid) {
 		if (context.get("pass") == PASS.ONE) {
-			w("Grid, Box, Text, Button, Clock, ResponsiveContext");
+			w("Grid, Box, CheckBoxGroup, Text, Button, Clock, ResponsiveContext");
 		}
 		if(context.get("pass") == PASS.TWO) {
 
@@ -227,18 +226,27 @@ public class ToWiring extends Visitor<StringBuffer> {
 		question.getAnswer().accept(this);
 	}
 
+
 	@Override
-	public void visit(Answer answer) {
+	public void visit(SingleAnswer singleAnswer) {
 		if(context.get("pass") == PASS.ONE) {
 			w(String.format(" onAnswerClick, "));
 		}
 		if(context.get("pass") == PASS.SIX) {
 			w("\t\t\t\t\t\t{this.state.quiz.questions[this.state.quiz.indexQuestion].answers.map((item,index)=>{\n\t\t\t\t\t\t\treturn ");
-			answer.getAnswer().accept(this);
+			singleAnswer.getAnswer().accept(this);
 			w("\t\t\t\t\t\t})}\n");
 		}
+	}
 
-
+	@Override
+	public void visit(MultipleAnswer multipleAnswer) {
+		if(context.get("pass") == PASS.ONE) {
+			w(String.format(" onMultipleAnswerChange, "));
+		}
+		if(context.get("pass") == PASS.FIVE) {
+			multipleAnswer.getAnswer().accept(this);
+		}
 	}
 
 	@Override
@@ -294,6 +302,19 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w(String.format(" onClick={()=>{ this.setState({ quiz : %s})}} ", buttonComponent.getFunctionName()));
 
 			w(String.format(" label={%s} ", buttonComponent.getVariableName()));
+
+			w(String.format(" />\n"));
+		}
+	}
+
+	@Override
+	public void visit(CheckBoxComponent checkBoxComponent) {
+		if(context.get("pass") == PASS.FIVE) {
+			w("<CheckBoxGroup");
+			w(String.format(" options = { %s }", checkBoxComponent.getVariableName()));
+			w(String.format(" onChange={ ({ value, option }) => { this.setState ({ quiz : %s}) } }", checkBoxComponent.getFunctionName()));
+			w(String.format(" gap = \'%s\' ", checkBoxComponent.getGap()));
+
 
 			w(String.format(" />\n"));
 		}

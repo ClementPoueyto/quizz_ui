@@ -37,7 +37,8 @@ public class ModelBuilder extends QuizzBaseListener {
     private Map<String, Zone>   zones= new HashMap<>();
     private Question ques;
     private Statement statement;
-    private Answer answer;
+    private SingleAnswer singleAnswer;
+    private MultipleAnswer multipleAnswer;
     private QuizInfo quizInfo;
     private Timer timer;
     private Theme theme;
@@ -49,6 +50,7 @@ public class ModelBuilder extends QuizzBaseListener {
 
     private TextComponent textComponent;
     private ButtonComponent buttonComponent;
+    private CheckBoxComponent checkBoxComponent;
     private ClockComponent clockComponent;
 
     private QuizElement currentQuizElement;
@@ -148,6 +150,9 @@ public class ModelBuilder extends QuizzBaseListener {
         else
             if (theApp.getTheme()!=null)
                 zone.setColor(theApp.getTheme().getPrimaryColor());
+        if(ctx.alignement!=null){
+            zone.setAlignement(TextAlign.valueOf(ctx.alignement.getText().toLowerCase()));
+        }
         zone.setName(ctx.name.getText());
         currentZone = zone;
     }
@@ -188,7 +193,6 @@ public class ModelBuilder extends QuizzBaseListener {
     @Override public void exitQuestion(QuizzParser.QuestionContext ctx) {
         currentQuizElement = ques;
         ques.setStatement(statement);
-        ques.setAnswer(answer);
         quizElements.add(ques);
     }
 
@@ -243,12 +247,25 @@ public class ModelBuilder extends QuizzBaseListener {
 
     }
 
-    @Override public void enterAnswer(QuizzParser.AnswerContext ctx) {
-        answer=new Answer();
+
+
+    @Override public void enterSingle_answer(QuizzParser.Single_answerContext ctx) {
+        singleAnswer=new SingleAnswer();
     }
-    @Override public void exitAnswer(QuizzParser.AnswerContext ctx) {
-        answer.setAnswer(buttonComponent);
+    @Override public void exitSingle_answer(QuizzParser.Single_answerContext ctx) {
+        singleAnswer.setAnswer(buttonComponent);
+        ques.setAnswer(singleAnswer);
+
     }
+
+    @Override public void enterMultiple_answer(QuizzParser.Multiple_answerContext ctx) {
+        multipleAnswer=new MultipleAnswer();
+    }
+    @Override public void exitMultiple_answer(QuizzParser.Multiple_answerContext ctx) {
+        multipleAnswer.setAnswer(checkBoxComponent);
+        ques.setAnswer(multipleAnswer);
+    }
+
     @Override public void enterButton(QuizzParser.ButtonContext ctx) {
         ButtonComponent buttonComponent= new ButtonComponent();
         if(ctx.color!=null){
@@ -261,6 +278,16 @@ public class ModelBuilder extends QuizzBaseListener {
         buttonComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
         this.buttonComponent = buttonComponent;
         componentList.add(buttonComponent);
+    }
+
+    @Override public void enterCheckboxgroup(QuizzParser.CheckboxgroupContext ctx) {
+        CheckBoxComponent checkBoxComponent= new CheckBoxComponent();
+        if(ctx.gapanswer!=null){
+            checkBoxComponent.setGap(Size.valueOf(ctx.gapanswer.getText().toLowerCase()));
+        }
+
+        this.checkBoxComponent = checkBoxComponent;
+        componentList.add(checkBoxComponent);
     }
 
     @Override public void enterClock(QuizzParser.ClockContext ctx) {

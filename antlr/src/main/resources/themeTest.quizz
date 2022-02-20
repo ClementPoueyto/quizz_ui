@@ -14,14 +14,13 @@ zone: header
             description : size LARGE
 
 zone: middle
+    alignment CENTER
     background DARK-2
     element :
             statement : size MEDIUM  align CENTER
-            answer :
-                size : SMALL margin : SMALL
+            answer : multiple gap LARGE
 
 zone: left
-    background BRAND
     element :
         timer : countdown size LARGE type DIGITAL
 

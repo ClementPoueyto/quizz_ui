@@ -1,5 +1,6 @@
 application gridCreation
 
+
 # Declaring grid
 grid : {
 zone: header
@@ -12,7 +13,7 @@ zone: middle
     background DARK-2
     element :
             statement : size MEDIUM  align CENTER
-            answer :
+            answer : single
                 color : RED size : SMALL margin : SMALL
 
 zone: left
