@@ -21,6 +21,9 @@ export default class App extends Component {
 						value: 950
 					},
 					large: 3000
+				},
+				font: {
+					family: 'SCRIPT'
 				}
 			}
 		});

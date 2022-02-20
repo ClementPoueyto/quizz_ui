@@ -9,7 +9,7 @@ public class Theme implements Visitable, NamedElement {
     private String name;
     private String primaryColor;
     private String secondaryColor;
-    private String fontStyle;
+    private FontStyle fontStyle;
 
 
     @Override
@@ -43,11 +43,11 @@ public class Theme implements Visitable, NamedElement {
         this.secondaryColor = secondaryColor;
     }
 
-    public String getFontStyle() {
+    public FontStyle getFontStyle() {
         return fontStyle;
     }
 
-    public void setFontStyle(String fontStyle) {
+    public void setFontStyle(FontStyle fontStyle) {
         this.fontStyle = fontStyle;
     }
 }
