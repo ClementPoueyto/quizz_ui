@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import {  onAnswerClick,  onTimerChange, } from './functions'
 import { Grommet, Grid, Box, Text, Button, Clock, ResponsiveContext } from 'grommet'
-import { deepMerge } from "grommet/utils";import { grommet } from "grommet/themes";var data = require('./quiz.json');
+import { deepMerge } from "grommet/utils";
+import { grommet } from "grommet/themes";
+var data = require('./quiz.json');
 
 export default class App extends Component {
 
