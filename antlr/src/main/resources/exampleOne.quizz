@@ -1,0 +1,48 @@
+application exampleOne
+
+#declaration grid
+
+grid : {
+    zone : header
+        background LIGHT-3
+        element :
+                title : size LARGE  align CENTER color : BLUE
+                description : size LARGE
+
+    zone : middle
+        background LIGHT-2
+        element :
+                statement : size MEDIUM  align CENTER
+                answer : single
+                    color : RED size : SMALL margin : SMALL
+
+    zone : nav
+        background BRAND
+        element :
+            timer : countdown size LARGE type DIGITAL
+
+    zone : right
+        background BRAND
+
+    zone : footer
+
+layout : {
+    gap MEDIUM
+    row 0 size XSMALL
+    row 1 size MEDIUM
+    row 2 size XXSMALL
+    col 0 size MEDIUM
+    col 1 size LARGE
+    col 2 size MEDIUM
+    arrangement{
+        nav header right,
+        nav middle right,
+        footer footer footer,
+       }
+    }
+
+}
+
+
+
+

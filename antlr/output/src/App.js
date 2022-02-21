@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  onMultipleAnswerChange,  onTimerChange, } from './functions'
+import {  onAnswerClick,  onTimerChange, } from './functions'
 import { Grommet, Grid, Box, CheckBoxGroup, Text, Button, Clock, ResponsiveContext } from 'grommet'
 import { deepMerge } from "grommet/utils";
 import { grommet } from "grommet/themes";
@@ -24,15 +24,11 @@ export default class App extends Component {
 					},
 					large: 3000
 				},
-				font: {
-					family: 'SCRIPT'
-				}
-			}
-		});
 		const areas = {
 			default: [
-				["left","header",],
-				["left","middle",],
+				["nav","header","right",],
+				["nav","middle","right",],
+				["footer","footer","footer",],
 			],
 			small: [
 				["header",],
@@ -40,11 +36,11 @@ export default class App extends Component {
 			],
 		}
 		const rows = {
-			default:['xsmall','medium',],
+			default:['xsmall','medium','xxsmall',],
 			small:['small','medium',],
 		}
 		const columns = {
-			default:['medium','large',],
+			default:['medium','large','medium',],
 			small:['medium',],
 }
 		return (
@@ -57,16 +53,22 @@ export default class App extends Component {
 					gap='null'
 						areas={areas[size] ? areas[size] : areas["default"]}
 				>
-					<Box gridArea='header' align='center' background='#dbd825' >
+					<Box gridArea='header' align='center' background='light-3' >
 						<Text size='large'  textAlign='center'  color='blue'  >{this.state.quiz.title}</Text>
 						<Text size='large'  textAlign='center'  >{this.state.quiz.theme}</Text>
 					</Box>
-					<Box gridArea='middle' align='center' background='dark-2' >
+					<Box gridArea='middle' align='center' background='light-2' >
 						<Text size='medium'  textAlign='center'  >{this.state.quiz.questions[this.state.quiz.indexQuestion].statement}</Text>
-<CheckBoxGroup options = { this.state.quiz.questions[this.state.quiz.indexQuestion].answers } onChange={ ({ value, option }) => { this.setState ({ quiz : onMultipleAnswerChange(this.state.quiz,value,option)}) } } gap = 'large'  />
+						{this.state.quiz.questions[this.state.quiz.indexQuestion].answers.map((item,index)=>{
+							return <Button primary={true}  size='small'  margin='small'  color='red'  onClick={()=>{ this.setState({ quiz : onAnswerClick(this.state.quiz,item,index)})}}  label={this.state.quiz.questions[this.state.quiz.indexQuestion].answers[index]}  />
+						})}
 					</Box>
-					<Box gridArea='left' align='center' background='#dbd825' >
+					<Box gridArea='nav' align='center' background='brand' >
 						<Clock run='backward'  type='digital'  size='large'  time='T00:01:00'  alignSelf='center'  precision='seconds'  onChange={onTimerChange}  />
+					</Box>
+					<Box gridArea='right' align='center' background='brand' >
+					</Box>
+					<Box gridArea='footer' align='center' background='null' >
 					</Box>
 				</Grid>
 			}
