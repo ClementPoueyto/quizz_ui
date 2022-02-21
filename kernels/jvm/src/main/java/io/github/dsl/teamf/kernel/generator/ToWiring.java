@@ -59,11 +59,10 @@ public class ToWiring extends Visitor<StringBuffer> {
 		app.getGrid().accept(this);
 		context.put("pass",PASS.THREE);
 
-		if(app.getTheme()!=null) {
 			app.getTheme().accept(this);
 			w("\t\t\t}\n");
 			w("\t\t});\n");
-		}
+
 
 
 		app.getGrid().accept(this);
