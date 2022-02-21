@@ -54,7 +54,7 @@ uiElement : button | text | clock | checkboxgroup ;
 NUMBER          :   [0-9]+;
 TIME            : [0-2][0-3]':'[0-5][0-9]':'[0-5][0-9];
 IDENTIFIER      :   LOWERCASE (LOWERCASE|UPPERCASE)+;
-SIZE            :   'XXSMALL' | 'XSMALL' | 'SMALL' | 'MEDIUM' | 'LARGE' | 'XLARGE';
+SIZE            :   'XXSMALL' | 'XSMALL' | 'SMALL' | 'MEDIUM' | 'LARGE' | 'XLARGE' | 'AUTO' | 'FULL';
 //QUESTION_UI     :   IMAGE   |   TEXT;
 //IMAGE           :   'image' PATH;
 TEXT            :   UPPERCASE (IDENTIFIER WS* NEWLINE)+;
