@@ -7,73 +7,94 @@ var data = require('./quiz.json');
 
 export default class App extends Component {
 
-	constructor() {
-		super();
-		this.state = { quiz : data }
-	}
+        constructor() {
+                super();
+                this.state = { quiz : data }
+        }
 
-	render() {
-		var customBreakpoints = deepMerge(grommet, {
-			global: {
-				breakpoints: {
-					small: {
-						 value: 600
-					},
-					medium: {
-						value: 950
-					},
-					large: 3000
-				},
-		const areas = {
-			default: [
-				["nav","header","right",],
-				["nav","middle","right",],
-				["footer","footer","footer",],
-			],
-			small: [
-				["header",],
-				["middle",],
-			],
-		}
-		const rows = {
-			default:['xsmall','medium','xxsmall',],
-			small:['small','medium',],
-		}
-		const columns = {
-			default:['medium','large','medium',],
-			small:['medium',],
+        render() {
+                var customBreakpoints = deepMerge(grommet, {
+                        global: {
+                                breakpoints: {
+                                        small: {
+                                                 value: 600
+                                        },
+                                        medium: {
+                                                value: 950
+                                        },
+                                        large: 3000
+                                },
+                        }
+                });
+                var c_areas= []
+                const areas = {
+                        default: [
+                                ["left","header",],
+                                ["left","middle",],
+                        ],
+                        medium: [
+                                ["left","header",],
+                                ["left","middle",],
+                        ],
+                        small: [
+                                ["header",],
+                                ["middle",],
+                        ],
+                }
+                const rows = {
+                        default:['xsmall','medium',],
+                        medium:['xsmall','medium',],
+                        small:['small','medium',],
+                }
+                const columns = {
+                        default:['medium','large',],
+                        medium:['medium','auto',],
+                        small:['auto',],
 }
-		return (
-			<Grommet theme={customBreakpoints}>
-				<ResponsiveContext.Consumer>
-					{size =>
-					<Grid
-						rows={rows[size] ? rows[size] : rows["default"]}
-						columns={columns[size] ? columns[size] : columns["default"]}
-					gap='null'
-						areas={areas[size] ? areas[size] : areas["default"]}
-				>
-					<Box gridArea='header' align='center' background='light-3' >
-						<Text size='large'  textAlign='center'  color='blue'  >{this.state.quiz.title}</Text>
-						<Text size='large'  textAlign='center'  >{this.state.quiz.theme}</Text>
-					</Box>
-					<Box gridArea='middle' align='center' background='light-2' >
-						<Text size='medium'  textAlign='center'  >{this.state.quiz.questions[this.state.quiz.indexQuestion].statement}</Text>
-						{this.state.quiz.questions[this.state.quiz.indexQuestion].answers.map((item,index)=>{
-							return <Button primary={true}  size='small'  margin='small'  color='red'  onClick={()=>{ this.setState({ quiz : onAnswerClick(this.state.quiz,item,index)})}}  label={this.state.quiz.questions[this.state.quiz.indexQuestion].answers[index]}  />
-						})}
-					</Box>
-					<Box gridArea='nav' align='center' background='brand' >
-						<Clock run='backward'  type='digital'  size='large'  time='T00:01:00'  alignSelf='center'  precision='seconds'  onChange={onTimerChange}  />
-					</Box>
-					<Box gridArea='right' align='center' background='brand' >
-					</Box>
-					<Box gridArea='footer' align='center' background='null' >
-					</Box>
-				</Grid>
-			}
-			</ResponsiveContext.Consumer>
-		</Grommet>
-		);
-	}
+                return (
+                        <Grommet theme={customBreakpoints}>
+                                <ResponsiveContext.Consumer>
+                                        {size =>
+                                        <Grid
+                                                rows={rows[size] ? rows[size] : rows["default"]}
+                                                columns={columns[size] ? columns[size] : columns["default"]}
+                                        gap='null'
+                                                areas={areas[size] ? areas[size] : areas["default"]}>
+                                        {
+                                                c_areas =  areas[size] ? areas[size] : areas["default"],
+                                                c_areas.find((row) => row.indexOf("header") >=0) ?
+                                                <Box gridArea='header' align='center' background='light-3'>
+                                                <Text size='large'  textAlign='center'  color='blue'  >{this.state.quiz.title}</Text>
+                                                <Text size='large'  textAlign='center'  >{this.state.quiz.theme}</Text>    
+                                                </Box>
+                                                :
+                                                <Box/>
+                                        }
+                                        {
+                                                c_areas =  areas[size] ? areas[size] : areas["default"],
+                                                c_areas.find((row) => row.indexOf("middle") >=0) ?
+                                                <Box gridArea='middle' align='center' background='dark-2'>
+                                                <Text size='medium'  textAlign='center'  >{this.state.quiz.questions[this.state.quiz.indexQuestion].statement}</Text>
+                                                {this.state.quiz.questions[this.state.quiz.indexQuestion].answers.map((item,index)=>{
+                                                        return <Button primary={true}  size='small'  margin='small'  color='red'  onClick={()=>{ this.setState({ quiz : onAnswerClick(this.state.quiz,item,index)})}}  label={this.state.quiz.questions[this.state.quiz.indexQuestion].answers[index]}  />
+                                                })}
+                                                </Box>
+                                                :
+                                                <Box/>
+                                        }
+                                        {
+                                                c_areas =  areas[size] ? areas[size] : areas["default"],
+                                                c_areas.find((row) => row.indexOf("left") >=0) ?
+                                                <Box gridArea='left' align='center' background='brand'>
+                                                <Clock run='backward'  type='digital'  size='large'  time='T00:01:00'  alignSelf='center'  precision='seconds'  onChange={onTimerChange}  />
+                                                </Box>
+                                                :
+                                                <Box/>
+                                        }
+                                </Grid>
+                        }
+                        </ResponsiveContext.Consumer>
+                </Grommet>
+                );
+        }
 }

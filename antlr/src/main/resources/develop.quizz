@@ -15,6 +15,7 @@ zone: middle
             statement : size MEDIUM  align CENTER
             answer : single
                 color : RED size : SMALL margin : SMALL
+            
 
 zone: left
     background BRAND
@@ -34,10 +35,23 @@ layout : {
 }
 
 layout : {
+    when screen is TABLET
+    gap SMALL
+    row 0 size XSMALL
+    row 1 size MEDIUM
+    col 0 size MEDIUM
+    col 1 size AUTO
+    arrangement{
+        left header,
+        left middle,
+    }
+}
+
+layout : {
     when screen is PHONE
     row 0 size SMALL
     row 1 size MEDIUM
-    col 0 size MEDIUM
+    col 0 size AUTO
     arrangement
     {
         header,

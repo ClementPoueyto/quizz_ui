@@ -58,10 +58,11 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 		app.getGrid().accept(this);
 		context.put("pass",PASS.THREE);
-
+		if(app.getTheme()!=null){
 			app.getTheme().accept(this);
-			w("\t\t\t}\n");
-			w("\t\t});\n");
+		}
+		w("\t\t\t}\n");
+		w("\t\t});\n");
 
 
 
@@ -83,12 +84,17 @@ public class ToWiring extends Visitor<StringBuffer> {
 		}
 		
 		if(context.get("pass") == PASS.SIX){
-
-			w(String.format("\t\t\t\t\t<Box gridArea=\'%s\' align=\'%s\' background=\'%s\' >\n", zone.getName(),zone.getAlignement(), zone.getColor()));
+			w("\t\t\t\t\t{\n");
+			w("\t\t\t\t\t\tc_areas =  areas[size] ? areas[size] : areas[\"default\"],\n");
+			w(String.format("\t\t\t\t\t\tc_areas.find((row) => row.indexOf(\"%s\") >=0) ?\n",zone.getName()));
+			w(String.format("\t\t\t\t\t\t<Box gridArea=\'%s\' align=\'%s\' background=\'%s\'>\n", zone.getName(),zone.getAlignement(), zone.getColor()));
 			if(zone.getQuizElement()!=null){
 				zone.getQuizElement().accept(this);
 			}
-			w("\t\t\t\t\t</Box>\n");
+			w("\t\t\t\t\t\t</Box>\n");
+			w("\t\t\t\t\t\t:\n");
+			w("\t\t\t\t\t\t<Box/>\n");
+			w("\t\t\t\t\t}\n");
 		}
 
 
@@ -117,6 +123,8 @@ public class ToWiring extends Visitor<StringBuffer> {
 			}
 		}
 		if(context.get("pass")==PASS.THREE){
+			
+			w("\t\tvar c_areas= []\n");
 			w("\t\tconst areas = {\n");
 			
 			for(Layout layout: grid.getLayouts()){
@@ -151,8 +159,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w("\t\t\t\t\t\trows={rows[size] ? rows[size] : rows[\"default\"]}\n");
 			w("\t\t\t\t\t\tcolumns={columns[size] ? columns[size] : columns[\"default\"]}\n");
 			w(String.format("\t\t\t\t\tgap=\'%s\'\n", "null"));
-			w("\t\t\t\t\t\tareas={areas[size] ? areas[size] : areas[\"default\"]}\n");
-			w("\t\t\t\t>\n");
+			w("\t\t\t\t\t\tareas={areas[size] ? areas[size] : areas[\"default\"]}>\n");
 			for (Zone zone : grid.getZones()) {
 				zone.accept(this);
 			}
