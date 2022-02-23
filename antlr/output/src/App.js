@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { } from './functions'
-import { Grommet, Grid, Box, CheckBoxGroup, Text, Button, Clock, ResponsiveContext, TextInput } from 'grommet'
+import {  onAnswerClick, } from './functions'
+import { Grommet, Grid, Box, CheckBoxGroup, Text, Button, Clock, ResponsiveContext, TextInput, Meter } from 'grommet'
 import { deepMerge } from "grommet/utils";
 import { grommet } from "grommet/themes";
 var data = require('./quiz.json');
@@ -15,40 +15,44 @@ export default class App extends Component {
 	render() {
 		var customBreakpoints = deepMerge(grommet, {
 			global: {
-<<<<<<< HEAD
-=======
-				font: {
-					family: 'SCRIPT'
-				}
->>>>>>> 06188f9c3a9c1630551effcb96ccb2cf628a23f1
+				breakpoints: {
+					small: {
+						 value: 600
+					},
+					medium: {
+						value: 950
+					},
+					large: 3000
+				},
 			}
 		});
 		var c_areas= []
 		const areas = {
 			default: [
-<<<<<<< HEAD
-				["unTruc",],
+				["left","header",],
+				["left","middle",],
+			],
+			medium: [
+				["left","header",],
+				["left","middle",],
+			],
+			small: [
+				["header",],
+				["middle",],
 			],
 		}
 		const rows = {
+			default:['xsmall','medium',],
+			medium:['xsmall','medium',],
+			small:['small','medium',],
+		}
+		const columns = {
 			default:['medium','large',],
-		}
-		const columns = {
-			default:['large',],
-=======
-				["nav","middle","right",],
-				["footer","footer","footer",],
-			],
-		}
-		const rows = {
-			default:['large','small',],
-		}
-		const columns = {
-			default:['medium','large','medium',],
->>>>>>> 06188f9c3a9c1630551effcb96ccb2cf628a23f1
+			medium:['medium','auto',],
+			small:['auto',],
 }
 		return (
-			<Grommet>
+			<Grommet theme={customBreakpoints}>
 				<ResponsiveContext.Consumer>
 					{size =>
 					<Grid
@@ -58,27 +62,9 @@ export default class App extends Component {
 						areas={areas[size] ? areas[size] : areas["default"]}>
 					{
 						c_areas =  areas[size] ? areas[size] : areas["default"],
-<<<<<<< HEAD
-						c_areas.find((row) => row.indexOf("unTruc") >=0) ?
-						<Box gridArea='unTruc' align='center' background='light-3'>
-						<Text size='medium'  textAlign='center'  >{this.state.quiz.questions[this.state.quiz.indexQuestion].statement}</Text>
-						<TextInput placeholder="Enter your answer here" size="medium" textAlign="center"/>
-=======
-						c_areas.find((row) => row.indexOf("middle") >=0) ?
-						<Box gridArea='middle' align='center' background='light-2'>
-						<Text size='medium'  textAlign='center'  >{this.state.quiz.questions[this.state.quiz.indexQuestion].statement}</Text>
-						{this.state.quiz.questions[this.state.quiz.indexQuestion].answers.map((item,index)=>{
-							return <Button primary={true}  size='small'  margin='small'  color='LIGHT-3'  onClick={()=>{ this.setState({ quiz : onAnswerClick(this.state.quiz,item,index)})}}  label={this.state.quiz.questions[this.state.quiz.indexQuestion].answers[index]}  />
-						})}
-						</Box>
-						:
-						<Box/>
-					}
-					{
-						c_areas =  areas[size] ? areas[size] : areas["default"],
-						c_areas.find((row) => row.indexOf("nav") >=0) ?
-						<Box gridArea='nav' align='center' background='brand'>
-						<Text size='large'  textAlign='center'  >{this.state.quiz.title}</Text>
+						c_areas.find((row) => row.indexOf("header") >=0) ?
+						<Box gridArea='header' align='center' background='light-3'>
+						<Text size='large'  textAlign='center'  color='blue'  >{this.state.quiz.title}</Text>
 						<Text size='large'  textAlign='center'  >{this.state.quiz.theme}</Text>
 						</Box>
 						:
@@ -86,18 +72,21 @@ export default class App extends Component {
 					}
 					{
 						c_areas =  areas[size] ? areas[size] : areas["default"],
-						c_areas.find((row) => row.indexOf("right") >=0) ?
-						<Box gridArea='right' align='center' background='brand'>
-						<Clock run='backward'  type='digital'  size='large'  time='T00:01:00'  alignSelf='center'  precision='seconds'  onChange={(time)=>{ this.setState({ quiz : onTimerChange(this.state.quiz,time)})}}  />
+						c_areas.find((row) => row.indexOf("middle") >=0) ?
+						<Box gridArea='middle' align='center' background='dark-2'>
+						<Text size='medium'  textAlign='center'  >{this.state.quiz.questions[this.state.quiz.indexQuestion].statement}</Text>
+						{this.state.quiz.questions[this.state.quiz.indexQuestion].answers.map((item,index)=>{
+							return <Button primary={true}  size='small'  margin='small'  color='red'  onClick={()=>{ this.setState({ quiz : onAnswerClick(this.state.quiz,item,index)})}}  label={this.state.quiz.questions[this.state.quiz.indexQuestion].answers[index]}  />
+						})}
 						</Box>
 						:
 						<Box/>
 					}
 					{
 						c_areas =  areas[size] ? areas[size] : areas["default"],
-						c_areas.find((row) => row.indexOf("footer") >=0) ?
-						<Box gridArea='footer' align='center' background='light-3'>
->>>>>>> 06188f9c3a9c1630551effcb96ccb2cf628a23f1
+						c_areas.find((row) => row.indexOf("left") >=0) ?
+						<Box gridArea='left' align='center' background='light-3'>
+							<Meter size='large'  type='pie'  color='brand'  thickness='large' value = {this.state.quiz.indexQuestion*100/this.state.quiz.questions.length}  />
 						</Box>
 						:
 						<Box/>

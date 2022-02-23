@@ -18,9 +18,9 @@ zone: middle
             
 
 zone: left
-    background BRAND
+    background LIGHT-3
     element :
-        timer : countdown size LARGE type DIGITAL
+        progress : size LARGE type PIE thickness LARGE color : BRAND
 
 layout {
     gap SMALL

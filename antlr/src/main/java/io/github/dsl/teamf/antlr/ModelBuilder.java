@@ -43,6 +43,7 @@ public class ModelBuilder extends QuizzBaseListener {
     private QuizInfo quizInfo;
     private Timer timer;
     private Theme theme;
+    private ProgressBar progressBar;
 
     private Zone currentZone;
 
@@ -54,6 +55,7 @@ public class ModelBuilder extends QuizzBaseListener {
     private CheckBoxComponent checkBoxComponent;
     private ClockComponent clockComponent;
     private TextInputComponent textInputComponent;
+    private MeterComponent meterComponent;
 
     private QuizElement currentQuizElement;
     private Layout currenLayout;
@@ -336,6 +338,32 @@ public class ModelBuilder extends QuizzBaseListener {
         theApp.setTheme(theme);
     }
 
+    @Override public void enterProgressbar(QuizzParser.ProgressbarContext ctx){
+        progressBar= new ProgressBar();
+    }
+    @Override public void exitProgressbar(QuizzParser.ProgressbarContext ctx){
+        progressBar.setMeter(meterComponent);
+        this.currentQuizElement = this.progressBar;
+        this.quizElements.add(progressBar);
+    }
+
+    @Override public void enterMeter(QuizzParser.MeterContext ctx) {
+        meterComponent = new MeterComponent();
+        if (ctx.color != null) {
+            meterComponent.setColor(ctx.color.getText());
+        }
+        if (ctx.size != null) {
+            meterComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
+        }
+        if (ctx.type != null) {
+            meterComponent.setType(MeterType.valueOf(ctx.type.getText().toLowerCase()));
+        }
+        if (ctx.thickness != null) {
+            meterComponent.setThickness(Size.valueOf(ctx.thickness.getText().toLowerCase()));
+        }
+
+    }
+
     @Override
     public void enterTextInput(QuizzParser.TextInputContext ctx) {
         TextInputComponent textInputComponent = new TextInputComponent();
@@ -363,5 +391,6 @@ public class ModelBuilder extends QuizzBaseListener {
         openAnswer.setAnswer(textInputComponent);
         ques.setAnswer(openAnswer);
     }
+
 }
 

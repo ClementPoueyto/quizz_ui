@@ -11,6 +11,11 @@
       "statement":"quel animal a des moustaches ?" ,
       "answers": ["le chat", "le requin"],
       "rightAnswer": ["le chat"]
+    },
+    {
+      "statement":"quel animal a des nageoires ?" ,
+      "answers": ["le chat", "le chien", "la poule", "la baleine"],
+      "rightAnswer": ["la baleine"]
     }
 
   ],

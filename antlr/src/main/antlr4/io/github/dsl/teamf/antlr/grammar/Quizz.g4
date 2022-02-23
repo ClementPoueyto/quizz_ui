@@ -27,7 +27,7 @@ arrangement     :   'arrangement' '{' line+ '}';
     line        :   zone_name+ ',';
     zone_name   :   IDENTIFIER ;
 
-quizz_element   : question | quiz_info | timer;
+quizz_element   : question | quiz_info | timer | progressbar;
     quiz_info   : ('title' ':' title=text) ('description' ':' description=text)?;
     question    : statement+ 'answer' ':' answer+;
     statement   : 'statement' ':' text;
@@ -36,12 +36,14 @@ quizz_element   : question | quiz_info | timer;
     multiple_answer : 'multiple' checkboxgroup;
     open_answer : 'open' textInput;
     timer       : 'timer' ':' clock;
+    progressbar : 'progress' ':' meter;
 
-uiElement : button | text | clock | checkboxgroup | textInput ;
+uiElement : button | text | clock | checkboxgroup | meter | textInput;
     checkboxgroup : ('gap' gapanswer=SIZE)?;
     text :  'size' size=SIZE  ('align' textAlign=ALIGN)? ('color' ':' color=(COLOR|HEX|SHADE))?;
     button : ('color' ':' color=(COLOR|HEX|SHADE))? 'size' ':' size=SIZE ('margin' ':' margin=SIZE)?;
     clock :  (chrono=('chrono'|'countdown'))? 'size' size=SIZE ('align' textAlign=ALIGN)? ('start' startTime=TIME)? ('type' type=('DIGITAL'|'ANALOG'))?;
+    meter :  'size' size=SIZE ('type' type=('CIRCLE'|'BAR'|'PIE'|'SEMICIRCLE'))? ('thickness' thickness=SIZE)? ('color' ':' color=(COLOR|HEX|SHADE))?;
     textInput : 'size' size=SIZE ('align' textAlign=ALIGN)? ('placeholder' placeholder=STRING)?;
 
 //quizPage        :   quizElement+;

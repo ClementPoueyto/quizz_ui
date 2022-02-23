@@ -7,15 +7,9 @@ theme {
             family : SCRIPT }
 }
 
-#declaration grid
-grid {
-
-    zone : middle
-        background LIGHT-2
-        element :
+    zone middle in LIGHT-2
                 statement : size MEDIUM  align CENTER
-                answer : single
-                  size : SMALL margin : SMALL
+                answer : single, SMALL margin : SMALL
 
     zone : nav
         background BRAND
@@ -39,8 +33,9 @@ layout {
     col 1 size LARGE
     col 2 size MEDIUM
     arrangement{
-        nav middle right,
-        footer footer footer,
+              M     L    M
+       LARGE nav middle right,
+       SMALL footer footer footer,
        }
     }
 

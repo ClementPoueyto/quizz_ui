@@ -26,7 +26,9 @@ public abstract class Visitor<T> {
 	public abstract void visit(OpenAnswer openAnswer);
 	public abstract void visit(Statement statement);
 	public abstract void visit(Timer timer);
+	public abstract void visit(ProgressBar progressBar);
 
+	public abstract void visit(MeterComponent meterComponent);
 	public abstract void visit(TextComponent textComponent);
 
 	public abstract void visit(TextInputComponent textInputComponent);

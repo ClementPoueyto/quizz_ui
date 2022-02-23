@@ -2,6 +2,7 @@ package io.github.dsl.teamf.kernel.generator;
 
 import java.io.Console;
 import java.util.List;
+import java.util.Locale;
 
 import io.github.dsl.teamf.kernel.App;
 import io.github.dsl.teamf.kernel.behavioral.*;
@@ -106,7 +107,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(Grid grid) {
 		if (context.get("pass") == PASS.ONE) {
-			w("Grid, Box, CheckBoxGroup, Text, Button, Clock, ResponsiveContext, TextInput");
+			w("Grid, Box, CheckBoxGroup, Text, Button, Clock, ResponsiveContext, TextInput, Meter");
 		}
 		if(context.get("pass") == PASS.TWO) {
 
@@ -272,6 +273,35 @@ public class ToWiring extends Visitor<StringBuffer> {
 			timer.getClockComponent().accept(this);
 		}
 
+	}
+
+	@Override
+	public void visit(ProgressBar progressBar) {
+
+		if(context.get("pass") == PASS.SIX) {
+			progressBar.getMeter().accept(this);
+		}
+	}
+
+	@Override
+	public void visit(MeterComponent meterComponent) {
+		if(context.get("pass") == PASS.SIX) {
+			w("\t\t\t\t\t\t\t<Meter");
+			if (meterComponent.getSize() != null) {
+				w(String.format(" size=\'%s\' ", meterComponent.getSize()));
+			}
+			if (meterComponent.getType() != null) {
+				w(String.format(" type=\'%s\' ", meterComponent.getType()));
+			}
+			if (meterComponent.getColor() != null) {
+				w(String.format(" color=\'%s\' ", meterComponent.getColor().toLowerCase()));
+			}
+			if (meterComponent.getColor() != null) {
+				w(String.format(" thickness=\'%s\' ", meterComponent.getThickness()));
+			}
+			w(String.format( "value = {this.state.quiz.indexQuestion*100/this.state.quiz.questions.length} "));
+			w(String.format(" />\n"));
+		}
 	}
 
 	@Override
