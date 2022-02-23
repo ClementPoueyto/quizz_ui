@@ -106,7 +106,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(Grid grid) {
 		if (context.get("pass") == PASS.ONE) {
-			w("Grid, Box, CheckBoxGroup, Text, Button, Clock, ResponsiveContext");
+			w("Grid, Box, CheckBoxGroup, Text, Button, Clock, ResponsiveContext, TextInput");
 		}
 		if(context.get("pass") == PASS.TWO) {
 
@@ -345,6 +345,27 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 			w(String.format(" />\n"));
 		}
+	}
+
+	@Override
+	public void visit(TextInputComponent textInputComponent) {
+		if (context.get("pass") == PASS.SIX) {
+			w("\t\t\t\t\t\t<TextInput");
+			if (textInputComponent.getPlaceholder() != null)
+				w(String.format(" placeholder=\"%s\"", textInputComponent.getPlaceholder()));
+			if (textInputComponent.getSize() != null)
+				w(String.format(" size=\"%s\"", textInputComponent.getSize()));
+			if (textInputComponent.getTextAlign() != null)
+				w(String.format(" textAlign=\"%s\"", textInputComponent.getTextAlign()));
+
+			w(String.format("/>\n"));
+		}
+	}
+
+	@Override
+	public void visit(OpenAnswer openAnswer) {
+		if (context.get("pass") == PASS.SIX)
+			openAnswer.getAnswer().accept(this);
 	}
 
 }

@@ -39,6 +39,7 @@ public class ModelBuilder extends QuizzBaseListener {
     private Statement statement;
     private SingleAnswer singleAnswer;
     private MultipleAnswer multipleAnswer;
+    private OpenAnswer openAnswer;
     private QuizInfo quizInfo;
     private Timer timer;
     private Theme theme;
@@ -52,6 +53,7 @@ public class ModelBuilder extends QuizzBaseListener {
     private ButtonComponent buttonComponent;
     private CheckBoxComponent checkBoxComponent;
     private ClockComponent clockComponent;
+    private TextInputComponent textInputComponent;
 
     private QuizElement currentQuizElement;
     private Layout currenLayout;
@@ -334,7 +336,32 @@ public class ModelBuilder extends QuizzBaseListener {
         theApp.setTheme(theme);
     }
 
+    @Override
+    public void enterTextInput(QuizzParser.TextInputContext ctx) {
+        TextInputComponent textInputComponent = new TextInputComponent();
+        if (ctx.textAlign != null)
+            textInputComponent.setTextAlign(TextAlign.valueOf(ctx.textAlign.getText().toLowerCase()));
+        if (ctx.placeholder != null) {
+            String placeHolder = ctx.placeholder.getText();
+            placeHolder = placeHolder.substring(1);
+            placeHolder = placeHolder.substring(0, placeHolder.length() - 1);
+            textInputComponent.setPlaceholder(placeHolder);
+        }
 
+        textInputComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
+        this.textInputComponent = textInputComponent;
+        this.componentList.add(textInputComponent);
+    }
 
+    @Override
+    public void enterOpen_answer(QuizzParser.Open_answerContext ctx) {
+        openAnswer = new OpenAnswer();
+    }
+
+    @Override
+    public void exitOpen_answer(QuizzParser.Open_answerContext ctx) {
+        openAnswer.setAnswer(textInputComponent);
+        ques.setAnswer(openAnswer);
+    }
 }
 

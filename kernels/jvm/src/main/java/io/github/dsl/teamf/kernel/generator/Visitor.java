@@ -22,10 +22,14 @@ public abstract class Visitor<T> {
 	public abstract void visit(Question question);
 	public abstract void visit(SingleAnswer singleAnswer);
 	public abstract void visit(MultipleAnswer multipleAnswer);
+
+	public abstract void visit(OpenAnswer openAnswer);
 	public abstract void visit(Statement statement);
 	public abstract void visit(Timer timer);
 
 	public abstract void visit(TextComponent textComponent);
+
+	public abstract void visit(TextInputComponent textInputComponent);
 	public abstract void visit(ButtonComponent buttonComponent);
 	public abstract void visit(CheckBoxComponent checkBoxComponent);
 	public abstract void visit(ClockComponent clockComponent);

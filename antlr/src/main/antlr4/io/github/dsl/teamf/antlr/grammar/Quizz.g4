@@ -31,16 +31,19 @@ quizz_element   : question | quiz_info | timer;
     quiz_info   : ('title' ':' title=text) ('description' ':' description=text)?;
     question    : statement+ 'answer' ':' answer+;
     statement   : 'statement' ':' text;
-    answer      : single_answer | multiple_answer;
+    answer      : single_answer | multiple_answer | open_answer;
     single_answer:  'single' button;
     multiple_answer : 'multiple' checkboxgroup;
+    open_answer : 'open' textInput;
     timer       : 'timer' ':' clock;
 
-uiElement : button | text | clock | checkboxgroup ;
+uiElement : button | text | clock | checkboxgroup | textInput ;
     checkboxgroup : ('gap' gapanswer=SIZE)?;
     text :  'size' size=SIZE  ('align' textAlign=ALIGN)? ('color' ':' color=(COLOR|HEX|SHADE))?;
     button : ('color' ':' color=(COLOR|HEX|SHADE))? 'size' ':' size=SIZE ('margin' ':' margin=SIZE)?;
     clock :  (chrono=('chrono'|'countdown'))? 'size' size=SIZE ('align' textAlign=ALIGN)? ('start' startTime=TIME)? ('type' type=('DIGITAL'|'ANALOG'))?;
+    textInput : 'size' size=SIZE ('align' textAlign=ALIGN)? ('placeholder' placeholder=STRING)?;
+
 //quizPage        :   quizElement+;
 //    quizElement :   (questionBlock   |   quizInfo |   navigationQuestion  |   progress    |   timer) zone;
 //    question    :   statement+ answer+;
@@ -69,6 +72,7 @@ TYPE            :   'BUTTON'|'TEXT';
 ALIGN           :   'CENTER'|'START'|'END';
 MEDIA           :   'PHONE' | 'COMPUTER' | 'TABLET';
 FONTFAM         :   'SERIF' | 'SANS-SERIF' | 'SCRIPT' | 'DISPLAY';
+STRING          :   '\''~('\n'|'\r')*?'\'';
 
 /*************
  ** Helpers **
