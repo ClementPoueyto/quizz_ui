@@ -107,7 +107,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(Grid grid) {
 		if (context.get("pass") == PASS.ONE) {
-			w("Grid, Box, CheckBoxGroup, Text, Button, Clock, ResponsiveContext, TextInput, Meter");
+			w("Grid, Box, CheckBoxGroup, Text, Button, Clock, Image, ResponsiveContext, TextInput, Meter");
 		}
 		if(context.get("pass") == PASS.TWO) {
 
@@ -258,10 +258,20 @@ public class ToWiring extends Visitor<StringBuffer> {
 		}
 	}
 
-	@Override
-	public void visit(Statement statement) {
+	public void visit(TextStatement textStatement) {
+		if(context.get("pass")==PASS.SIX)
+		textStatement.getStatement().accept(this);
+	}
 
-		statement.getStatement().accept(this);
+	@Override
+	public void visit(PictureStatement pictureStatement){
+		/*if(context.get("pass")==PASS.ONE){
+			w(String.format("Image, "));
+		}*/
+		if(context.get("pass")==PASS.SIX)
+		{
+			pictureStatement.getPicture().accept(this);
+		}
 	}
 
 	@Override
@@ -320,6 +330,15 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w(String.format(" >{%s}</Text>\n", textComponent.getVariableName()));
 		}
 
+	}
+	@Override
+	public void visit(PictureComponent pictureComponent)
+	{
+		if(context.get("pass")==PASS.SIX){
+			w("\t\t\t\t\t\t<Image ");
+			w(String.format("src= {%s} ", pictureComponent.getPath()));
+			w(String.format("/>"));
+		}
 	}
 
 	@Override

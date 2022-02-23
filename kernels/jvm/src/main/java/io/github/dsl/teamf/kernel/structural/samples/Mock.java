@@ -102,11 +102,16 @@ public class Mock {
 		//QUESTION
 		Question question= new Question();
 		MultipleAnswer answer = new MultipleAnswer();
-		Statement statement = new Statement();
+		//PictureStatement statement = new PictureStatement();
+		TextStatement statement = new TextStatement();
 
 		TextComponent textStatement = new TextComponent();
 		textStatement.setSize(Size.medium);
 		statement.setStatement(textStatement);
+
+	/*	PictureComponent picture=new PictureComponent();
+		picture.setPath("./Hello");
+		statement.setPicture(picture);*/
 
 		ButtonComponent answerButton = new ButtonComponent();
 		answerButton.setMargin(Size.xsmall);

@@ -36,10 +36,11 @@ public class ModelBuilder extends QuizzBaseListener {
     private List<Layout> layouts = new ArrayList<>();
     private Map<String, Zone>   zones= new HashMap<>();
     private Question ques;
-    private Statement statement;
     private SingleAnswer singleAnswer;
     private MultipleAnswer multipleAnswer;
     private OpenAnswer openAnswer;
+    private PictureStatement pictureStatement;
+    private TextStatement textStatement;
     private QuizInfo quizInfo;
     private Timer timer;
     private Theme theme;
@@ -196,7 +197,6 @@ public class ModelBuilder extends QuizzBaseListener {
 
     @Override public void exitQuestion(QuizzParser.QuestionContext ctx) {
         currentQuizElement = ques;
-        ques.setStatement(statement);
         quizElements.add(ques);
     }
 
@@ -230,15 +230,8 @@ public class ModelBuilder extends QuizzBaseListener {
 
     }
 
-    @Override public void enterStatement(QuizzParser.StatementContext ctx) {
-        statement= new Statement();
-    }
-    @Override public void exitStatement(QuizzParser.StatementContext ctx) {
-        statement.setStatement(textComponent);
-    }
-
     @Override public void enterText(QuizzParser.TextContext ctx) {
-        TextComponent textComponent= new TextComponent();
+        textComponent= new TextComponent();
         if(ctx.color!=null){
             textComponent.setColor(ctx.color.getText().toLowerCase());
         }
@@ -246,11 +239,10 @@ public class ModelBuilder extends QuizzBaseListener {
             textComponent.setTextAlign(TextAlign.valueOf(ctx.textAlign.getText().toLowerCase()));
         }
         textComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
-        this.textComponent = textComponent;
         this.componentList.add(textComponent);
 
-    }
 
+    }
 
 
     @Override public void enterSingle_answer(QuizzParser.Single_answerContext ctx) {
@@ -361,8 +353,35 @@ public class ModelBuilder extends QuizzBaseListener {
         if (ctx.thickness != null) {
             meterComponent.setThickness(Size.valueOf(ctx.thickness.getText().toLowerCase()));
         }
+    }
+    @Override public void enterText_statement(QuizzParser.Text_statementContext ctx) {
+        textStatement= new TextStatement();
 
     }
+
+    @Override public void exitText_statement(QuizzParser.Text_statementContext ctx) {
+        textStatement.setStatement(textComponent);
+        ques.setStatement(textStatement);
+    }
+
+    @Override public void enterPicture_statement(QuizzParser.Picture_statementContext ctx) {
+        pictureStatement=new PictureStatement();
+    }
+
+    @Override public void exitPicture_statement(QuizzParser.Picture_statementContext ctx) {
+        ques.setStatement(pictureStatement);
+    }
+
+    @Override public void enterPicture(QuizzParser.PictureContext ctx) {
+        PictureComponent picture=new PictureComponent();
+
+        picture.setHeight(Size.valueOf(ctx.height.getText().toLowerCase()));
+        picture.setWidth(Size.valueOf(ctx.width.getText().toLowerCase()));
+       // picture.setPath(ctx.path.getText());
+        pictureStatement.setPicture(picture);
+        componentList.add(picture);
+    }
+
 
     @Override
     public void enterTextInput(QuizzParser.TextInputContext ctx) {
