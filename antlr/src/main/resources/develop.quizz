@@ -2,7 +2,7 @@ application gridCreation
 
 
 # Declaring grid
-grid : {
+grid {
 zone: header
     background LIGHT-3
     element :
@@ -22,7 +22,7 @@ zone: left
     element :
         timer : countdown size LARGE type DIGITAL
 
-layout : {
+layout {
     gap SMALL
     row 0 size XSMALL
     row 1 size MEDIUM
@@ -34,7 +34,7 @@ layout : {
     }
 }
 
-layout : {
+layout {
     when screen is TABLET
     gap SMALL
     row 0 size XSMALL
@@ -47,7 +47,7 @@ layout : {
     }
 }
 
-layout : {
+layout {
     when screen is PHONE
     row 0 size SMALL
     row 1 size MEDIUM
