@@ -266,7 +266,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(Timer timer) {
 		if(context.get("pass") == PASS.ONE) {
-			w(String.format(" this.state.quiz { onTimerChange, "));
+			w(String.format(" onTimerChange, "));
 		}
 		if(context.get("pass") == PASS.SIX) {
 			timer.getClockComponent().accept(this);
