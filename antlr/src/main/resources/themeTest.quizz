@@ -1,13 +1,14 @@
 application gridCreation
 
-theme :
+theme {
     primary color : #dbd825
     secondary color : #1edaeb
     font : {
-        family : SCRIPT }
+        family : SERIF }
+  }
 
 # Declaring grid
-grid : {
+grid {
 zone: header
     element :
             title : size LARGE  align CENTER color : BLUE
@@ -24,7 +25,7 @@ zone: left
     element :
         timer : countdown size LARGE type DIGITAL
 
-layout : {
+layout {
     gap SMALL
     row 0 size XSMALL
     row 1 size MEDIUM
@@ -36,7 +37,7 @@ layout : {
     }
 }
 
-layout : {
+layout {
     when screen is PHONE
     row 0 size SMALL
     row 1 size MEDIUM

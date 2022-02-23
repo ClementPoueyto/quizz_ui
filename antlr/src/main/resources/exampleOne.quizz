@@ -1,41 +1,44 @@
 application exampleOne
 
-#declaration grid
+theme {
+    primary color : BRAND
+        secondary color : LIGHT-3
+        font : {
+            family : SCRIPT }
+}
 
-grid : {
-    zone : header
-        background LIGHT-3
-        element :
-                title : size LARGE  align CENTER color : BLUE
-                description : size LARGE
+#declaration grid
+grid {
 
     zone : middle
         background LIGHT-2
         element :
                 statement : size MEDIUM  align CENTER
                 answer : single
-                    color : RED size : SMALL margin : SMALL
+                  size : SMALL margin : SMALL
 
     zone : nav
         background BRAND
         element :
-            timer : countdown size LARGE type DIGITAL
+                        title : size LARGE  align CENTER
+                        description : size LARGE
 
     zone : right
         background BRAND
+        element :
+            timer : countdown size LARGE type DIGITAL
 
     zone : footer
+        background LIGHT-3
 
-layout : {
+layout {
     gap MEDIUM
-    row 0 size XSMALL
-    row 1 size MEDIUM
-    row 2 size XXSMALL
+    row 0 size LARGE
+    row 1 size SMALL
     col 0 size MEDIUM
     col 1 size LARGE
     col 2 size MEDIUM
     arrangement{
-        nav header right,
         nav middle right,
         footer footer footer,
        }

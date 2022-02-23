@@ -9,13 +9,13 @@ root            :   declaration theme? grid EOF;
 
 declaration     :   'application' name=IDENTIFIER;
 
-theme           :   'theme' ':' ('primary color' ':')? primary=(COLOR|HEX|SHADE) ('secondary color' ':')? secondary=(COLOR|HEX|SHADE) ('font' ':')? font;
+theme           :   'theme' '{' ('primary color' ':' primary=(COLOR|HEX|SHADE) ('secondary color' ':' secondary=(COLOR|HEX|SHADE))?)? ('font' ':' font)? '}';
 font            :   '{' 'family' ':' family=FONTFAM ('size' ':' size=NUMBER 'px')? '}';
 
-grid            :   'grid' ':' '{'zone+ layout+ '}';
+grid            :   'grid' '{'zone+ layout+ '}';
     zone        :   'zone' ':' name=IDENTIFIER ('alignment' alignement=ALIGN)? ('background' color=(COLOR|HEX|SHADE))? ('element' ':' quizz_element)?;
     
-layout          :   'layout' ':' '{' screen_condition? gap? rows columns arrangement '}';
+layout          :   'layout' '{' screen_condition? gap? rows columns arrangement '}';
     screen_condition : 'when screen is ' media=MEDIA; 
     gap         :   'gap' value=SIZE;
     rows        :   row+;

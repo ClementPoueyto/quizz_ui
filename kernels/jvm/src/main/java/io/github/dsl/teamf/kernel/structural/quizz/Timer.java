@@ -18,7 +18,7 @@ public class Timer extends QuizElement{
     }
 
     public void setClockComponent(ClockComponent clockComponent) {
-        clockComponent.setFunctionName("onTimerChange");
+        clockComponent.setFunctionName("onTimerChange(this.state.quiz,time)");
         this.clockComponent = clockComponent;
     }
 }
