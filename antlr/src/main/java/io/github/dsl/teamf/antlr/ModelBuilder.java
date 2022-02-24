@@ -102,9 +102,9 @@ public class ModelBuilder extends QuizzBaseListener {
 
     @Override
     public void exitLayout(QuizzParser.LayoutContext ctx){
+        currenLayout.setArrangement(arrangement);
         currenLayout.setColumns(currentColumn);
         currenLayout.setRows(currentRows);
-        currenLayout.setArrangement(arrangement);
         grid.getLayouts().add(currenLayout);
     }
 
@@ -112,6 +112,16 @@ public class ModelBuilder extends QuizzBaseListener {
     public void enterArrangement(QuizzParser.ArrangementContext ctx){
         countLineArrangement = -1;
         arrangement = new ArrayList<>();
+    }
+
+    @Override
+    public void exitArrangement(QuizzParser.ArrangementContext ctx){ ;
+        for(int i=0;i<arrangement.size();i++){
+            currentRows.add(i,Size.auto);
+        }
+        for(int j=0;j<arrangement.get(0).size();j++){
+            currentColumn.add(j,Size.auto);
+        }
     }
 
     @Override
@@ -171,12 +181,12 @@ public class ModelBuilder extends QuizzBaseListener {
 
     @Override
     public void enterRow(QuizzParser.RowContext ctx) {
-        currentRows.add(Integer.parseInt(ctx.value.getText()),Size.valueOf(ctx.size.getText().toLowerCase()));
+        currentRows.set(Integer.parseInt(ctx.value.getText()),Size.valueOf(ctx.size.getText().toLowerCase()));
     }
 
     @Override
     public void enterColumn(QuizzParser.ColumnContext ctx) {
-        currentColumn.add(Integer.parseInt(ctx.value.getText()),Size.valueOf(ctx.size.getText().toLowerCase()));
+        currentColumn.set(Integer.parseInt(ctx.value.getText()),Size.valueOf(ctx.size.getText().toLowerCase()));
     }
 
     @Override
