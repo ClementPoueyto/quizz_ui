@@ -9,6 +9,7 @@ public class MeterComponent extends UiComponent{
 
     private Size size = Size.large;
     private String color;
+    private String backgroundColor;
     private String functionName;
     private Size margin = Size.xsmall;
     private String maxValue = "100";
@@ -74,5 +75,13 @@ public class MeterComponent extends UiComponent{
 
     public void setType(MeterType type) {
         this.type = type;
+    }
+
+    public String getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
     }
 }

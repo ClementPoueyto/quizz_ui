@@ -329,6 +329,9 @@ public class ModelBuilder extends QuizzBaseListener {
         if (ctx.color != null) {
             meterComponent.setColor(ctx.color.getText());
         }
+        if (ctx.background != null) {
+            meterComponent.setBackgroundColor(ctx.background.getText());
+        }
         if (ctx.size != null) {
             meterComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
         }

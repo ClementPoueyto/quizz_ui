@@ -1,32 +1,26 @@
 application gridCreation
 
-
 # Declaring grid
-grid {
 zone: header
     background LIGHT-3
-    element :
-            title : size LARGE  align CENTER color : BLUE
-            description : size LARGE
+    title with size LARGE,  align CENTER, color BLUE
+    description with size LARGE
 
 zone: middle
     background DARK-2
-    element :
-            statement : text : size MEDIUM  align CENTER
-            answer : single
-                color : RED size : SMALL margin : SMALL
-            
+    statement with text with size MEDIUM,  align CENTER
+    answer with single choice with size SMALL, color RED , margin SMALL
 
 zone: left
     background LIGHT-3
-    element :
-        progress : size LARGE type PIE thickness LARGE color : BRAND
+    progress with size LARGE, type BAR, thickness LARGE, color BRAND, background LIGHT-4
 
 layout {
     gap SMALL
     arrangement{
-        left header,
-        left middle,
+                MEDIUM   MEDIUM,
+        MEDIUM left header,
+        MEDIUM left middle,
     }
 }
 
@@ -34,22 +28,20 @@ layout {
     when screen is TABLET
     gap SMALL
     arrangement{
-        left header,
-        left middle,
+         MEDIUM   MEDIUM,
+         MEDIUM left header,
+         MEDIUM left middle,
     }
 }
 
 layout {
     when screen is PHONE
-    row 0 size SMALL
-    row 1 size MEDIUM
-    col 0 size AUTO
     arrangement
     {
-        header,
-        middle,
+        AUTO,
+        AUTO header,
+        AUTO middle,
     }
-   }
 }
 
 

@@ -1,4 +1,15 @@
-import React, { Component } from 'react'
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------< io.github.mosser.arduinoml:external-antlr >--------------
+[INFO] Building external-antlr 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- exec-maven-plugin:1.6.0:java (default-cli) @ external-antlr ---
+
+
+Running the ANTLR compiler for Quizz UI
+Using input file: C:\Users\pouey\Documents\cours\SI5\DSL\labs\quizz_ui\antlr\src\main\resources\develop.quizz
+COLORLIGHT-3COLORDARK-2COLORLIGHT-3import React, { Component } from 'react'
 import {  onAnswerClick,  onTimerChange, onMultipleAnswerChange} from './functions'
 import { Grommet, Grid, Box, CheckBoxGroup, Text, Button, Clock, Image, ResponsiveContext, TextInput, Meter } from 'grommet'
 import { deepMerge } from "grommet/utils";
@@ -98,3 +109,10 @@ export default class App extends Component {
 		);
 	}
 }
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.684 s
+[INFO] Finished at: 2022-02-26T00:45:25+01:00
+[INFO] ------------------------------------------------------------------------

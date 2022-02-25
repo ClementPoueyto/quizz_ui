@@ -307,6 +307,9 @@ public class ToWiring extends Visitor<StringBuffer> {
 				w(String.format(" color=\'%s\' ", meterComponent.getColor().toLowerCase()));
 			}
 			if (meterComponent.getColor() != null) {
+				w(String.format(" background=\'%s\' ", meterComponent.getBackgroundColor().toLowerCase()));
+			}
+			if (meterComponent.getColor() != null) {
 				w(String.format(" thickness=\'%s\' ", meterComponent.getThickness()));
 			}
 			w(String.format( "value = {this.state.quiz.indexQuestion*100/this.state.quiz.questions.length} "));
