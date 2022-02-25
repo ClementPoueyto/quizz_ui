@@ -5,6 +5,8 @@ application gridCreation
 grid {
 zone: header
     background LIGHT-3
+    rounding MEDIUM
+    border : size : MEDIUM style : DOUBLE color : BLUE
     element :
             title : size LARGE  align CENTER color : BLUE
             description : size LARGE
@@ -25,8 +27,9 @@ zone: left
 layout {
     gap SMALL
     arrangement{
-        left header,
-        left middle,
+            MEDIUM LARGE,
+    MEDIUM  left header,
+    LARGE   left middle,
     }
 }
 
@@ -34,20 +37,19 @@ layout {
     when screen is TABLET
     gap SMALL
     arrangement{
-        left header,
-        left middle,
+               MEDIUM AUTO,
+        MEDIUM left header,
+        LARGE left middle,
     }
 }
 
 layout {
     when screen is PHONE
-    row 0 size SMALL
-    row 1 size MEDIUM
-    col 0 size AUTO
     arrangement
     {
-        header,
-        middle,
+               AUTO,
+        MEDIUM header,
+        LARGE  middle,
     }
    }
 }

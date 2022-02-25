@@ -47,6 +47,7 @@ public class ModelBuilder extends QuizzBaseListener {
     private ProgressBar progressBar;
 
     private Zone currentZone;
+    private Border border;
 
     private List<QuizElement> quizElements = new ArrayList<>();
     private List<UiComponent> componentList=new ArrayList<>();
@@ -147,6 +148,7 @@ public class ModelBuilder extends QuizzBaseListener {
     @Override
     public void enterZone(QuizzParser.ZoneContext ctx) {
         currentQuizElement = null;
+        border = null;
         Zone zone = new Zone();
         if(ctx.color==null)
             System.out.printf("IT's NULL");
@@ -161,11 +163,31 @@ public class ModelBuilder extends QuizzBaseListener {
             zone.setAlignement(TextAlign.valueOf(ctx.alignement.getText().toLowerCase()));
         }
         zone.setName(ctx.name.getText());
+        if(ctx.rounding !=null){
+            zone.setRounding(Size.valueOf(ctx.rounding.getText().toLowerCase()));
+        }   
         currentZone = zone;
     }
+     
+    @Override public void enterBorder(QuizzParser.BorderContext ctx){
+        border = new Border();
+        if(ctx.color != null){
+            border.setColor(ctx.color.getText());
+        }
+        if(ctx.size != null){
+            border.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
+        }
+        if(ctx.style != null) {
+            border.setStyle(ctx.style.getText().toLowerCase());
+        }
+    }
+
     @Override public void exitZone(QuizzParser.ZoneContext ctx) {
         if(currentQuizElement!=null){
             currentZone.setQuizElement(currentQuizElement);
+        }
+        if(border != null){
+            currentZone.setBorder(border);
         }
         this.grid.getZones().add(currentZone);
         zones.put(ctx.name.getText(),currentZone);

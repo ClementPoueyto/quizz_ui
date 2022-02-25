@@ -3,6 +3,7 @@ package io.github.dsl.teamf.kernel.generator;
 import io.github.dsl.teamf.kernel.App;
 import io.github.dsl.teamf.kernel.behavioral.*;
 import io.github.dsl.teamf.kernel.structural.quizz.*;
+import io.github.dsl.teamf.kernel.structural.ui.Border;
 import io.github.dsl.teamf.kernel.structural.ui.Grid;
 import io.github.dsl.teamf.kernel.structural.ui.Layout;
 import io.github.dsl.teamf.kernel.structural.ui.Theme;
@@ -40,6 +41,7 @@ public abstract class Visitor<T> {
 	public abstract void visit(PictureComponent pictureComponent);
 	public abstract void visit(ClockComponent clockComponent);
 	public abstract void visit(ScreenCondition DisplayCondition);
+	public abstract void visit(Border border);
 
 
 	/***********************

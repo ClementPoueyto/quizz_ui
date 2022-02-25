@@ -5,6 +5,7 @@ import io.github.dsl.teamf.kernel.behavioral.*;
 import io.github.dsl.teamf.kernel.generator.ToWiring;
 import io.github.dsl.teamf.kernel.generator.Visitor;
 import io.github.dsl.teamf.kernel.structural.quizz.*;
+import io.github.dsl.teamf.kernel.structural.ui.Border;
 import io.github.dsl.teamf.kernel.structural.ui.Grid;
 import io.github.dsl.teamf.kernel.structural.ui.Layout;
 import io.github.dsl.teamf.kernel.structural.ui.Size;
@@ -34,9 +35,14 @@ public class Mock {
 		ScreenCondition screenCondition = new ScreenCondition();
 		screenCondition.setScreenSize(ScreenSize.PHONE);
 		
+
 		Zone header = new Zone();
+		Border border = new Border();
+		border.setSize(Size.small);
 		header.setName("header");
 		header.setColor("light-5");
+		header.setRounding(Size.small);
+		header.setBorder(border);
 		grid.getZones().add(header);
 		
 		Zone middle = new Zone();

@@ -13,8 +13,9 @@ theme           :   'theme' '{' ('primary color' ':' primary=(COLOR|HEX|SHADE) (
 font            :   '{' 'family' ':' family=FONTFAM ('size' ':' size=NUMBER 'px')? '}';
 
 grid            :   'grid' '{'zone+ layout+ '}';
-    zone        :   'zone' ':' name=IDENTIFIER ('alignment' alignement=ALIGN)? ('background' color=(COLOR|HEX|SHADE))? ('element' ':' quizz_element)?;
-    
+    zone        :   'zone' ':' name=IDENTIFIER ('alignment' alignement=ALIGN)? ('background' color=(COLOR|HEX|SHADE))? ('rounding' rounding=SIZE)? ('border' ':' border )? ('element' ':' quizz_element)? ;
+    border      :   ('size' ':' size=SIZE)? ('style' ':' style=BORDERSTYLE)? ('color' ':' color=(COLOR|HEX|SHADE))?;
+
 layout          :   'layout' '{' screen_condition? gap? arrangement '}';
     screen_condition : 'when screen is ' media=MEDIA; 
     gap         :   'gap' value=SIZE;
@@ -62,6 +63,7 @@ NUMBER          :   [0-9]+;
 TIME            : [0-2][0-3]':'[0-5][0-9]':'[0-5][0-9];
 IDENTIFIER      :   LOWERCASE (LOWERCASE|UPPERCASE|NUMBER)+;
 SIZE            :   'XXSMALL' | 'XSMALL' | 'SMALL' | 'MEDIUM' | 'LARGE' | 'XLARGE' | 'AUTO' | 'FULL';
+BORDERSTYLE     :   'SOLID' | 'DASHED' | 'DOTTED' | 'DOUBLE' | 'RIDGE';
 //QUESTION_UI     :   IMAGE   |   TEXT;
 //IMAGE           :   'image' PATH;
 TEXT            :   UPPERCASE (IDENTIFIER WS* NEWLINE)+;

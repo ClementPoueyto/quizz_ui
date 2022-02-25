@@ -7,6 +7,7 @@ import java.util.Locale;
 import io.github.dsl.teamf.kernel.App;
 import io.github.dsl.teamf.kernel.behavioral.*;
 import io.github.dsl.teamf.kernel.structural.quizz.*;
+import io.github.dsl.teamf.kernel.structural.ui.Border;
 import io.github.dsl.teamf.kernel.structural.ui.Grid;
 import io.github.dsl.teamf.kernel.structural.ui.Layout;
 import io.github.dsl.teamf.kernel.structural.ui.Size;
@@ -88,7 +89,14 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w("\t\t\t\t\t{\n");
 			w("\t\t\t\t\t\tc_areas =  areas[size] ? areas[size] : areas[\"default\"],\n");
 			w(String.format("\t\t\t\t\t\tc_areas.find((row) => row.indexOf(\"%s\") >=0) ?\n",zone.getName()));
-			w(String.format("\t\t\t\t\t\t<Box gridArea=\'%s\' align=\'%s\' background=\'%s\'>\n", zone.getName(),zone.getAlignement(), zone.getColor()));
+			w(String.format("\t\t\t\t\t\t<Box gridArea=\'%s\' align=\'%s\' background=\'%s\' ", zone.getName(),zone.getAlignement(), zone.getColor()));
+			if(zone.getRounding() != null){
+				w(String.format("round=\'%s\' ",zone.getRounding()));
+			}
+			if(zone.getBorder() != null){
+				zone.getBorder().accept(this);
+			}
+			w(">\n");
 			if(zone.getQuizElement()!=null){
 				zone.getQuizElement().accept(this);
 			}
@@ -415,6 +423,25 @@ public class ToWiring extends Visitor<StringBuffer> {
 	public void visit(OpenAnswer openAnswer) {
 		if (context.get("pass") == PASS.SIX)
 			openAnswer.getAnswer().accept(this);
+	}
+
+	@Override
+	public void visit(Border border) {
+		if(context.get("pass") == PASS.SIX){
+			w("border={{");
+			if(border.getColor()!=null){
+				w(String.format("color: \"%s\",", border.getColor()));
+			}
+			if(border.getSize()!=null){
+				w(String.format("size: \"%s\",", border.getSize()));
+			}
+			if(border.getStyle()!=null){
+				w(String.format("style: \"%s\",", border.getStyle()));
+			}
+			w("}}");
+			
+		}
+		
 	}
 
 }

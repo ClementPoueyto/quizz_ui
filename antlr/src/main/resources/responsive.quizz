@@ -4,17 +4,21 @@ theme {
     primary color : #50148C
     secondary color : #1D438A
     font : {
-        family : SCRIPT }
+        family : SCRIPT
+         }
 }
 
 # Declaring grid
 grid {
 zone: header
+    rounding SMALL
+    border : size : MEDIUM  color : #FFFFFF
     element :
             title : size LARGE  align CENTER color : #00BFB2
             description : size LARGE
 
 zone: middle
+    rounding SMALL
     element :
             statement : text : size MEDIUM  align CENTER
             answer : single
@@ -31,7 +35,7 @@ zone: clockz
         timer : countdown size LARGE type DIGITAL
 
 layout {
-    gap SMALL
+    gap LARGE
     arrangement{
             MEDIUM LARGE,
     MEDIUM  clock header,
