@@ -117,6 +117,8 @@ public class ModelBuilder extends QuizzBaseListener {
     @Override
     public void enterLine(QuizzParser.LineContext ctx){
         countLineArrangement++;
+        currentRows.add(Size.valueOf(ctx.row.getText().toLowerCase()));
+
         arrangement.add(new ArrayList<>());
     }
 
@@ -170,25 +172,8 @@ public class ModelBuilder extends QuizzBaseListener {
     }
 
     @Override
-    public void enterRow(QuizzParser.RowContext ctx) {
-        currentRows.add(Integer.parseInt(ctx.value.getText()),Size.valueOf(ctx.size.getText().toLowerCase()));
-    }
-
-    @Override
     public void enterColumn(QuizzParser.ColumnContext ctx) {
-        currentColumn.add(Integer.parseInt(ctx.value.getText()),Size.valueOf(ctx.size.getText().toLowerCase()));
-    }
-
-    @Override
-    public void exitRows(QuizzParser.RowsContext ctx) {
-        //grid.setRows(this.rows);
-        currenLayout.setRows(currentRows);
-    }
-
-    @Override
-    public void exitColumns(QuizzParser.ColumnsContext ctx) {
-        //grid.setColumns(this.cols);
-        currenLayout.setColumns(currentColumn);
+        currentColumn.add(Size.valueOf(ctx.SIZE().getText().toLowerCase()));
     }
 
     @Override public void enterQuestion(QuizzParser.QuestionContext ctx) {

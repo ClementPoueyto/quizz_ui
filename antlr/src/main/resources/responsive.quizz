@@ -1,0 +1,67 @@
+application gridCreation
+
+theme {
+    primary color : #50148C
+    secondary color : #1D438A
+    font : {
+        family : SCRIPT }
+}
+
+# Declaring grid
+grid {
+zone: header
+    element :
+            title : size LARGE  align CENTER color : #00BFB2
+            description : size LARGE
+
+zone: middle
+    element :
+            statement : text : size MEDIUM  align CENTER
+            answer : single
+                size : SMALL margin : SMALL
+            
+
+zone: clock
+    background #FFFFFF
+    element :
+        timer : countdown size LARGE type ANALOG
+
+zone: clockz
+    element :
+        timer : countdown size LARGE type DIGITAL
+
+layout {
+    gap SMALL
+    arrangement{
+            MEDIUM LARGE,
+    MEDIUM  clock header,
+    LARGE   clock middle,
+    }
+}
+
+layout {
+    when screen is TABLET
+    gap SMALL
+    arrangement{
+            MEDIUM AUTO,
+    MEDIUM  clock header,
+    LARGE   clock middle,
+    }
+}
+
+layout {
+    when screen is PHONE
+    gap SMALL
+    arrangement
+    {        
+                AUTO    SMALL,  
+    MEDIUM    header clockz,
+    LARGE    middle middle,
+    }
+   }
+}
+
+
+
+
+

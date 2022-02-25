@@ -12,7 +12,7 @@ zone: header
 zone: middle
     background DARK-2
     element :
-            statement : size MEDIUM  align CENTER
+            statement : text : size MEDIUM  align CENTER
             answer : single
                 color : RED size : SMALL margin : SMALL
             
@@ -24,10 +24,6 @@ zone: left
 
 layout {
     gap SMALL
-    row 0 size XSMALL
-    row 1 size MEDIUM
-    col 0 size MEDIUM
-    col 1 size LARGE
     arrangement{
         left header,
         left middle,
@@ -37,10 +33,6 @@ layout {
 layout {
     when screen is TABLET
     gap SMALL
-    row 0 size XSMALL
-    row 1 size MEDIUM
-    col 0 size MEDIUM
-    col 1 size AUTO
     arrangement{
         left header,
         left middle,
