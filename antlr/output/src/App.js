@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  onMultipleAnswerChange,  onTimerChange, } from './functions'
+import {  onAnswerClick,  onTimerChange, onMultipleAnswerChange} from './functions'
 import { Grommet, Grid, Box, CheckBoxGroup, Text, Button, Clock, Image, ResponsiveContext, TextInput, Meter } from 'grommet'
 import { deepMerge } from "grommet/utils";
 import { grommet } from "grommet/themes";
@@ -71,7 +71,8 @@ export default class App extends Component {
 						c_areas =  areas[size] ? areas[size] : areas["default"],
 						c_areas.find((row) => row.indexOf("middle") >=0) ?
 						<Box gridArea='middle' align='center' background='dark-2'>
-						<Image src= {this.state.quiz.questions[this.state.quiz.indexQuestion].statement} /><CheckBoxGroup options = { this.state.quiz.questions[this.state.quiz.indexQuestion].answers } onChange={ ({ value, option }) => { this.setState ({ quiz : onMultipleAnswerChange(this.state.quiz,value,option)}) } } gap = 'large'  />
+<Box height="small" width="xsmall">
+						<Image src= {this.state.quiz.questions[this.state.quiz.indexQuestion].statement.image} /></Box><CheckBoxGroup options = { this.state.quiz.questions[this.state.quiz.indexQuestion].answers } onChange={ ({ value, option }) => { this.setState ({ quiz : onMultipleAnswerChange(this.state.quiz,value,option)}) } } gap = 'large'  />
 						</Box>
 						:
 						<Box/>

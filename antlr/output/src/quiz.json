@@ -3,7 +3,9 @@
   "theme": "Animals",
   "questions" : [
     {
-      "statement": "https://www.geipi-polytech.org/sites/default/files/styles/logos_page/public/logos/polytech_nice_sophia_logo_carre.jpg?itok=dDte6GWu",
+      "statement": {
+       "image": "https://www.geipi-polytech.org/sites/default/files/styles/logos_page/public/logos/polytech_nice_sophia_logo_carre.jpg?itok=dDte6GWu"
+      } ,
       "answers": ["Polytech", "univ cote d'azur"],
       "rightAnswer": ["Polytech"]
     },
