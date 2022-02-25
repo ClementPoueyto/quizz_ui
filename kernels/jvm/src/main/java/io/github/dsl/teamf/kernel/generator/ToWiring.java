@@ -33,10 +33,10 @@ public class ToWiring extends Visitor<StringBuffer> {
 	public void visit(App app) {
 		context.put("pass", PASS.ONE); //import components
 		w("import React, { Component } from 'react'\n");
-		w("import { ");
-		for(QuizElement quizElement : app.getQuizElementList()){
+		w("import {  onAnswerClick,  onTimerChange, onMultipleAnswerChange");
+		/*for(QuizElement quizElement : app.getQuizElementList()){
 			quizElement.accept(this);
-		}
+		}*/
 		w("} from './functions'\n");
 		w("import { Grommet, ");
 		app.getGrid().accept(this);

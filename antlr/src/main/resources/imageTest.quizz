@@ -26,25 +26,20 @@ zone: left
 
 layout  {
     gap SMALL
-    row 0 size XSMALL
-    row 1 size MEDIUM
-    col 0 size MEDIUM
-    col 1 size LARGE
     arrangement{
-        left header,
-        left middle,
+              MEDIUM LARGE,
+      XSMALL  left header,
+      MEDIUM  left middle,
     }
 }
 
 layout  {
     when screen is PHONE
-    row 0 size SMALL
-    row 1 size MEDIUM
-    col 0 size MEDIUM
     arrangement
-    {
-        header,
-        middle,
+    {           
+            MEDIUM,
+       SMALL header,
+       MEDIUM middle,
     }
    }
 }

@@ -112,21 +112,20 @@ public class ModelBuilder extends QuizzBaseListener {
     public void enterArrangement(QuizzParser.ArrangementContext ctx){
         countLineArrangement = -1;
         arrangement = new ArrayList<>();
-    }
-
-    @Override
-    public void exitArrangement(QuizzParser.ArrangementContext ctx){ ;
-        for(int i=0;i<arrangement.size();i++){
+        for(int i=0;i<ctx.line().size();i++){
             currentRows.add(i,Size.auto);
         }
-        for(int j=0;j<arrangement.get(0).size();j++){
-            currentColumn.add(j,Size.auto);
+        for (int j = 0; j < ctx.line().get(0).zone_name().size(); j++) {
+                currentColumn.add(j, Size.auto);
         }
     }
 
     @Override
     public void enterLine(QuizzParser.LineContext ctx){
         countLineArrangement++;
+        int index = ((QuizzParser.ArrangementContext)ctx.parent).line().indexOf(ctx);
+        if(ctx.row!=null)
+            currentRows.set(index,Size.valueOf(ctx.row.getText().toLowerCase()));
         arrangement.add(new ArrayList<>());
     }
 
@@ -180,25 +179,10 @@ public class ModelBuilder extends QuizzBaseListener {
     }
 
     @Override
-    public void enterRow(QuizzParser.RowContext ctx) {
-        currentRows.set(Integer.parseInt(ctx.value.getText()),Size.valueOf(ctx.size.getText().toLowerCase()));
-    }
-
-    @Override
     public void enterColumn(QuizzParser.ColumnContext ctx) {
-        currentColumn.set(Integer.parseInt(ctx.value.getText()),Size.valueOf(ctx.size.getText().toLowerCase()));
-    }
-
-    @Override
-    public void exitRows(QuizzParser.RowsContext ctx) {
-        //grid.setRows(this.rows);
-        currenLayout.setRows(currentRows);
-    }
-
-    @Override
-    public void exitColumns(QuizzParser.ColumnsContext ctx) {
-        //grid.setColumns(this.cols);
-        currenLayout.setColumns(currentColumn);
+        int index = ((QuizzParser.ColumnsContext)ctx.parent).column().indexOf(ctx);
+        System.out.println(ctx.SIZE().getText());
+        currentColumn.set(index,Size.valueOf(ctx.SIZE().getText().toLowerCase()));
     }
 
     @Override public void enterQuestion(QuizzParser.QuestionContext ctx) {
