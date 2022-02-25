@@ -22,8 +22,8 @@ layout          :   'layout' '{' screen_condition? gap? arrangement '}';
     columns        :   column+ ',';
     column         :   SIZE;
     
-arrangement     :   'arrangement' '{' columns line+ '}';
-    line        :   row=SIZE zone_name+ ',';
+arrangement     :   'arrangement' '{' columns? line+ '}';
+    line        :   row=SIZE? zone_name+ ',';
     zone_name   :   IDENTIFIER ;
 
 quizz_element   : question | quiz_info | timer | progressbar;

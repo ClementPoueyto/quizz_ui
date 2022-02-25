@@ -47,8 +47,7 @@ layout {
     when screen is TABLET
     gap SMALL
     arrangement{
-            MEDIUM AUTO,
-    MEDIUM  clock header,
+            clock header,
     LARGE   clock middle,
     }
 }
