@@ -88,7 +88,20 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w("\t\t\t\t\t{\n");
 			w("\t\t\t\t\t\tc_areas =  areas[size] ? areas[size] : areas[\"default\"],\n");
 			w(String.format("\t\t\t\t\t\tc_areas.find((row) => row.indexOf(\"%s\") >=0) ?\n",zone.getName()));
+	/*		if(zone.getQuizElement() instanceof Question)
+			{
+				if(((Question) zone.getQuizElement()).getStatement() instanceof PictureStatement)
+					context.put("pass",PASS.SEVEN);
+			}*/
+
 			w(String.format("\t\t\t\t\t\t<Box gridArea=\'%s\' align=\'%s\' background=\'%s\'>\n", zone.getName(),zone.getAlignement(), zone.getColor()));
+
+		/*	w(String.format("\t\t\t\t\t\t<Box "));
+			if(context.get("pass")==PASS.SEVEN)
+				zone.getQuizElement().accept(this);
+			context.put("pass",PASS.SIX);
+			w(String.format("gridArea=\'%s\' align=\'%s\' background=\'%s\'>\n", zone.getName(),zone.getAlignement(), zone.getColor()));
+		*/
 			if(zone.getQuizElement()!=null){
 				zone.getQuizElement().accept(this);
 			}
@@ -268,10 +281,9 @@ public class ToWiring extends Visitor<StringBuffer> {
 		/*if(context.get("pass")==PASS.ONE){
 			w(String.format("Image, "));
 		}*/
-		if(context.get("pass")==PASS.SIX)
-		{
+
 			pictureStatement.getPicture().accept(this);
-		}
+
 	}
 
 	@Override
@@ -335,10 +347,19 @@ public class ToWiring extends Visitor<StringBuffer> {
 	public void visit(PictureComponent pictureComponent)
 	{
 		if(context.get("pass")==PASS.SIX){
+			w(String.format("<Box height=\"%s\" width=\"%s\">\n",pictureComponent.getHeight(),pictureComponent.getWidth()));
+
 			w("\t\t\t\t\t\t<Image ");
 			w(String.format("src= {%s} ", pictureComponent.getPath()));
 			w(String.format("/>"));
+			w("</Box>");
 		}
+/*
+		if(context.get("pass")==PASS.SEVEN)
+		{
+			w(String.format("height=\"%s\" width=\"%s\"",pictureComponent.getHeight(),pictureComponent.getWidth()));
+
+		}*/
 	}
 
 	@Override
