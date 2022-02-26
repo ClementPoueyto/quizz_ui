@@ -2,6 +2,7 @@ package io.github.dsl.teamf.antlr;
 
 import io.github.dsl.teamf.antlr.grammar.*;
 import io.github.dsl.teamf.kernel.App;
+import io.github.dsl.teamf.kernel.behavioral.Theme;
 import io.github.dsl.teamf.kernel.structural.Layout;
 
 public class ModelBuilder extends QuizzBaseListener {
@@ -46,7 +47,11 @@ public class ModelBuilder extends QuizzBaseListener {
     public void enterDeclaration(QuizzParser.DeclarationContext ctx) {
         app.setName(ctx.name.getText());
         app.setQuizPath(unquote(ctx.quizPath.getText()));
+    }
+
+    public void enterAppAttributes(QuizzParser.AppAttributesContext ctx) {
         app.setLayout(new Layout(ctx.layoutName.getText()));
+        app.setTheme(new Theme(ctx.themeName.getText()));
     }
 }
 

@@ -9,6 +9,7 @@ componentDidMount() {
 
 render() {
 	console.log("rootLayout1");
+	console.log("globalTheme");
 	return (<p>{quiz.title}</p>);
 }
 }
