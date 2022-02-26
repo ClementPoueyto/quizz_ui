@@ -24,7 +24,7 @@ application exampleOne
         progress with size FULL, type BAR, thickness MEDIUM
 
 layout {
-    gap AUTO
+    gap SMALL
     arrangement{
              AUTO AUTO,
        XSMALL left header,
