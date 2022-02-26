@@ -19,7 +19,7 @@ import io.github.dsl.teamf.kernel.structural.ui.Zone;
  * Quick and dirty visitor to support the generation of Wiring code
  */
 public class ToWiring extends Visitor<StringBuffer> {
-	enum PASS {ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN}
+	enum PASS {ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT }
 
 
 	public ToWiring() {
@@ -71,7 +71,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 		app.getGrid().accept(this);
 		w("\t\treturn (\n");
-		context.put("pass", PASS.SEVEN); //describe components
+		context.put("pass", PASS.EIGHT); //describe components
 		app.getGrid().accept(this);
 
 
@@ -90,7 +90,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 				zone.getQuizElement().accept(this);
 			}
 		}
-		if(context.get("pass") == PASS.SEVEN){
+		if(context.get("pass") == PASS.EIGHT){
 			w("\t\t\t\t\t{\n");
 			w("\t\t\t\t\t\tc_areas =  areas[size] ? areas[size] : areas[\"default\"],\n");
 			w(String.format("\t\t\t\t\t\tc_areas.find((row) => row.indexOf(\"%s\") >=0) ?\n",zone.getName()));
@@ -98,10 +98,10 @@ public class ToWiring extends Visitor<StringBuffer> {
 	/*		if(zone.getQuizElement() instanceof Question)
 			{
 				if(((Question) zone.getQuizElement()).getStatement() instanceof PictureStatement)
-					context.put("pass",PASS.SEVEN);
+					context.put("pass",PASS.EIGHT);
 			}*/
 
-			w(String.format("\t\t\t\t\t\t<Box gridArea=\'%s\' align=\'%s\'  ", zone.getName(),zone.getAlignement()));
+			w(String.format("\t\t\t\t\t\t<Box overflow='auto' gridArea=\'%s\' align=\'%s\'  ", zone.getName(),zone.getAlignement()));
 			if(zone.getColor()!=null){
 				w(String.format(" background=\'%s\' ", zone.getColor().toLowerCase()));
 			}
@@ -114,9 +114,9 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w(">\n");
 			
 		/*	w(String.format("\t\t\t\t\t\t<Box "));
-			if(context.get("pass")==PASS.SEVEN)
+			if(context.get("pass")==PASS.EIGHT)
 				zone.getQuizElement().accept(this);
-			context.put("pass",PASS.SEVEN);
+			context.put("pass",PASS.EIGHT);
 			w(String.format("gridArea=\'%s\' align=\'%s\' background=\'%s\'>\n", zone.getName(),zone.getAlignement(), zone.getColor()));
 		*/
 			if(zone.getQuizElement()!=null){
@@ -182,8 +182,15 @@ public class ToWiring extends Visitor<StringBuffer> {
 				layout.accept(this);
 			}
 			w("}\n");
+
+			context.put("pass", PASS.SEVEN);
+			w("\t\tconst gaps = {\n");
+			for(Layout layout: grid.getLayouts()){
+				layout.accept(this);
+			}
+			w("}\n");
 		}
-		if (context.get("pass") == PASS.SEVEN) {
+		if (context.get("pass") == PASS.EIGHT) {
 			if(grid.isResponsiveGrid()){
 				w("\t\t\t<Grommet theme={customBreakpoints}>\n");
 			}else{
@@ -194,7 +201,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w("\t\t\t\t\t<Grid\n");
 			w("\t\t\t\t\t\trows={rows[size] ? rows[size] : rows[\"default\"]}\n");
 			w("\t\t\t\t\t\tcolumns={columns[size] ? columns[size] : columns[\"default\"]}\n");
-			w(String.format("\t\t\t\t\tgap=\'%s\'\n", "null"));
+			w("\t\t\t\t\t\tgap={gaps[size] ? gaps[size] : gaps[\"default\"]}\n");
 			w("\t\t\t\t\t\tareas={areas[size] ? areas[size] : areas[\"default\"]}>\n");
 			for (Zone zone : grid.getZones()) {
 				zone.accept(this);
@@ -222,7 +229,17 @@ public class ToWiring extends Visitor<StringBuffer> {
 				w("],\n");
 			}
 			w("\t\t\t],\n");
-		}else{
+		}
+		else if (context.get("pass") == PASS.SEVEN) {
+			if(layout.getScreenCondition() !=null){
+				w(String.format("\t\t\t%s:",layout.getScreenCondition().getScreenConditionName()));
+			}else{
+				w("\t\t\tdefault:");
+			}
+			
+			w(String.format("\'%s\',\n",layout.getGap()));	
+		}
+		else{
 			if(layout.getScreenCondition() !=null){
 				w(String.format("\t\t\t%s:[",layout.getScreenCondition().getScreenConditionName()));
 			}else{
@@ -256,7 +273,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(QuizInfo quizInfo) {
-		if(context.get("pass") == PASS.SEVEN) {
+		if(context.get("pass") == PASS.EIGHT) {
 			if (quizInfo.getTitle() != null) {
 				w("\t\t\t\t\t\t");
 				quizInfo.getTitle().accept(this);
@@ -290,7 +307,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 				w("\t\t\t\t\t</>)\n");			}
 			w("\t}\n");
 		}
-		if (context.get("pass") == PASS.SEVEN) {
+		if (context.get("pass") == PASS.EIGHT) {
 			w("\t\t\t\t\t\t\t{this.renderQuestion()}\n");
 
 		}
@@ -311,7 +328,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 		if(context.get("pass") == PASS.ONE) {
 			w(String.format(" onAnswerClick, "));
 		}
-		if(context.get("pass") == PASS.SEVEN || context.get("pass") == PASS.TWO) {
+		if(context.get("pass") == PASS.EIGHT || context.get("pass") == PASS.TWO) {
 			w("{this.state.quiz.questions[i].answers.map((item,index)=>{\n\t\t\t\t\t\t\treturn ");
 			singleAnswer.getAnswer().accept(this);
 			w("})}\n");
@@ -320,7 +337,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(Navigation navigation) {
-		if(context.get("pass") == PASS.SEVEN || context.get("pass") == PASS.TWO){
+		if(context.get("pass") == PASS.EIGHT || context.get("pass") == PASS.TWO){
 
 		}
 	}
@@ -332,13 +349,13 @@ public class ToWiring extends Visitor<StringBuffer> {
 		if(context.get("pass") == PASS.ONE) {
 			w(String.format(" onMultipleAnswerChange, "));
 		}
-		if(context.get("pass") == PASS.SEVEN || context.get("pass") == PASS.TWO) {
+		if(context.get("pass") == PASS.EIGHT || context.get("pass") == PASS.TWO) {
 			multipleAnswer.getAnswer().accept(this);
 		}
 	}
 
 	public void visit(TextStatement textStatement) {
-		if(context.get("pass")==PASS.SEVEN || context.get("pass") == PASS.TWO)
+		if(context.get("pass")==PASS.EIGHT || context.get("pass") == PASS.TWO)
 		textStatement.getStatement().accept(this);
 	}
 
@@ -357,7 +374,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 		if(context.get("pass") == PASS.ONE) {
 			w(String.format(" onTimerChange, "));
 		}
-		if(context.get("pass") == PASS.SEVEN) {
+		if(context.get("pass") == PASS.EIGHT) {
 			w("\t\t\t\t\t\t");
 			timer.getClockComponent().accept(this);
 		}
@@ -367,7 +384,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(ProgressBar progressBar) {
 
-		if(context.get("pass") == PASS.SEVEN) {
+		if(context.get("pass") == PASS.EIGHT) {
 			w("\t\t\t\t\t\t");
 			progressBar.getMeter().accept(this);
 		}
@@ -375,7 +392,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(MeterComponent meterComponent) {
-		if(context.get("pass") == PASS.SEVEN || context.get("pass") == PASS.TWO) {
+		if(context.get("pass") == PASS.EIGHT || context.get("pass") == PASS.TWO) {
 			w("<Meter");
 			if (meterComponent.getSize() != null) {
 				w(String.format(" size=\'%s\' ", meterComponent.getSize()));
@@ -399,7 +416,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(TextComponent textComponent) {
-		if(context.get("pass") == PASS.SEVEN || context.get("pass") == PASS.TWO) {
+		if(context.get("pass") == PASS.EIGHT || context.get("pass") == PASS.TWO) {
 			w("<Text");
 			if (textComponent.getSize() != null) {
 				w(String.format(" size=\'%s\' ", textComponent.getSize()));
@@ -417,7 +434,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(PictureComponent pictureComponent)
 	{
-		if(context.get("pass")==PASS.SEVEN || context.get("pass") == PASS.TWO){
+		if(context.get("pass")==PASS.EIGHT || context.get("pass") == PASS.TWO){
 			w(String.format("<Box height=\"%s\" width=\"%s\">\n",pictureComponent.getHeight(),pictureComponent.getWidth()));
 
 			w("<Image ");
@@ -426,7 +443,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w("</Box>");
 		}
 /*
-		if(context.get("pass")==PASS.SEVEN)
+		if(context.get("pass")==PASS.EIGHT)
 		{
 			w(String.format("height=\"%s\" width=\"%s\"",pictureComponent.getHeight(),pictureComponent.getWidth()));
 
@@ -435,7 +452,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(ButtonComponent buttonComponent) {
-		if(context.get("pass") == PASS.SEVEN || context.get("pass") == PASS.TWO) {
+		if(context.get("pass") == PASS.EIGHT || context.get("pass") == PASS.TWO) {
 			w("<Button");
 			w(String.format(" primary={%s} ", buttonComponent.getPrimary()));
 
@@ -458,7 +475,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(CheckBoxComponent checkBoxComponent) {
-		if(context.get("pass") == PASS.SEVEN || context.get("pass") == PASS.TWO) {
+		if(context.get("pass") == PASS.EIGHT || context.get("pass") == PASS.TWO) {
 			w("<CheckBoxGroup");
 			w(String.format(" options = { %s }", checkBoxComponent.getVariableName()));
 			w(String.format(" onChange={ ({ value, option }) => { this.setState ({ quiz : %s}) } }", checkBoxComponent.getFunctionName()));
@@ -472,7 +489,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(ClockComponent clockComponent) {
 
-		if(context.get("pass") == PASS.SEVEN || context.get("pass") == PASS.TWO) {
+		if(context.get("pass") == PASS.EIGHT || context.get("pass") == PASS.TWO) {
 			w("<Clock");
 			w(String.format(" run=\'%s\' ", clockComponent.getClockDirection()));
 			w(String.format(" type=\'%s\' ", clockComponent.getType()));
@@ -490,7 +507,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(TextInputComponent textInputComponent) {
-		if (context.get("pass") == PASS.SEVEN || context.get("pass") == PASS.TWO) {
+		if (context.get("pass") == PASS.EIGHT || context.get("pass") == PASS.TWO) {
 			w("<TextInput");
 			if (textInputComponent.getPlaceholder() != null)
 				w(String.format(" placeholder=\"%s\"", textInputComponent.getPlaceholder()));
@@ -505,13 +522,13 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(OpenAnswer openAnswer) {
-		if (context.get("pass") == PASS.SEVEN || context.get("pass") == PASS.TWO)
+		if (context.get("pass") == PASS.EIGHT || context.get("pass") == PASS.TWO)
 			openAnswer.getAnswer().accept(this);
 	}
 
 	@Override
 	public void visit(Border border) {
-		if(context.get("pass") == PASS.SEVEN || context.get("pass") == PASS.TWO){
+		if(context.get("pass") == PASS.EIGHT || context.get("pass") == PASS.TWO){
 			w("border={{");
 			if(border.getColor()!=null){
 				w(String.format("color: \"%s\",", border.getColor().toLowerCase()));
