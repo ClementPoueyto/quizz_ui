@@ -2,7 +2,7 @@ application gridCreation
 
 theme {
     primary color : #50148C
-    secondary color : #1D438A
+    secondary color : LIGHT-2
     font {
         family  SCRIPT
          }
@@ -19,22 +19,24 @@ zone: middle
     rounding SMALL
             show all questions
             statement with text with size MEDIUM,  align CENTER
-            answer with single choice with
-                size  SMALL, margin  SMALL
-            
+            answer with multiple choice with gap  MEDIUM
 
 zone: clock
-    background #FFFFFF
+
+    background LIGHT-4
+    rounding SMALL
         timer with countdown, size LARGE, type ANALOG
 
 zone: clockz
+    background LIGHT-4
+        rounding SMALL
         timer with countdown, size LARGE, type DIGITAL
 
 layout {
     gap LARGE
     arrangement{
             MEDIUM LARGE,
-    MEDIUM  clock header,
+    SMALL  clock header,
     LARGE   clock middle,
     }
 }
@@ -53,9 +55,10 @@ layout {
     gap SMALL
     arrangement
     {        
-                AUTO    SMALL,  
-    MEDIUM    header clockz,
-    LARGE    middle middle,
+             FULL,
+    XSMALL  header ,
+    XSMALL clockz,
+    LARGE  middle,
     }
 
 }

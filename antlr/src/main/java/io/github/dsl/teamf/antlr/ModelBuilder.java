@@ -107,6 +107,7 @@ public class ModelBuilder extends QuizzBaseListener {
         currenLayout.setColumns(currentColumn);
         currenLayout.setRows(currentRows);
         grid.getLayouts().add(currenLayout);
+
     }
 
     @Override
@@ -298,11 +299,16 @@ public class ModelBuilder extends QuizzBaseListener {
         if(ctx.color!=null){
             buttonComponent.setColor(ctx.color.getText().toLowerCase());
         }
-        else
+        else{
             if(theApp.getTheme()!=null&&theApp.getTheme().getSecondaryColor()!=null)
                 buttonComponent.setColor(theApp.getTheme().getSecondaryColor());
-        buttonComponent.setMargin(Size.valueOf(ctx.margin.getText().toLowerCase()));
-        buttonComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
+        }
+        if(ctx.margin!=null){
+            buttonComponent.setMargin(Size.valueOf(ctx.margin.getText().toLowerCase()));
+        }
+        if(ctx.size!=null){
+            buttonComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
+        }
         this.buttonComponent = buttonComponent;
         componentList.add(buttonComponent);
     }

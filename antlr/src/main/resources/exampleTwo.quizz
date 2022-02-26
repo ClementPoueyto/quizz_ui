@@ -7,7 +7,7 @@ theme {
 
 # Declaring grid
 zone: header
-    title with size LARGE,  align CENTER
+    title with size XLARGE,  align CENTER
     description with size LARGE
 
 zone: middle
@@ -17,13 +17,17 @@ zone: middle
 zone: left
     progress with size SMALL, type CIRCLE, thickness MEDIUM
 
+zone: leftbottom
+      timer with chrono, size LARGE, type ANALOG
+
+
 layout {
     gap SMALL
     arrangement{
 
-            MEDIUM LARGE,
-    MEDIUM  left header,
-    LARGE   left middle,
+            MEDIUM AUTO,
+    SMALL  left header,
+    LARGE  leftbottom middle,
     }
 }
 
@@ -42,7 +46,7 @@ layout {
     arrangement
     {
                AUTO,
-        MEDIUM header,
+        SMALL header,
         LARGE  middle,
     }
 }
