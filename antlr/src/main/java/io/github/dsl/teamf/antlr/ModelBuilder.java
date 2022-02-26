@@ -210,14 +210,23 @@ public class ModelBuilder extends QuizzBaseListener {
         currentColumn.set(index,Size.valueOf(ctx.SIZE().getText().toLowerCase()));
     }
 
+    @Override
+    public void exitPage(QuizzParser.PageContext ctx) {
+        Page page = new Page();
+        page.setQuestion(ques);
+        if(ctx.showAll!=null)
+            page.setAllOnPage(true);
+        else
+            page.setAllOnPage(false);
+        quizElements.add(page);
+        this.currentQuizElement = page;
+    }
+
+
     @Override public void enterQuestion(QuizzParser.QuestionContext ctx) {
          ques=new Question();
     }
 
-    @Override public void exitQuestion(QuizzParser.QuestionContext ctx) {
-        currentQuizElement = ques;
-        quizElements.add(ques);
-    }
 
     @Override
     public void enterQuiz_info(QuizzParser.Quiz_infoContext ctx) {

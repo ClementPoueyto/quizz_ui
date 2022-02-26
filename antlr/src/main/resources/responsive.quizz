@@ -17,6 +17,7 @@ zone: header
 
 zone: middle
     rounding SMALL
+            show all questions
             statement with text with size MEDIUM,  align CENTER
             answer with single choice with
                 size  SMALL, margin  SMALL
