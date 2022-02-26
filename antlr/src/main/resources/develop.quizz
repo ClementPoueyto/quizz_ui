@@ -15,7 +15,7 @@ zone: middle
     answer with single choice with size SMALL, margin SMALL
 
 zone: left
-    progress with size LARGE, type BAR, thickness LARGE
+    progress with size SMALL, type CIRCLE, thickness MEDIUM
 
 layout {
     gap SMALL

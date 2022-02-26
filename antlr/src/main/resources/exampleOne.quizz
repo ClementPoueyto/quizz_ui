@@ -1,45 +1,32 @@
 application exampleOne
 
-theme {
-    primary color : BRAND
-        secondary color : LIGHT-3
-        font : {
-            family : SCRIPT }
-}
 
-    zone middle in LIGHT-2
-                statement : size MEDIUM  align CENTER
-                answer : single, SMALL margin : SMALL
+    zone : middle
+    background DARK-2
+      statement with text with size MEDIUM,  align CENTER
+      answer with multiple choice with gap MEDIUM
 
     zone : nav
-        background BRAND
-        element :
-                        title : size LARGE  align CENTER
-                        description : size LARGE
+        background DARK-5
+        title with size LARGE,  align CENTER
+        description with size LARGE
 
     zone : right
-        background BRAND
-        element :
-            timer : countdown size LARGE type DIGITAL
+        background LIGHT-2
+        timer with countdown, size LARGE, type DIGITAL
 
     zone : footer
-        background LIGHT-3
+        background DARK-3
 
 layout {
-    gap MEDIUM
-    row 0 size LARGE
-    row 1 size SMALL
-    col 0 size MEDIUM
-    col 1 size LARGE
-    col 2 size MEDIUM
     arrangement{
-              M     L    M
-       LARGE nav middle right,
+             MEDIUM LARGE MEDIUM,
+       LARGE nav header right,
        SMALL footer footer footer,
        }
     }
 
-}
+
 
 
 
