@@ -132,6 +132,14 @@ public class ModelBuilder extends QuizzBaseListener {
 
     @Override
     public void enterZone_name(QuizzParser.Zone_nameContext ctx){
+        if(zones.get(ctx.IDENTIFIER().getText()) == null){
+            try {
+                throw new NamedElementNotFoundException(ctx.IDENTIFIER().getText());
+            } catch (NamedElementNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
         arrangement.get(countLineArrangement).add(zones.get(ctx.IDENTIFIER().getText()));
     }
 
