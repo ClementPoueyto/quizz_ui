@@ -18,7 +18,7 @@ public class SingleAnswer extends Answer{
 
     public void setAnswer(ButtonComponent answer) {
         answer.setFunctionName("onAnswerClick(this.state.quiz,item,index)");
-        answer.setVariableName("this.state.quiz.questions[this.state.quiz.indexQuestion].answers[index]");
+        answer.setVariableName("this.state.quiz.questions[i].answers[index]");
         this.answer = answer;
     }
 }

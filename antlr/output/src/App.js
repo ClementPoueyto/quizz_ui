@@ -17,7 +17,7 @@ export default class App extends Component {
 			global: {
 				breakpoints: {
 					small: {
-						 value: 600
+						value: 600
 					},
 					medium: {
 						value: 950
@@ -29,11 +29,7 @@ export default class App extends Component {
 		var c_areas= []
 		const areas = {
 			default: [
-				["left","header",],
-				["left","middle",],
-			],
-			medium: [
-				["left","header",],
+				["header","header",],
 				["left","middle",],
 			],
 			small: [
@@ -42,59 +38,55 @@ export default class App extends Component {
 			],
 		}
 		const rows = {
-			default:['medium','large',],
-			medium:['medium','large',],
-			small:['medium','large',],
+			default:['small','medium',],
+			small:['small','medium','large',],
 		}
 		const columns = {
-			default:['medium','large',],
-			medium:['medium','auto',],
-			small:['auto',],
-}
+			default:['small','large',],
+			small:[],
+		}
 		return (
 			<Grommet theme={customBreakpoints}>
 				<ResponsiveContext.Consumer>
 					{size =>
-					<Grid
-						rows={rows[size] ? rows[size] : rows["default"]}
-						columns={columns[size] ? columns[size] : columns["default"]}
-					gap='null'
-						areas={areas[size] ? areas[size] : areas["default"]}>
-					{
-						c_areas =  areas[size] ? areas[size] : areas["default"],
-						c_areas.find((row) => row.indexOf("header") >=0) ?
-						<Box gridArea='header' align='center'   background='dark-2' >
-						<Text size='large'  textAlign='center'  color='light-2'  >{this.state.quiz.title}</Text>
-						<Text size='large'  textAlign='center'  color='light-2'  >{this.state.quiz.theme}</Text>
-						</Box>
-						:
-						<Box/>
+						<Grid
+							rows={rows[size] ? rows[size] : rows["default"]}
+							columns={columns[size] ? columns[size] : columns["default"]}
+							gap='null'
+							areas={areas[size] ? areas[size] : areas["default"]}>
+							{
+								c_areas =  areas[size] ? areas[size] : areas["default"]}{
+								c_areas.find((row) => row.indexOf("header") >=0) ?
+								<Box gridArea='header' align='center'   background='light-5' round='small' border={{size: "small",}}>
+								<Text size='large'  textAlign='center'  >{this.state.quiz.title}</Text>
+								<Text size='medium'  textAlign='center'  >{this.state.quiz.theme}</Text>
+								</Box>
+								:
+								<Box/>
+							}
+							{
+								c_areas =  areas[size] ? areas[size] : areas["default"]}{
+								c_areas.find((row) => row.indexOf("middle") >=0) ?
+								<Box gridArea='middle' align='center'   background='light-3' >
+							{this.state.quiz.questions.map((question,i)=>{return(<>						<Text size='medium'  textAlign='center'  >{this.state.quiz.questions[i].statement}</Text>
+								<CheckBoxGroup options = { this.state.quiz.questions[i].answers } onChange={ ({ value, option }) => { this.setState ({ quiz : onMultipleAnswerChange(this.state.quiz,value,option)}) } } gap = 'small'  />
+								</>)})}						</Box>
+								:
+								<Box/>
+							}
+							{
+								c_areas =  areas[size] ? areas[size] : areas["default"]}{
+								c_areas.find((row) => row.indexOf("left") >=0) ?
+								<Box gridArea='left' align='center'   background='brand' >
+								<Clock run='backward'  type='digital'  size='large'  time='T00:01:00'  alignSelf='center'  precision='seconds'  onChange={(time)=>{ this.setState({ quiz : onTimerChange(this.state.quiz,time)})}}  />
+								</Box>
+								:
+								<Box/>
+							}
+						</Grid>
 					}
-					{
-						c_areas =  areas[size] ? areas[size] : areas["default"],
-						c_areas.find((row) => row.indexOf("middle") >=0) ?
-						<Box gridArea='middle' align='center'   background='dark-2' >
-						<Text size='medium'  textAlign='center'  color='light-2'  >{this.state.quiz.questions[this.state.quiz.indexQuestion].statement}</Text>
-						{this.state.quiz.questions[this.state.quiz.indexQuestion].answers.map((item,index)=>{
-							return <Button primary={true}  size='small'  margin='small'  color='light-2'  onClick={()=>{ this.setState({ quiz : onAnswerClick(this.state.quiz,item,index)})}}  label={this.state.quiz.questions[this.state.quiz.indexQuestion].answers[index]}  />
-						})}
-						</Box>
-						:
-						<Box/>
-					}
-					{
-						c_areas =  areas[size] ? areas[size] : areas["default"],
-						c_areas.find((row) => row.indexOf("left") >=0) ?
-						<Box gridArea='left' align='center'   background='dark-2' >
-							<Meter size='large'  type='bar'  color='light-2'  thickness='large' value = {this.state.quiz.indexQuestion*100/this.state.quiz.questions.length}  />
-						</Box>
-						:
-						<Box/>
-					}
-				</Grid>
-			}
-			</ResponsiveContext.Consumer>
-		</Grommet>
+				</ResponsiveContext.Consumer>
+			</Grommet>
 		);
 	}
 }

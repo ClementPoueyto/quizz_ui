@@ -255,7 +255,28 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 
 	}
+	@Override
+	public void visit(Page page) {
+		System.out.println("\n\n\n\n");
+		if(context.get("pass") == PASS.ONE) {
+			System.out.println("\n\n\n\n");
 
+			page.getQuestion().accept(this);
+			page.getQuestion().accept(this);
+		}
+		if (context.get("pass") == PASS.SIX) {
+			if(page.isAllOnPage()){
+				w("\t\t\t\t\t{this.state.quiz.questions.map((question,i)=>{return(<>");
+				page.getQuestion().accept(this);
+				w("\t\t\t\t\t</>)})}");
+			}
+			else{
+				w("\t\t\t\t\t\t{let i = this.state.quiz.indexQuestion");
+				page.getQuestion().accept(this);
+			}
+
+		}
+	}
 	@Override
 	public void visit(Question question) {
 		question.getStatement().accept(this);
@@ -269,11 +290,20 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w(String.format(" onAnswerClick, "));
 		}
 		if(context.get("pass") == PASS.SIX) {
-			w("\t\t\t\t\t\t{this.state.quiz.questions[this.state.quiz.indexQuestion].answers.map((item,index)=>{\n\t\t\t\t\t\t\treturn ");
+			w("\t\t\t\t\t\t{this.state.quiz.questions[i].answers.map((item,index)=>{\n\t\t\t\t\t\t\treturn ");
 			singleAnswer.getAnswer().accept(this);
 			w("\t\t\t\t\t\t})}\n");
 		}
 	}
+
+	@Override
+	public void visit(Navigation navigation) {
+		if(context.get("pass") == PASS.SIX){
+
+		}
+	}
+
+
 
 	@Override
 	public void visit(MultipleAnswer multipleAnswer) {

@@ -42,6 +42,8 @@ public abstract class Visitor<T> {
 	public abstract void visit(ClockComponent clockComponent);
 	public abstract void visit(ScreenCondition DisplayCondition);
 	public abstract void visit(Border border);
+	public abstract void visit(Navigation navigation);
+	public abstract void visit(Page page);
 
 
 	/***********************

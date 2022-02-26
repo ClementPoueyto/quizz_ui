@@ -104,9 +104,12 @@ public class Mock {
 		
 		header.setQuizElement(quizInfo);
 		
-		
+
 		//QUESTION
+		Page page = new Page();
 		Question question= new Question();
+		page.setQuestion(question);
+
 		MultipleAnswer answer = new MultipleAnswer();
 		//PictureStatement statement = new PictureStatement();
 		TextStatement statement = new TextStatement();
@@ -132,7 +135,7 @@ public class Mock {
 		question.setAnswer(answer);
 		question.setStatement(statement);
 
-		middle.setQuizElement(question);
+		middle.setQuizElement(page);
 
 		Timer timer = new Timer();
 		ClockComponent clockComponent = new ClockComponent();
@@ -145,7 +148,7 @@ public class Mock {
 
 		theSwitch.setGrid(grid);
 
-		theSwitch.getQuizElementList().add(question);
+		theSwitch.getQuizElementList().add(page);
 		theSwitch.getQuizElementList().add(timer);
 
 		// Generating Code

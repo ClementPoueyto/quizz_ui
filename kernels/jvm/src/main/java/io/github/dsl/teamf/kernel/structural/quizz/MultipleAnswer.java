@@ -19,7 +19,7 @@ public class MultipleAnswer extends Answer{
 
     public void setAnswer(CheckBoxComponent answer) {
         answer.setFunctionName("onMultipleAnswerChange(this.state.quiz,value,option)");
-        answer.setVariableName("this.state.quiz.questions[this.state.quiz.indexQuestion].answers");
+        answer.setVariableName("this.state.quiz.questions[i].answers");
         this.answer = answer;
     }
 }
