@@ -1,5 +1,6 @@
 package io.github.dsl.teamf.kernel.structural.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.github.dsl.teamf.kernel.behavioral.ScreenCondition;
@@ -8,7 +9,7 @@ import io.github.dsl.teamf.kernel.generator.Visitor;
 
 public class Layout implements Visitable{
     private ScreenCondition screenCondition;
-    private List<List<Zone>> arrangement;
+    private List<List<Zone>> arrangement = new ArrayList<>();
     private Size gap;
     private List<Size> rows;
     private List<Size> columns;
