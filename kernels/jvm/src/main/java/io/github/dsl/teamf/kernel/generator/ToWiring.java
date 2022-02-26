@@ -96,7 +96,10 @@ public class ToWiring extends Visitor<StringBuffer> {
 					context.put("pass",PASS.SEVEN);
 			}*/
 
-			w(String.format("\t\t\t\t\t\t<Box gridArea=\'%s\' align=\'%s\' background=\'%s\' ", zone.getName(),zone.getAlignement(), zone.getColor()));
+			w(String.format("\t\t\t\t\t\t<Box gridArea=\'%s\' align=\'%s\'  ", zone.getName(),zone.getAlignement()));
+			if(zone.getColor()!=null){
+				w(String.format(" background=\'%s\' ", zone.getColor().toLowerCase()));
+			}
 			if(zone.getRounding() != null){
 				w(String.format("round=\'%s\' ",zone.getRounding()));
 			}
@@ -230,12 +233,14 @@ public class ToWiring extends Visitor<StringBuffer> {
 	}
 	@Override
 	public void visit(Theme theme) {
+		if(theme.getFontStyle()!=null){
+			w("\t\t\t\tfont: {\n");
+			w("\t\t\t\t\tfamily: '" + theme.getFontStyle().getFamily() +"'\n");
+			if(theme.getFontStyle().getSize()!=0)
+				w("\t\t\t\t\t,size: '"+ theme.getFontStyle().getSize()+"px'\n");
+			w("\t\t\t\t}\n");
+		}
 
-		w("\t\t\t\tfont: {\n");
-		w("\t\t\t\t\tfamily: '" + theme.getFontStyle().getFamily() +"'\n");
-		if(theme.getFontStyle().getSize()!=0)
-		w("\t\t\t\t\t,size: '"+ theme.getFontStyle().getSize()+"px'\n");
-		w("\t\t\t\t}\n");
 
 	}
 
@@ -327,10 +332,10 @@ public class ToWiring extends Visitor<StringBuffer> {
 			if (meterComponent.getColor() != null) {
 				w(String.format(" color=\'%s\' ", meterComponent.getColor().toLowerCase()));
 			}
-			if (meterComponent.getColor() != null) {
+			if (meterComponent.getBackgroundColor() != null) {
 				w(String.format(" background=\'%s\' ", meterComponent.getBackgroundColor().toLowerCase()));
 			}
-			if (meterComponent.getColor() != null) {
+			if (meterComponent.getThickness() != null) {
 				w(String.format(" thickness=\'%s\' ", meterComponent.getThickness()));
 			}
 			w(String.format( "value = {this.state.quiz.indexQuestion*100/this.state.quiz.questions.length} "));
@@ -349,7 +354,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 				w(String.format(" textAlign=\'%s\' ", textComponent.getTextAlign()));
 			}
 			if (textComponent.getColor() != null) {
-				w(String.format(" color=\'%s\' ", textComponent.getColor()));
+				w(String.format(" color=\'%s\' ", textComponent.getColor().toLowerCase()));
 			}
 			w(String.format(" >{%s}</Text>\n", textComponent.getVariableName()));
 		}
@@ -387,7 +392,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 				w(String.format(" margin=\'%s\' ", buttonComponent.getMargin()));
 			}
 			if (buttonComponent.getColor() != null) {
-				w(String.format(" color=\'%s\' ", buttonComponent.getColor()));
+				w(String.format(" color=\'%s\' ", buttonComponent.getColor().toLowerCase()));
 			}
 			w(String.format(" onClick={()=>{ this.setState({ quiz : %s})}} ", buttonComponent.getFunctionName()));
 
@@ -455,7 +460,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 		if(context.get("pass") == PASS.SIX){
 			w("border={{");
 			if(border.getColor()!=null){
-				w(String.format("color: \"%s\",", border.getColor()));
+				w(String.format("color: \"%s\",", border.getColor().toLowerCase()));
 			}
 			if(border.getSize()!=null){
 				w(String.format("size: \"%s\",", border.getSize()));

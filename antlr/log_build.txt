@@ -13,7 +13,7 @@
 [INFO] 
 [INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ external-antlr ---
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] Copying 8 resources
+[INFO] Copying 7 resources
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ external-antlr ---
 [INFO] Changes detected - recompiling the module!
@@ -34,6 +34,6 @@
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.984 s
-[INFO] Finished at: 2022-02-25T23:29:01+01:00
+[INFO] Total time:  3.165 s
+[INFO] Finished at: 2022-02-26T11:00:17+01:00
 [INFO] ------------------------------------------------------------------------

@@ -9,7 +9,7 @@ public class Theme implements Visitable, NamedElement {
     private String name;
     private String primaryColor;
     private String secondaryColor;
-    private FontStyle fontStyle;
+    private FontStyle fontStyle ;
 
 
     @Override

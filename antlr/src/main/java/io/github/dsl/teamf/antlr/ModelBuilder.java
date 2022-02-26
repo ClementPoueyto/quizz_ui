@@ -164,7 +164,7 @@ public class ModelBuilder extends QuizzBaseListener {
         if(ctx.color!=null)
         zone.setColor(ctx.color.getText().toLowerCase());
         else
-            if (theApp.getTheme()!=null)
+            if (theApp.getTheme()!=null&theApp.getTheme().getPrimaryColor()!=null)
                 zone.setColor(theApp.getTheme().getPrimaryColor());
         if(ctx.alignement!=null){
             zone.setAlignement(TextAlign.valueOf(ctx.alignement.getText().toLowerCase()));
@@ -181,6 +181,9 @@ public class ModelBuilder extends QuizzBaseListener {
         if(ctx.color != null){
             border.setColor(ctx.color.getText());
         }
+        else
+            if(theApp.getTheme()!=null&&theApp.getTheme().getSecondaryColor()!=null)
+                border.setColor(theApp.getTheme().getSecondaryColor());
         if(ctx.size != null){
             border.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
         }
@@ -251,6 +254,9 @@ public class ModelBuilder extends QuizzBaseListener {
         if(ctx.color!=null){
             textComponent.setColor(ctx.color.getText().toLowerCase());
         }
+        else
+            if(theApp.getTheme()!=null&&theApp.getTheme().getSecondaryColor()!=null)
+                textComponent.setColor(theApp.getTheme().getSecondaryColor());
         if(ctx.textAlign!=null){
             textComponent.setTextAlign(TextAlign.valueOf(ctx.textAlign.getText().toLowerCase()));
         }
@@ -284,7 +290,7 @@ public class ModelBuilder extends QuizzBaseListener {
             buttonComponent.setColor(ctx.color.getText().toLowerCase());
         }
         else
-            if(theApp.getTheme()!=null)
+            if(theApp.getTheme()!=null&&theApp.getTheme().getSecondaryColor()!=null)
                 buttonComponent.setColor(theApp.getTheme().getSecondaryColor());
         buttonComponent.setMargin(Size.valueOf(ctx.margin.getText().toLowerCase()));
         buttonComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
@@ -337,8 +343,12 @@ public class ModelBuilder extends QuizzBaseListener {
 
     @Override public void enterTheme(QuizzParser.ThemeContext ctx) {
         theme =new Theme();
-        theme.setPrimaryColor(ctx.primary.getText());
-        theme.setSecondaryColor(ctx.secondary.getText());
+        if(ctx.primary!=null){
+            theme.setPrimaryColor(ctx.primary.getText());
+        }
+        if(ctx.secondary!=null) {
+            theme.setSecondaryColor(ctx.secondary.getText());
+        }
 
     }
 
@@ -360,6 +370,9 @@ public class ModelBuilder extends QuizzBaseListener {
         if (ctx.color != null) {
             meterComponent.setColor(ctx.color.getText());
         }
+        else
+            if(theApp.getTheme()!=null&&theApp.getTheme().getSecondaryColor()!=null)
+                meterComponent.setColor(theApp.getTheme().getSecondaryColor());
         if (ctx.background != null) {
             meterComponent.setBackgroundColor(ctx.background.getText());
         }

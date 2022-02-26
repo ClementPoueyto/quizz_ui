@@ -1,19 +1,21 @@
 application gridCreation
 
+theme {
+    primary color : DARK-2
+    secondary color : LIGHT-2
+}
+
 # Declaring grid
 zone: header
-    background LIGHT-3
-    title with size LARGE,  align CENTER, color BLUE
+    title with size LARGE,  align CENTER
     description with size LARGE
 
 zone: middle
-    background DARK-2
     statement with text with size MEDIUM,  align CENTER
-    answer with single choice with size SMALL, color RED , margin SMALL
+    answer with single choice with size SMALL, margin SMALL
 
 zone: left
-    background LIGHT-3
-    progress with size LARGE, type BAR, thickness LARGE, color BRAND, background LIGHT-4
+    progress with size LARGE, type BAR, thickness LARGE
 
 layout {
     gap SMALL
