@@ -101,7 +101,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 					context.put("pass",PASS.SEVEN);
 			}*/
 
-			w(String.format("\t\t\t\t\t\t<Box gridArea=\'%s\' align=\'%s\'  ", zone.getName(),zone.getAlignement()));
+			w(String.format("\t\t\t\t\t\t<Box overflow='auto' gridArea=\'%s\' align=\'%s\'  ", zone.getName(),zone.getAlignement()));
 			if(zone.getColor()!=null){
 				w(String.format(" background=\'%s\' ", zone.getColor().toLowerCase()));
 			}
