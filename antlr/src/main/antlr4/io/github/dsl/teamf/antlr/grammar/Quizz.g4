@@ -27,8 +27,9 @@ arrangement     :   'arrangement' '{' columns? line+ '}';
     line        :   row=SIZE? zone_name+ ',';
     zone_name   :   IDENTIFIER ;
 
-quizz_element   : question | quiz_info | timer | progressbar;
+quizz_element   : page | quiz_info | timer | progressbar;
     quiz_info   : ('title' 'with' title=text) ('description' 'with' description=text)?;
+    page        : (showAll='show all questions')? question;
     question    : statement+ 'answer' 'with' answer+;
 
     statement   : 'statement' 'with' (text_statement|picture_statement);
@@ -82,7 +83,6 @@ ALIGN           :   'CENTER'|'START'|'END';
 MEDIA           :   'PHONE' | 'COMPUTER' | 'TABLET';
 FONTFAM         :   'SERIF' | 'SANS-SERIF' | 'SCRIPT' | 'DISPLAY';
 STRING          :   '\''~('\n'|'\r')*?'\'';
-
 /*************
  ** Helpers **
  *************/
