@@ -1,0 +1,30 @@
+Application MultiplePageGoal from quiz 'C://mescouilles.quiz.json'
+    uses layout rootLayout1 as default 
+    uses layout rootLayout2 when screen is TABLET
+    uses layout rootLayout3 when screen is PHONE
+    uses theme globalTheme
+
+# theme
+
+globalTheme is a theme with primary color #50148C, secondary color #1D438A, font family  SCRIPT
+
+# root layouts
+
+rootLayout1 is a grid with LARGE gap wich follows disposition
+    SMALL headerLayout
+    AUTO middleLayout
+
+# other layouts
+
+headerLayout is a box that contains text binded to quiz title aligned center with font size 15
+
+middleLayout is a navigation box that contains the questions :
+        question statement :
+            open question aligned center with fond size 12 with color blue
+            default aligned center with fond size 12
+        single answer :
+            answers > 4 render as a list
+            default render as grid
+        multiple answers :
+            default render as checkboxes
+        open question uses placeholder 'Enter your answer here'
