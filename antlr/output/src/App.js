@@ -8,6 +8,7 @@ componentDidMount() {
 }
 
 render() {
-	return (<div></div>);
+	console.log("rootLayout1");
+	return (<p>{quiz.title}</p>);
 }
 }

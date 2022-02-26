@@ -6,7 +6,7 @@ grammar Quizz;
 
 root            :   declaration EOF;
 
-declaration     :   'Application' name=WORD 'from quiz' quizPath=STRING;
+declaration     :   'Application' name=WORD 'from quiz' quizPath=STRING 'uses layout' layoutName=IDENTIFIER;
 
 /*****************
  ** Lexer rules **

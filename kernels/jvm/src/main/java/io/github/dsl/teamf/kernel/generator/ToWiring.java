@@ -27,7 +27,8 @@ public class ToWiring extends Visitor<StringBuffer> {
 		w("\tdocument.title = \""+app.getName()+"\";\n");
 		w("}\n");
 		w("\nrender() {\n");
-		w("\treturn (<div></div>);\n}\n");
+		w("\tconsole.log(\""+app.getLayout().getName()+"\");\n");
+		w("\treturn (<p>{quiz.title}</p>);\n}\n");
 		w("}");
 	}
 }
