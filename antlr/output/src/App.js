@@ -13,62 +13,38 @@ export default class App extends Component {
 	}
 
 	renderQuestion(){
-		return this.state.quiz.questions.map((question,i)=>{
-		return(<>
-					<Text size='medium'  textAlign='center'  color='light-2'  >{this.state.quiz.questions[i].statement}</Text>
-					<CheckBoxGroup options = { this.state.quiz.questions[i].answers } onChange={ ({ value, option }) => { this.setState ({ quiz : onMultipleAnswerChange(this.state.quiz,value,option)}) } } gap = 'medium'  />
-					</>)})
+		let i = this.state.quiz.indexQuestion;
+				return(<>
+					<Text size='medium'  textAlign='center'  >{this.state.quiz.questions[i].statement.text}</Text>
+					{this.state.quiz.questions[i].answers.map((item,index)=>{
+							return <Button primary={true}  size='large'  margin='small'  color='light-2'  onClick={()=>{ this.setState({ quiz : onAnswerClick(this.state.quiz,item,index)})}}  label={this.state.quiz.questions[i].answers[index]}  />
+})}
+					</>)
 	}
 	render() {
 		var customBreakpoints = deepMerge(grommet, {
 			global: {
-				breakpoints: {
-					small: {
-						 value: 600
-					},
-					medium: {
-						value: 950
-					},
-					large: 3000
-				},
-				font: {
-					family: 'SCRIPT'
-				}
 			}
 		});
 		var c_areas= []
 		const areas = {
 			default: [
-				["clock","header",],
-				["clock","middle",],
-			],
-			medium: [
-				["clock","header",],
-				["clock","middle",],
-			],
-			small: [
-				["header",],
-				["clockz",],
-				["middle",],
+				["left","header",],
+				["middle","middle",],
+				["footer","footer",],
 			],
 		}
 		const rows = {
-			default:['small','large',],
-			medium:['auto','large',],
-			small:['xsmall','xsmall','large',],
+			default:['xsmall','medium','small',],
 		}
 		const columns = {
-			default:['medium','large',],
-			medium:['auto','auto',],
-			small:['full',],
+			default:['auto','auto',],
 }
 		const gaps = {
-			default:'large',
-			medium:'small',
-			small:'small',
+			default:'small',
 }
 		return (
-			<Grommet theme={customBreakpoints}>
+			<Grommet>
 				<ResponsiveContext.Consumer>
 					{size =>
 					<Grid
@@ -78,18 +54,8 @@ export default class App extends Component {
 						areas={areas[size] ? areas[size] : areas["default"]}>
 					{
 						c_areas =  areas[size] ? areas[size] : areas["default"],
-						c_areas.find((row) => row.indexOf("header") >=0) ?
-						<Box overflow='auto' gridArea='header' align='center'   background='#50148c' round='small' border={{color: "#ffffff",size: "medium",}}>
-						<Text size='large'  textAlign='center'  color='#00bfb2'  >{this.state.quiz.title}</Text>
-						<Text size='large'  textAlign='center'  color='light-2'  >{this.state.quiz.theme}</Text>
-						</Box>
-						:
-						<Box/>
-					}
-					{
-						c_areas =  areas[size] ? areas[size] : areas["default"],
 						c_areas.find((row) => row.indexOf("middle") >=0) ?
-						<Box overflow='auto' gridArea='middle' align='center'   background='#50148c' round='small' >
+						<Box overflow='auto' gridArea='middle' align='center'   background='dark-2' round='small' border={{color: "dark-3",size: "small",style: "dashed",}}>
 							{this.renderQuestion()}
 						</Box>
 						:
@@ -97,18 +63,27 @@ export default class App extends Component {
 					}
 					{
 						c_areas =  areas[size] ? areas[size] : areas["default"],
-						c_areas.find((row) => row.indexOf("clock") >=0) ?
-						<Box overflow='auto' gridArea='clock' align='center'   background='light-4' round='small' >
-						<Clock run='backward'  type='analog'  size='large'  time='T00:01:00'  alignSelf='center'  precision='seconds'  onChange={(time)=>{ this.setState({ quiz : onTimerChange(this.state.quiz,time)})}}  />
+						c_areas.find((row) => row.indexOf("header") >=0) ?
+						<Box overflow='auto' gridArea='header' align='center'   background='dark-5' round='medium' >
+						<Text size='xlarge'  textAlign='center'  >{this.state.quiz.title}</Text>
 						</Box>
 						:
 						<Box/>
 					}
 					{
 						c_areas =  areas[size] ? areas[size] : areas["default"],
-						c_areas.find((row) => row.indexOf("clockz") >=0) ?
-						<Box overflow='auto' gridArea='clockz' align='center'   background='light-4' round='small' >
+						c_areas.find((row) => row.indexOf("left") >=0) ?
+						<Box overflow='auto' gridArea='left' align='center'   background='light-2' round='medium' >
 						<Clock run='backward'  type='digital'  size='large'  time='T00:01:00'  alignSelf='center'  precision='seconds'  onChange={(time)=>{ this.setState({ quiz : onTimerChange(this.state.quiz,time)})}}  />
+						</Box>
+						:
+						<Box/>
+					}
+					{
+						c_areas =  areas[size] ? areas[size] : areas["default"],
+						c_areas.find((row) => row.indexOf("footer") >=0) ?
+						<Box overflow='auto' gridArea='footer' align='center'   background='dark-3' round='small' >
+						<Meter size='full'  type='bar'  thickness='medium' value = {this.state.quiz.indexQuestion*100/this.state.quiz.questions.length}  />
 						</Box>
 						:
 						<Box/>
