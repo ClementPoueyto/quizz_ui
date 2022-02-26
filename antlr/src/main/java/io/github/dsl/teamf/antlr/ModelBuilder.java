@@ -47,6 +47,7 @@ public class ModelBuilder extends QuizzBaseListener {
     private ProgressBar progressBar;
 
     private Zone currentZone;
+    private Border border;
 
     private List<QuizElement> quizElements = new ArrayList<>();
     private List<UiComponent> componentList=new ArrayList<>();
@@ -102,9 +103,9 @@ public class ModelBuilder extends QuizzBaseListener {
 
     @Override
     public void exitLayout(QuizzParser.LayoutContext ctx){
+        currenLayout.setArrangement(arrangement);
         currenLayout.setColumns(currentColumn);
         currenLayout.setRows(currentRows);
-        currenLayout.setArrangement(arrangement);
         grid.getLayouts().add(currenLayout);
     }
 
@@ -112,13 +113,20 @@ public class ModelBuilder extends QuizzBaseListener {
     public void enterArrangement(QuizzParser.ArrangementContext ctx){
         countLineArrangement = -1;
         arrangement = new ArrayList<>();
+        for(int i=0;i<ctx.line().size();i++){
+            currentRows.add(i,Size.auto);
+        }
+        for (int j = 0; j < ctx.line().get(0).zone_name().size(); j++) {
+                currentColumn.add(j, Size.auto);
+        }
     }
 
     @Override
     public void enterLine(QuizzParser.LineContext ctx){
         countLineArrangement++;
-        currentRows.add(Size.valueOf(ctx.row.getText().toLowerCase()));
-
+        int index = ((QuizzParser.ArrangementContext)ctx.parent).line().indexOf(ctx);
+        if(ctx.row!=null)
+            currentRows.set(index,Size.valueOf(ctx.row.getText().toLowerCase()));
         arrangement.add(new ArrayList<>());
     }
 
@@ -147,6 +155,7 @@ public class ModelBuilder extends QuizzBaseListener {
     @Override
     public void enterZone(QuizzParser.ZoneContext ctx) {
         currentQuizElement = null;
+        border = null;
         Zone zone = new Zone();
         if(ctx.color==null)
             System.out.printf("IT's NULL");
@@ -161,11 +170,31 @@ public class ModelBuilder extends QuizzBaseListener {
             zone.setAlignement(TextAlign.valueOf(ctx.alignement.getText().toLowerCase()));
         }
         zone.setName(ctx.name.getText());
+        if(ctx.rounding !=null){
+            zone.setRounding(Size.valueOf(ctx.rounding.getText().toLowerCase()));
+        }   
         currentZone = zone;
     }
+     
+    @Override public void enterBorder(QuizzParser.BorderContext ctx){
+        border = new Border();
+        if(ctx.color != null){
+            border.setColor(ctx.color.getText());
+        }
+        if(ctx.size != null){
+            border.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
+        }
+        if(ctx.style != null) {
+            border.setStyle(ctx.style.getText().toLowerCase());
+        }
+    }
+
     @Override public void exitZone(QuizzParser.ZoneContext ctx) {
         if(currentQuizElement!=null){
             currentZone.setQuizElement(currentQuizElement);
+        }
+        if(border != null){
+            currentZone.setBorder(border);
         }
         this.grid.getZones().add(currentZone);
         zones.put(ctx.name.getText(),currentZone);
@@ -173,7 +202,9 @@ public class ModelBuilder extends QuizzBaseListener {
 
     @Override
     public void enterColumn(QuizzParser.ColumnContext ctx) {
-        currentColumn.add(Size.valueOf(ctx.SIZE().getText().toLowerCase()));
+        int index = ((QuizzParser.ColumnsContext)ctx.parent).column().indexOf(ctx);
+        System.out.println(ctx.SIZE().getText());
+        currentColumn.set(index,Size.valueOf(ctx.SIZE().getText().toLowerCase()));
     }
 
     @Override public void enterQuestion(QuizzParser.QuestionContext ctx) {

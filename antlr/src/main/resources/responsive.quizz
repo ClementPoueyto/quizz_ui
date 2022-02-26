@@ -3,35 +3,34 @@ application gridCreation
 theme {
     primary color : #50148C
     secondary color : #1D438A
-    font : {
-        family : SCRIPT }
+    font {
+        family  SCRIPT
+         }
 }
 
 # Declaring grid
-grid {
 zone: header
-    element :
-            title : size LARGE  align CENTER color : #00BFB2
-            description : size LARGE
+    rounding SMALL
+    border with size MEDIUM,  color #FFFFFF
+            title with size LARGE,  align CENTER, color #00BFB2
+            description with size LARGE
 
 zone: middle
-    element :
-            statement : text : size MEDIUM  align CENTER
-            answer : single
-                size : SMALL margin : SMALL
+    rounding SMALL
+            statement with text with size MEDIUM,  align CENTER
+            answer with single choice with
+                size  SMALL, margin  SMALL
             
 
 zone: clock
     background #FFFFFF
-    element :
-        timer : countdown size LARGE type ANALOG
+        timer with countdown, size LARGE, type ANALOG
 
 zone: clockz
-    element :
-        timer : countdown size LARGE type DIGITAL
+        timer with countdown, size LARGE, type DIGITAL
 
 layout {
-    gap SMALL
+    gap LARGE
     arrangement{
             MEDIUM LARGE,
     MEDIUM  clock header,
@@ -43,8 +42,7 @@ layout {
     when screen is TABLET
     gap SMALL
     arrangement{
-            MEDIUM AUTO,
-    MEDIUM  clock header,
+            clock header,
     LARGE   clock middle,
     }
 }
@@ -58,7 +56,7 @@ layout {
     MEDIUM    header clockz,
     LARGE    middle middle,
     }
-   }
+
 }
 
 

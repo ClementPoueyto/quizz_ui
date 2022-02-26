@@ -9,20 +9,22 @@ root            :   declaration theme? grid EOF;
 
 declaration     :   'application' name=IDENTIFIER;
 
-theme           :   'theme' '{' ('primary color'  primary=(COLOR|HEX|SHADE) ('secondary color'  secondary=(COLOR|HEX|SHADE))?)? ('font' font)? '}';
-font            :   '{' 'family' family=FONTFAM ('size' size=NUMBER 'px')? '}';
+theme           :   'theme' '{' ('primary color' ':' primary=(COLOR|HEX|SHADE) ('secondary color' ':' secondary=(COLOR|HEX|SHADE))?)? ('font' font)? '}';
+font            :   '{' 'family' family=FONTFAM ('with' 'size' size=NUMBER 'px')? '}';
 
 grid            :   zone+ layout+;
-    zone        :   'zone' ':' name=IDENTIFIER ('alignment' alignement=ALIGN)? ('background' color=(COLOR|HEX|SHADE))? (quizz_element)?;
-    
+    zone        :   'zone' ':' name=IDENTIFIER ('alignment' alignement=ALIGN)? ('background' color=(COLOR|HEX|SHADE))? ('rounding' rounding=SIZE)? ('border' 'with' border )? (quizz_element)?;
+    border      :   ('size' size=SIZE)? (',')? ('style' style=BORDERSTYLE)? (',')? ('color' color=(COLOR|HEX|SHADE))?;
+
+
 layout          :   'layout' '{' screen_condition? gap? arrangement '}';
     screen_condition : 'when screen is ' media=MEDIA; 
     gap         :   'gap' value=SIZE;
     columns        :   column+ ',';
     column         :   SIZE;
     
-arrangement     :   'arrangement' '{' columns line+ '}';
-    line        :   row=SIZE zone_name+ ',';
+arrangement     :   'arrangement' '{' columns? line+ '}';
+    line        :   row=SIZE? zone_name+ ',';
     zone_name   :   IDENTIFIER ;
 
 quizz_element   : question | quiz_info | timer | progressbar;
@@ -62,6 +64,7 @@ NUMBER          :   [0-9]+;
 TIME            : [0-2][0-3]':'[0-5][0-9]':'[0-5][0-9];
 IDENTIFIER      :   LOWERCASE (LOWERCASE|UPPERCASE|NUMBER)+;
 SIZE            :   'XXSMALL' | 'XSMALL' | 'SMALL' | 'MEDIUM' | 'LARGE' | 'XLARGE' | 'AUTO' | 'FULL';
+BORDERSTYLE     :   'SOLID' | 'DASHED' | 'DOTTED' | 'DOUBLE' | 'RIDGE';
 //QUESTION_UI     :   IMAGE   |   TEXT;
 //IMAGE           :   'image' PATH;
 TEXT            :   UPPERCASE (IDENTIFIER WS* NEWLINE)+;

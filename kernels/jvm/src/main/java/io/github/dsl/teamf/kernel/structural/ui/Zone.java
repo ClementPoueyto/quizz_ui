@@ -13,22 +13,24 @@ public class Zone implements NamedElement, Visitable {
     private String color;
     private TextAlign alignement = TextAlign.center;
     private QuizElement quizElement;
-
+    private Border border;
+    private Size rounding;
+    
     @Override
     public void setName(String name) {
         this.name = name;
     }
-
+    
     @Override
     public String getName() {
         return this.name;
     }
-
+    
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
-
+    
     public String getColor() {
         return color;
     }
@@ -36,20 +38,36 @@ public class Zone implements NamedElement, Visitable {
     public void setColor(String color) {
         this.color = color;
     }
-
+    
     public QuizElement getQuizElement() {
         return quizElement;
     }
-
+    
     public void setQuizElement(QuizElement quizElement) {
         this.quizElement = quizElement;
     }
-
+    
     public TextAlign getAlignement() {
         return alignement;
     }
-
+    
     public void setAlignement(TextAlign alignement) {
         this.alignement = alignement;
+    }
+    
+    public Size getRounding() {
+        return rounding;
+    }
+    
+    public void setRounding(Size rounding) {
+        this.rounding = rounding;
+    }
+    
+    public Border getBorder() {
+        return border;
+    }
+    
+    public void setBorder(Border border) {
+        this.border = border;
     }
 }

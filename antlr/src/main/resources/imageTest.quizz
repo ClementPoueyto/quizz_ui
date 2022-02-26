@@ -3,26 +3,25 @@ application gridCreation
 theme {
     primary color : #dbd825
     secondary color : #1edaeb
-    font : {
-        family : SCRIPT }
+    font {
+        family SCRIPT }
 }
+
+
 # Declaring grid
-grid  {
+
 zone: header
-    element :
-            title : size LARGE  align CENTER color : BLUE
-            description : size LARGE
+            title with size LARGE,  align CENTER, color BLUE
+            description with size LARGE
 
 zone: middle
     alignment CENTER
     background DARK-2
-    element :
-            statement : picture : height : SMALL width : XSMALL
-            answer : multiple gap LARGE
+            statement with picture with height SMALL, width XSMALL
+            answer with multiple choice with gap LARGE
 
 zone: left
-    element :
-        timer : countdown size LARGE type DIGITAL
+        timer with countdown, size LARGE, type DIGITAL
 
 layout  {
     gap SMALL
@@ -41,8 +40,8 @@ layout  {
        SMALL header,
        MEDIUM middle,
     }
-   }
-}
+ }
+
 
 
 

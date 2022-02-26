@@ -18,9 +18,10 @@ zone: left
 layout {
     gap SMALL
     arrangement{
-                MEDIUM   MEDIUM,
-        MEDIUM left header,
-        MEDIUM left middle,
+
+            MEDIUM LARGE,
+    MEDIUM  left header,
+    LARGE   left middle,
     }
 }
 
@@ -28,9 +29,9 @@ layout {
     when screen is TABLET
     gap SMALL
     arrangement{
-         MEDIUM   MEDIUM,
-         MEDIUM left header,
-         MEDIUM left middle,
+               MEDIUM AUTO,
+        MEDIUM left header,
+        LARGE left middle,
     }
 }
 
@@ -38,9 +39,9 @@ layout {
     when screen is PHONE
     arrangement
     {
-        AUTO,
-        AUTO header,
-        AUTO middle,
+               AUTO,
+        MEDIUM header,
+        LARGE  middle,
     }
 }
 
