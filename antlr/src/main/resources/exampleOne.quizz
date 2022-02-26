@@ -3,26 +3,33 @@ application exampleOne
 
     zone : middle
     background DARK-2
+        rounding SMALL
+      border with size SMALL, style DASHED, color DARK-3
       statement with text with size MEDIUM,  align CENTER
-      answer with multiple choice with gap MEDIUM
+      answer with single choice with size LARGE, color LIGHT-2 ,margin SMALL
 
-    zone : nav
+    zone : header
         background DARK-5
-        title with size LARGE,  align CENTER
-        description with size LARGE
+            rounding MEDIUM
+        title with size XLARGE,  align CENTER
 
-    zone : right
+    zone : left
         background LIGHT-2
+        rounding MEDIUM
         timer with countdown, size LARGE, type DIGITAL
 
     zone : footer
         background DARK-3
+                rounding SMALL
+        progress with size FULL, type BAR, thickness MEDIUM
 
 layout {
+    gap SMALL
     arrangement{
-             MEDIUM LARGE MEDIUM,
-       LARGE nav header right,
-       SMALL footer footer footer,
+             AUTO AUTO,
+       XSMALL left header,
+       MEDIUM middle middle,
+       SMALL footer footer,
        }
     }
 
