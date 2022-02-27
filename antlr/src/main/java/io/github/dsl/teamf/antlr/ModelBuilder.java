@@ -1,9 +1,14 @@
 package io.github.dsl.teamf.antlr;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.github.dsl.teamf.antlr.grammar.*;
 import io.github.dsl.teamf.kernel.App;
 import io.github.dsl.teamf.kernel.behavioral.Theme;
+import io.github.dsl.teamf.kernel.structural.GridLayout;
 import io.github.dsl.teamf.kernel.structural.Layout;
+import io.github.dsl.teamf.kernel.structural.Size;
 
 public class ModelBuilder extends QuizzBaseListener {
 
@@ -26,6 +31,9 @@ public class ModelBuilder extends QuizzBaseListener {
     /*******************
      ** Symbol tables **
      *******************/
+
+    GridLayout grid;
+    List<Layout> row;
 
     /**************************
      ** Listening mechanisms **
@@ -65,6 +73,46 @@ public class ModelBuilder extends QuizzBaseListener {
         appTheme.setPrimaryColor(ctx.primary.getText());
         appTheme.setSecondaryColor(ctx.secondary.getText());
         appTheme.setFont(ctx.fontFamily.getText());
+    }
+
+    @Override
+    public void enterGridDeclaration(QuizzParser.GridDeclarationContext ctx) {
+        grid = new GridLayout(ctx.gridName.getText());
+        grid.setGap(Size.valueOf(ctx.gap.getText()));
+    }
+
+    @Override
+    public void enterColumn(QuizzParser.ColumnContext ctx) {
+        int currentNumberOfColumns = grid.getSizeByColumnIndex().keySet().size();
+        grid.getSizeByColumnIndex().put(currentNumberOfColumns, Size.valueOf(ctx.columnSize.getText()));
+    }
+
+    @Override
+    public void enterRow(QuizzParser.RowContext ctx) {
+        row = new ArrayList<>();
+        int currentNumberOfLines = grid.getSizeByRowIndex().keySet().size();
+        grid.getSizeByRowIndex().put(currentNumberOfLines, Size.valueOf(ctx.rowSize.getText()));
+    }
+
+    @Override
+    public void enterZone(QuizzParser.ZoneContext ctx) {
+        row.add(new Layout(ctx.zoneName.getText()));
+    }
+
+    @Override
+    public void exitRow(QuizzParser.RowContext ctx) {
+        int currentNumberOfLines = grid.getLayouts().length;
+        Layout rows[][] = new Layout[currentNumberOfLines + 1][];
+        System.out.println(currentNumberOfLines);
+        for(int i = 0; i < currentNumberOfLines; i++)
+            rows[i] = grid.getLayouts()[i];
+        rows[currentNumberOfLines] = row.toArray(new Layout[0]);
+        grid.setLayouts(rows);
+    }
+
+    @Override
+    public void exitGridDeclaration(QuizzParser.GridDeclarationContext ctx) {
+        app.setLayout(grid);
     }
 }
 

@@ -12,8 +12,16 @@ appAttributes   :   (layoutAttribute themeAttribute) | (layoutAttribute themeAtt
 layoutAttribute :   'uses layout' layoutName=IDENTIFIER;
 themeAttribute  :   'uses theme' themeName=IDENTIFIER;
 
-declaration     :   themeDeclaration;
+declaration     :   themeDeclaration | gridDeclaration;
 themeDeclaration:   IDENTIFIER 'is theme with primary color' primary=COLOR'secondary color' secondary=COLOR'font family' fontFamily=FONTFAM;
+gridDeclaration :   gridName=IDENTIFIER 'is grid with' gap=SIZE 'gap wich follows disposition' disposition;
+
+disposition     :   columns? row+;
+columns         :   column+;
+column          :   columnSize=SIZE;
+row             :   rowSize=SIZE zone+;
+zone            :   zoneName=IDENTIFIER;
+
 
 /*****************
  ** Lexer rules **

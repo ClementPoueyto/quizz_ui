@@ -1,6 +1,7 @@
 package io.github.dsl.teamf.kernel.generator;
 
 import io.github.dsl.teamf.kernel.App;
+import io.github.dsl.teamf.kernel.structural.GridLayout;
 
 
 /**
@@ -21,6 +22,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(App app) {
 		w("import React, { Component } from 'react';\n");
+		w("import { Grommet, Grid } from 'grommet';\n");
 		w("\nvar quiz = require('"+app.getQuizPath()+"');\n");
 		w("export default class App extends Component {\n");
 		w("\ncomponentDidMount() {\n");
@@ -29,7 +31,26 @@ public class ToWiring extends Visitor<StringBuffer> {
 		w("\nrender() {\n");
 		w("\tconsole.log(\""+app.getLayout().getName()+"\");\n");
 		w("\tconsole.log(\""+app.getTheme()+"\");\n");
-		w("\treturn (<p>{quiz.title}</p>);\n}\n");
+		w("\treturn (\n");
+		if(app.getLayout() instanceof GridLayout)
+			((GridLayout) app.getLayout()).accept(this);
+		w("\t);}");
 		w("}");
+	}
+
+	@Override
+	public void visit(GridLayout grid) {
+		w("\t\t<Grid\n");
+		w("\t\trows={[");
+		for(int i = 0; i < grid.getSizeByRowIndex().keySet().size(); i++)
+			w("\""+grid.getSizeByRowIndex().get(i).toString().toLowerCase()+"\",");
+		w("]}\n");
+		w("\t\tcolumns={[");
+		for(int i = 0; i < grid.getSizeByColumnIndex().keySet().size(); i++)
+			w("\""+grid.getSizeByColumnIndex().toString().toLowerCase()+"\",");
+		w("]}\n");
+		w("\t\tgap=\""+grid.getGap().toString().toLowerCase()+"\"\n");
+		w(">\n");
+		w("\t\t</Grid>\n");
 	}
 }

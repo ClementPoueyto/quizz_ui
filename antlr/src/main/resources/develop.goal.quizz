@@ -5,3 +5,9 @@ Application SinglePageGoal from quiz './quiz.json'
 # theme
 
 globalTheme is theme with primary color BLUE secondary color ORANGE font family SCRIPT
+
+# root layouts
+
+rootLayout1 is grid with LARGE gap wich follows disposition
+    SMALL headerLayout
+    AUTO middleLayout
