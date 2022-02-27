@@ -190,7 +190,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(CheckBoxComponent checkBoxComponent) {
-		w(String.format("<CheckBoxGroup %s options={%s}  gap = \'%s\' />\n",
+		w(String.format("<CheckBoxGroup %s options={%s}  gap=\'%s\' />\n",
 				checkBoxComponent.getGeneralStyle(), checkBoxComponent.getVariableName(), checkBoxComponent.getGap()));
 		if (checkBoxComponent.getFunctionName() != null && !checkBoxComponent.getFunctionName().equals(""))
 			w(String.format("onChange={ () =>{%s({ value, option })}}", checkBoxComponent.getFunctionName()));
