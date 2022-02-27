@@ -1,11 +1,11 @@
 # other layouts
 
-left is box that contains text with value 'It is the left panel' aligned START with font size 15
-right is box that contains text with value 'It is the right panel' aligned END with font size 15
+questionList is box that contains text with value 'questionList' aligned CENTER with font size 15
+send is box that contains text with value 'send' aligned CENTER with font size 15
 
 middleLayout is grid with SMALL gap wich follows disposition
-            SMALL SMALL
-    AUTO    left right
+    AUTO questionList
+    SMALL send
 
 headerLayout is box that contains text binded to quiz title aligned CENTER with font size 15
 

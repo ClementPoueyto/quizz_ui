@@ -125,7 +125,7 @@ public class ModelBuilder extends QuizzBaseListener {
     public void enterText(QuizzParser.TextContext ctx) {
         text = new TextComponent();
         if (ctx.textValue != null)
-            text.setValue(ctx.textValue.getText());
+            text.setValue(ctx.textValue.getText().substring(1, ctx.textValue.getText().length() - 1));
         if (ctx.textAlign != null)
             text.setAligment(Alignment.valueOf(ctx.textAlign.getText()));
         if (ctx.fontSize != null)
