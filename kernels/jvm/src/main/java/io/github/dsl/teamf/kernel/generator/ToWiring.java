@@ -1,5 +1,7 @@
 package io.github.dsl.teamf.kernel.generator;
 
+import java.util.Arrays;
+
 import io.github.dsl.teamf.kernel.App;
 import io.github.dsl.teamf.kernel.behavioral.TextComponent;
 import io.github.dsl.teamf.kernel.structural.BoxLayout;
@@ -50,18 +52,18 @@ public class ToWiring extends Visitor<StringBuffer> {
 		w("]}\n");
 		w("\t\tcolumns={[");
 		for (int i = 0; i < grid.getSizeByColumnIndex().keySet().size(); i++)
-			w("\"" + grid.getSizeByColumnIndex().toString().toLowerCase() + "\",");
+			w("\"" + grid.getSizeByColumnIndex().get(i).toString().toLowerCase() + "\",");
 		w("]}\n");
 		w("\t\tgap=\"" + grid.getGap().toString().toLowerCase() + "\"\n");
 		w("areas={[\n");
 		for (int i = 0; i < grid.getLayouts().length; i++)
-			for (int j = 0; j < grid.getLayouts()[j].length; j++)
+			for (int j = 0; j < grid.getLayouts()[i].length; j++)
 				w("{ name: \"" + grid.getName() + i + j + "\", start: [" + j + ", " + i + "], end: [" + j + ", " + i
 						+ "] },");
 		w("]}\n");
 		w(">\n");
 		for (int i = 0; i < grid.getLayouts().length; i++)
-			for (int j = 0; j < grid.getLayouts()[j].length; j++) {
+			for (int j = 0; j < grid.getLayouts()[i].length; j++) {
 				Layout layout = grid.getLayouts()[i][j];
 				layout.setGridArea(grid.getName() + i + j);
 				layout.accept(this);

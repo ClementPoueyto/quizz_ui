@@ -1,7 +1,13 @@
 # other layouts
 
+left is box that contains text with value 'It is the left panel' aligned START with font size 15
+right is box that contains text with value 'It is the right panel' aligned END with font size 15
+
+middleLayout is grid with SMALL gap wich follows disposition
+            SMALL SMALL
+    AUTO    left right
+
 headerLayout is box that contains text binded to quiz title aligned CENTER with font size 15
-middleLayout is box that contains text with value 'middleLayout' aligned CENTER with font size 15
 
 # root layouts
 
