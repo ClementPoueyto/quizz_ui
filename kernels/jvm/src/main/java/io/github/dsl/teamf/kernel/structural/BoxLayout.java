@@ -4,8 +4,11 @@ import io.github.dsl.teamf.kernel.behavioral.UIComponent;
 import io.github.dsl.teamf.kernel.generator.Visitable;
 import io.github.dsl.teamf.kernel.generator.Visitor;
 
+import java.util.List;
+
 public class BoxLayout extends Layout implements Visitable {
-    private UIComponent content;
+    private List<UIComponent> contents;
+    private List
     private String background;
 
     public BoxLayout(String name) {

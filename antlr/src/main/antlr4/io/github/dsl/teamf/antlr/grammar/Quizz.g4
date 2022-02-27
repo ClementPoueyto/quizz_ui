@@ -23,9 +23,12 @@ column          :   columnSize=SIZE;
 row             :   rowSize=SIZE zone+;
 zone            :   zoneName=IDENTIFIER;
 
-boxContent      :   text;
-text            :   'text' (quizTitleBinding | 'with value' textValue=STRING) ('aligned' textAlign=ALIGN)? ('with font size' fontSize=NUMBER);
-
+boxContent      :   text | textInput | button | checkBox;
+text            :   'text' (quizTitleBinding | 'with value' textValue=STRING) ('with font size' fontSize=NUMBER)? globalStyle?;
+textInput       :   'text input' ('that contains place holder' textValue=STRING)? ('with font size' fontSize=NUMBER)? globalStyle?;
+button          :   'button that call' (functionName=STRING)? ('contains value' textValue=STRING)?  globalStyle?;
+checkBox        :   'checkbox that call' (functionName=STRING)? 'and contains option' (option=String)? 'with'('gap' gapanswer=SIZE)? globalStyle?;
+globalStyle     :   ('aligned' textAlign=ALIGN)? ;
 quizTitleBinding:   'binded to quiz title';
 
 /*****************

@@ -5,9 +5,7 @@ import java.util.List;
 
 import io.github.dsl.teamf.antlr.grammar.*;
 import io.github.dsl.teamf.kernel.App;
-import io.github.dsl.teamf.kernel.behavioral.Alignment;
-import io.github.dsl.teamf.kernel.behavioral.TextComponent;
-import io.github.dsl.teamf.kernel.behavioral.Theme;
+import io.github.dsl.teamf.kernel.behavioral.*;
 import io.github.dsl.teamf.kernel.structural.BoxLayout;
 import io.github.dsl.teamf.kernel.structural.GridLayout;
 import io.github.dsl.teamf.kernel.structural.Layout;
@@ -44,6 +42,9 @@ public class ModelBuilder extends QuizzBaseListener {
 
     BoxLayout box;
     TextComponent text;
+    ButtonComponent button;
+    CheckBoxComponent checkBox;
+    TextInputComponent textInput;
 
     /**************************
      ** Listening mechanisms **
@@ -126,10 +127,11 @@ public class ModelBuilder extends QuizzBaseListener {
         text = new TextComponent();
         if (ctx.textValue != null)
             text.setValue(ctx.textValue.getText().substring(1, ctx.textValue.getText().length() - 1));
-        if (ctx.textAlign != null)
-            text.setAligment(Alignment.valueOf(ctx.textAlign.getText()));
-        if (ctx.fontSize != null)
+        if(ctx.fontSize != null)
             text.setFontSize(Integer.parseInt(ctx.fontSize.getText()));
+        if (ctx.globalStyle() != null) {
+            text.setAligment(Alignment.valueOf(ctx.globalStyle().textAlign.getText()));
+        }
     }
 
     @Override
@@ -176,4 +178,44 @@ public class ModelBuilder extends QuizzBaseListener {
         if (theme != null)
             app.setTheme(theme);
     }
+
+    @Override
+    public void enterButton(QuizzParser.ButtonContext ctx) {
+        button = new ButtonComponent();
+        if (ctx.functionName != null)
+            button.setFunctionName(ctx.functionName.getText());
+        if (ctx.textValue != null)
+            button.setVariableName(ctx.textValue.getText());
+        if (ctx.globalStyle() != null) {
+            button.setAligment(Alignment.valueOf(ctx.globalStyle().textAlign.getText()));
+        }
+    }
+
+    @Override
+    public void enterCheckBox(QuizzParser.CheckBoxContext ctx) {
+        checkBox = new CheckBoxComponent();
+        if (ctx.functionName != null)
+            checkBox.setFunctionName(ctx.functionName.getText());
+        if (ctx.option != null)
+            checkBox.setVariableName(ctx.option.getText());
+        if (ctx.globalStyle() != null) {
+            checkBox.setAligment(Alignment.valueOf(ctx.globalStyle().textAlign.getText()));
+        }
+    }
+
+    @Override
+    public void enterTextInput(QuizzParser.TextInputContext ctx) {
+        textInput = new TextInputComponent();
+        if (ctx.textValue != null)
+            textInput.setValue(ctx.textValue.getText());
+        if(ctx.fontSize != null)
+            textInput.setFontSize(Integer.parseInt(ctx.fontSize.getText()));
+        if (ctx.globalStyle() != null) {
+            textInput.setAligment(Alignment.valueOf(ctx.globalStyle().textAlign.getText()));
+
+        }
+    }
+
+
+
 }

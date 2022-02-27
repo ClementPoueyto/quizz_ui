@@ -3,7 +3,7 @@ package io.github.dsl.teamf.kernel.generator;
 import java.util.Arrays;
 
 import io.github.dsl.teamf.kernel.App;
-import io.github.dsl.teamf.kernel.behavioral.TextComponent;
+import io.github.dsl.teamf.kernel.behavioral.*;
 import io.github.dsl.teamf.kernel.structural.BoxLayout;
 import io.github.dsl.teamf.kernel.structural.GridLayout;
 import io.github.dsl.teamf.kernel.structural.Layout;
@@ -27,7 +27,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(App app) {
 		w("import React, { Component } from 'react';\n");
-		w("import { Grommet, Grid, Box, Text } from 'grommet';\n");
+		w("import { Grommet, Grid, Box, Text, TextInput, Button, CheckBoxGroup  } from 'grommet';\n");
 		w("\nvar quiz = require('" + app.getQuizPath() + "');\n");
 		w("export default class App extends Component {\n");
 		w("\ncomponentDidMount() {\n");
@@ -84,14 +84,40 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(TextComponent text) {
-		w("<Text \n");
-		if (text.getAligment() != null)
-			w("alignSelf=\"" + text.getAligment().toString().toLowerCase() + "\" ");
-		w(">" + text.getValue() + "</Text>\n");
+		w("<Text"+text.getGeneralStyle()+">" + text.getValue() + "</Text>\n");
 	}
 
 	@Override
 	public void visit(Layout layout) {
 		((BoxLayout) layout).accept(this);
 	}
+
+	@Override
+	public void visit(UIComponent uiComponent) {
+
+	}
+
+	@Override
+	public void visit(ButtonComponent buttonComponent) {
+		w(String.format("<Button %s onClick={%s}}" +
+				" label={%s} />\n", buttonComponent.getGeneralStyle(),buttonComponent.getFunctionName(),buttonComponent.getVariableName()));
+	}
+
+	@Override
+	public void visit(CheckBoxComponent checkBoxComponent) {
+		w(String.format("<CheckBoxGroup %s options={%s} onChange={ () =>{%s({ value, option })}} gap = \'%s\' />\n",
+				checkBoxComponent.getGeneralStyle(),checkBoxComponent.getVariableName(),checkBoxComponent.getFunctionName(),checkBoxComponent.getGap()));
+	}
+
+
+	@Override
+	public void visit(TextInputComponent textInputComponent) {
+		w("<TextInput");
+		if (textInputComponent.getValue() != null)
+			w(String.format(" placeholder=\"%s\" ", textInputComponent.getValue()));
+		w(textInputComponent.getGeneralStyle()+"/>");
+		w(String.format("/>\n"));
+	}
+
+
 }

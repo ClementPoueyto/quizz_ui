@@ -3,9 +3,8 @@ package io.github.dsl.teamf.kernel.behavioral;
 import io.github.dsl.teamf.kernel.generator.Visitable;
 import io.github.dsl.teamf.kernel.generator.Visitor;
 
-public class TextComponent extends UIComponent implements Visitable {
+public class TextComponent extends UIComponent  {
     private String value;
-    private Alignment aligment;
     private int fontSize;
 
     public TextComponent(String value) {
@@ -21,14 +20,6 @@ public class TextComponent extends UIComponent implements Visitable {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public Alignment getAligment() {
-        return aligment;
-    }
-
-    public void setAligment(Alignment aligment) {
-        this.aligment = aligment;
     }
 
     public int getFontSize() {
