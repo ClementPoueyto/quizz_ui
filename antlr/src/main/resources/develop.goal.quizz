@@ -11,3 +11,6 @@ globalTheme is theme with primary color BLUE secondary color ORANGE font family 
 rootLayout1 is grid with LARGE gap wich follows disposition
     SMALL headerLayout
     AUTO middleLayout
+
+# other layouts
+

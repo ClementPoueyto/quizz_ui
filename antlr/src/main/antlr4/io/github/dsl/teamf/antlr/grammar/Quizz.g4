@@ -12,9 +12,10 @@ appAttributes   :   (layoutAttribute themeAttribute) | (layoutAttribute themeAtt
 layoutAttribute :   'uses layout' layoutName=IDENTIFIER;
 themeAttribute  :   'uses theme' themeName=IDENTIFIER;
 
-declaration     :   themeDeclaration | gridDeclaration;
+declaration     :   themeDeclaration | gridDeclaration | boxDeclaration;
 themeDeclaration:   IDENTIFIER 'is theme with primary color' primary=COLOR'secondary color' secondary=COLOR'font family' fontFamily=FONTFAM;
 gridDeclaration :   gridName=IDENTIFIER 'is grid with' gap=SIZE 'gap wich follows disposition' disposition;
+boxDeclaration  :   boxName=IDENTIFIER 'is box that contains' boxContent;
 
 disposition     :   columns? row+;
 columns         :   column+;
@@ -22,6 +23,10 @@ column          :   columnSize=SIZE;
 row             :   rowSize=SIZE zone+;
 zone            :   zoneName=IDENTIFIER;
 
+boxContent      :   text;
+text            :   'text' (quizTitleBinding | 'with value' textValue=STRING) ('aligned' textAlign=ALIGN)? ('with font size' fontSize=NUMBER);
+
+quizTitleBinding:   'binded to quiz title';
 
 /*****************
  ** Lexer rules **

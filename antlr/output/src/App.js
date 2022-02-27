@@ -22,7 +22,7 @@ export default class App extends Component {
           { name: "main", start: [0, 1], end: [0, 1] },
         ]}
       >
-        <Box gridArea="header" background="brand" />
+        <Box gridArea="header" background="violet" />
         <Box gridArea="main" background="brand" />
       </Grid>
     );
