@@ -9,7 +9,7 @@ import javax.swing.*;
 public class UIComponent implements Visitable {
     private Alignment aligment= Alignment.CENTER;
     private Size size=Size.AUTO;
-    private String color="white";
+    private String color="unset";
     private Size margin = Size.AUTO;
     private Boolean primary=true;
 
@@ -47,7 +47,7 @@ public class UIComponent implements Visitable {
 
     public String getGeneralStyle(){
         return String.format(" primary={%s} size=\'%s\'  margin=\'%s\'  " +
-                "color=\'%s\' alignSelf=\'%s\' ",this.primary,this.size,this.margin,this.color, this.aligment);
+                "color=\'%s\' alignSelf=\'%s\' ",this.primary,this.size.value(),this.margin,this.color, this.aligment.value());
     }
     @Override
     public void accept(Visitor visitor) {

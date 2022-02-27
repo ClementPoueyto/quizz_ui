@@ -36,15 +36,12 @@ public class ModelBuilder extends QuizzBaseListener {
      *******************/
     List<Layout> declaredLayouts = new ArrayList<>();
     List<Theme> declaredThemes = new ArrayList<>();
-
     GridLayout grid;
     List<Layout> row;
 
+    List<UIComponent> currentBoxContents = new ArrayList<>();
     BoxLayout box;
     TextComponent text;
-    ButtonComponent button;
-    CheckBoxComponent checkBox;
-    TextInputComponent textInput;
 
     /**************************
      ** Listening mechanisms **
@@ -120,19 +117,11 @@ public class ModelBuilder extends QuizzBaseListener {
     @Override
     public void enterBoxDeclaration(QuizzParser.BoxDeclarationContext ctx) {
         box = new BoxLayout(ctx.boxName.getText());
+        box.setFlex(ctx.isFlex != null);
+        if(ctx.direction != null)
+            box.setDirection(Direction.valueOf(ctx.direction.getText()));
     }
 
-    @Override
-    public void enterText(QuizzParser.TextContext ctx) {
-        text = new TextComponent();
-        if (ctx.textValue != null)
-            text.setValue(ctx.textValue.getText().substring(1, ctx.textValue.getText().length() - 1));
-        if(ctx.fontSize != null)
-            text.setFontSize(Integer.parseInt(ctx.fontSize.getText()));
-        if (ctx.globalStyle() != null) {
-            text.setAligment(Alignment.valueOf(ctx.globalStyle().textAlign.getText()));
-        }
-    }
 
     @Override
     public void enterQuizTitleBinding(QuizzParser.QuizTitleBindingContext ctx) {
@@ -141,7 +130,8 @@ public class ModelBuilder extends QuizzBaseListener {
 
     @Override
     public void exitBoxContent(QuizzParser.BoxContentContext ctx) {
-        box.setContent(text);
+        box.setContents(new ArrayList<>(currentBoxContents));
+        currentBoxContents.clear();
     }
 
     @Override
@@ -181,7 +171,7 @@ public class ModelBuilder extends QuizzBaseListener {
 
     @Override
     public void enterButton(QuizzParser.ButtonContext ctx) {
-        button = new ButtonComponent();
+        ButtonComponent button = new ButtonComponent();
         if (ctx.functionName != null)
             button.setFunctionName(ctx.functionName.getText());
         if (ctx.textValue != null)
@@ -189,32 +179,52 @@ public class ModelBuilder extends QuizzBaseListener {
         if (ctx.globalStyle() != null) {
             button.setAligment(Alignment.valueOf(ctx.globalStyle().textAlign.getText()));
         }
+        currentBoxContents.add(button);
+
     }
 
     @Override
     public void enterCheckBox(QuizzParser.CheckBoxContext ctx) {
-        checkBox = new CheckBoxComponent();
+        CheckBoxComponent checkBox = new CheckBoxComponent();
         if (ctx.functionName != null)
             checkBox.setFunctionName(ctx.functionName.getText());
         if (ctx.option != null)
             checkBox.setVariableName(ctx.option.getText());
+        else{checkBox.setVariableName("[]"); }
         if (ctx.globalStyle() != null) {
             checkBox.setAligment(Alignment.valueOf(ctx.globalStyle().textAlign.getText()));
         }
+        currentBoxContents.add(checkBox);
+
     }
 
     @Override
     public void enterTextInput(QuizzParser.TextInputContext ctx) {
-        textInput = new TextInputComponent();
+        TextInputComponent textInput = new TextInputComponent();
         if (ctx.textValue != null)
             textInput.setValue(ctx.textValue.getText());
         if(ctx.fontSize != null)
             textInput.setFontSize(Integer.parseInt(ctx.fontSize.getText()));
         if (ctx.globalStyle() != null) {
             textInput.setAligment(Alignment.valueOf(ctx.globalStyle().textAlign.getText()));
-
         }
+        currentBoxContents.add(textInput);
+
     }
+
+    @Override
+    public void enterText(QuizzParser.TextContext ctx) {
+        text = new TextComponent();
+        if (ctx.textValue != null)
+            text.setValue(ctx.textValue.getText().substring(1, ctx.textValue.getText().length() - 1));
+        if(ctx.fontSize != null)
+            text.setFontSize(Integer.parseInt(ctx.fontSize.getText()));
+        if (ctx.globalStyle() != null) {
+            text.setAligment(Alignment.valueOf(ctx.globalStyle().textAlign.getText()));
+        }
+        currentBoxContents.add(text);
+    }
+
 
 
 

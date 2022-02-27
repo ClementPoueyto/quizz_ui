@@ -8,110 +8,53 @@
 
 
 Running the ANTLR compiler for Quizz UI
-Using input file: C:\Users\pouey\Documents\cours\SI5\DSL\labs\quizz_ui\antlr\src\main\resources\exampleOne.quizz
-COLORDARK-2COLORDARK-5COLORLIGHT-2COLORDARK-3AUTO
-AUTO
-import React, { Component } from 'react'
-import {  onAnswerClick,  onTimerChange, onMultipleAnswerChange} from './functions'
-import { Grommet, Grid, Box, CheckBoxGroup, Text, Button, Clock, Image, ResponsiveContext, TextInput, Meter } from 'grommet'
-import { deepMerge } from "grommet/utils";
-import { grommet } from "grommet/themes";
-var data = require('./quiz.json');
+Using input file: C:\Users\sylva\Desktop\SI5\DSL\quizz_ui\antlr\src\main\resources\develop.goal.quizz
+import React, { Component } from 'react';
+import { Grommet, Grid, Box, Text, TextInput, Button, CheckBoxGroup  } from 'grommet';
 
+var quiz = require('./quiz.json');
 export default class App extends Component {
 
-	constructor() {
-		super();
-		this.state = { quiz : data }
-	}
-
-	renderQuestion(){
-		let i = this.state.quiz.indexQuestion;
-				return(<>
-					<Text size='medium'  textAlign='center'  >{this.state.quiz.questions[i].statement}</Text>
-					{this.state.quiz.questions[i].answers.map((item,index)=>{
-							return <Button primary={true}  size='large'  margin='small'  color='light-2'  onClick={()=>{ this.setState({ quiz : onAnswerClick(this.state.quiz,item,index)})}}  label={this.state.quiz.questions[i].answers[index]}  />
-})}
-					</>)
-	}
-	render() {
-		var customBreakpoints = deepMerge(grommet, {
-			global: {
-			}
-		});
-		var c_areas= []
-		const areas = {
-			default: [
-				["left","header",],
-				["middle","middle",],
-				["footer","footer",],
-			],
-		}
-		const rows = {
-			default:['xsmall','medium','small',],
-		}
-		const columns = {
-			default:['auto','auto',],
-}
-		const gaps = {
-			default:'small',
-}
-		return (
-			<Grommet>
-				<ResponsiveContext.Consumer>
-					{size =>
-					<Grid
-						rows={rows[size] ? rows[size] : rows["default"]}
-						columns={columns[size] ? columns[size] : columns["default"]}
-						gap={gaps[size] ? gaps[size] : gaps["default"]}
-						areas={areas[size] ? areas[size] : areas["default"]}>
-					{
-						c_areas =  areas[size] ? areas[size] : areas["default"],
-						c_areas.find((row) => row.indexOf("middle") >=0) ?
-						<Box overflow='auto' gridArea='middle' align='center'   background='dark-2' round='small' border={{color: "dark-3",size: "small",style: "dashed",}}>
-							{this.renderQuestion()}
-						</Box>
-						:
-						<Box/>
-					}
-					{
-						c_areas =  areas[size] ? areas[size] : areas["default"],
-						c_areas.find((row) => row.indexOf("header") >=0) ?
-						<Box overflow='auto' gridArea='header' align='center'   background='dark-5' round='medium' >
-						<Text size='xlarge'  textAlign='center'  >{this.state.quiz.title}</Text>
-						</Box>
-						:
-						<Box/>
-					}
-					{
-						c_areas =  areas[size] ? areas[size] : areas["default"],
-						c_areas.find((row) => row.indexOf("left") >=0) ?
-						<Box overflow='auto' gridArea='left' align='center'   background='light-2' round='medium' >
-						<Clock run='backward'  type='digital'  size='large'  time='T00:01:00'  alignSelf='center'  precision='seconds'  onChange={(time)=>{ this.setState({ quiz : onTimerChange(this.state.quiz,time)})}}  />
-						</Box>
-						:
-						<Box/>
-					}
-					{
-						c_areas =  areas[size] ? areas[size] : areas["default"],
-						c_areas.find((row) => row.indexOf("footer") >=0) ?
-						<Box overflow='auto' gridArea='footer' align='center'   background='dark-3' round='small' >
-						<Meter size='full'  type='bar'  thickness='medium' value = {this.state.quiz.indexQuestion*100/this.state.quiz.questions.length}  />
-						</Box>
-						:
-						<Box/>
-					}
-				</Grid>
-			}
-			</ResponsiveContext.Consumer>
-		</Grommet>
-		);
-	}
+componentDidMount() {
+	document.title = "SinglePageGoal";
 }
 
+render() {
+	console.log("rootLayout1");
+	console.log("Theme [font=SCRIPT, name=globalTheme, primaryColor=BLUE, secondaryColor=ORANGE]");
+	return (
+		<Grid
+		rows={["small","auto",]}
+		columns={[]}
+		gap="large"
+areas={[
+{ name: "rootLayout100", start: [0, 0], end: [0, 0] },{ name: "rootLayout110", start: [0, 1], end: [0, 1] },]}
+>
+		<Box  gridArea="rootLayout100"  background="unset" flex={false} direction="column">
+<Text primary={true} size='auto'  margin='AUTO'  color='unset' alignSelf='center'  fontSize='15' >{quiz.title}</Text>
+<TextInput primary={true} size='auto'  margin='AUTO'  color='unset' alignSelf='center'  fontSize='15' />
+<Button  primary={true} size='medium'  margin='AUTO'  color='unset' alignSelf='center'  onClick={null} label={'salut'} />
+<CheckBoxGroup  primary={true} size='medium'  margin='AUTO'  color='unset' alignSelf='center'  options={[]}  gap = 'SMALL' />
+</Box>
+		<Grid
+		rows={["auto","small",]}
+		columns={[]}
+		gap="small"
+areas={[
+{ name: "middleLayout00", start: [0, 0], end: [0, 0] },{ name: "middleLayout10", start: [0, 1], end: [0, 1] },]}
+>
+		<Box  gridArea="middleLayout00"  background="unset" flex={false} direction="column">
+<Text primary={true} size='auto'  margin='AUTO'  color='unset' alignSelf='center'  fontSize='15' >questionList</Text>
+</Box>
+		<Box  gridArea="middleLayout10"  background="unset" flex={false} direction="column">
+<Text primary={true} size='auto'  margin='AUTO'  color='unset' alignSelf='center'  fontSize='15' >send</Text>
+</Box>
+		</Grid>
+		</Grid>
+	);}}
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  0.813 s
-[INFO] Finished at: 2022-02-26T18:08:45+01:00
+[INFO] Total time:  0.651 s
+[INFO] Finished at: 2022-02-27T14:48:10+01:00
 [INFO] ------------------------------------------------------------------------

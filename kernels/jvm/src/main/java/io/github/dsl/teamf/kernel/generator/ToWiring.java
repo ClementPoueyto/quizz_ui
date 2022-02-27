@@ -75,16 +75,18 @@ public class ToWiring extends Visitor<StringBuffer> {
 	public void visit(BoxLayout box) {
 		w("\t\t<Box ");
 		if (box.getGridArea() != null)
-			w("gridArea=\"" + box.getGridArea() + "\" ");
-		w("background=\"" + box.getBackground() + "\"");
+			w(" gridArea=\"" + box.getGridArea() + "\" ");
+		w(" background=\"" + box.getBackground() + "\"");
+		w(" flex={" + box.isFlex() + "}");
+		w(" direction=\"" + box.getDirection().value() + "\"");
 		w(">\n");
-		box.getContent().accept(this);
+		box.getContents().forEach(uiComponent -> {uiComponent.accept(this);});
 		w("</Box>\n");
 	}
 
 	@Override
 	public void visit(TextComponent text) {
-		w("<Text"+text.getGeneralStyle()+">" + text.getValue() + "</Text>\n");
+		w("<Text"+text.getGeneralStyle()+ text.getTextStyle()+">" + text.getValue() + "</Text>\n");
 	}
 
 	@Override
@@ -99,14 +101,16 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(ButtonComponent buttonComponent) {
-		w(String.format("<Button %s onClick={%s}}" +
+		w(String.format("<Button %s onClick={%s}" +
 				" label={%s} />\n", buttonComponent.getGeneralStyle(),buttonComponent.getFunctionName(),buttonComponent.getVariableName()));
 	}
 
 	@Override
 	public void visit(CheckBoxComponent checkBoxComponent) {
-		w(String.format("<CheckBoxGroup %s options={%s} onChange={ () =>{%s({ value, option })}} gap = \'%s\' />\n",
-				checkBoxComponent.getGeneralStyle(),checkBoxComponent.getVariableName(),checkBoxComponent.getFunctionName(),checkBoxComponent.getGap()));
+		w(String.format("<CheckBoxGroup %s options={%s}  gap = \'%s\' />\n",
+				checkBoxComponent.getGeneralStyle(),checkBoxComponent.getVariableName(),checkBoxComponent.getGap()));
+		if(checkBoxComponent.getFunctionName() != null && !checkBoxComponent.getFunctionName().equals(""))
+			w(String.format("onChange={ () =>{%s({ value, option })}}",checkBoxComponent.getFunctionName()));
 	}
 
 
@@ -115,7 +119,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 		w("<TextInput");
 		if (textInputComponent.getValue() != null)
 			w(String.format(" placeholder=\"%s\" ", textInputComponent.getValue()));
-		w(textInputComponent.getGeneralStyle()+"/>");
+		w(textInputComponent.getGeneralStyle()+ textInputComponent.getTextStyle());
 		w(String.format("/>\n"));
 	}
 

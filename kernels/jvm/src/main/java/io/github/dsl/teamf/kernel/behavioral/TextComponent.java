@@ -39,4 +39,8 @@ public class TextComponent extends UIComponent  {
         visitor.visit(this);
     }
 
+    public String getTextStyle(){
+        return String.format(" fontSize=\'%s\' ",this.fontSize);
+
+    }
 }

@@ -15,7 +15,7 @@ themeAttribute  :   'uses theme' themeName=IDENTIFIER;
 declaration     :   themeDeclaration | gridDeclaration | boxDeclaration;
 themeDeclaration:   themeName=IDENTIFIER 'is theme with primary color' primary=COLOR'secondary color' secondary=COLOR'font family' fontFamily=FONTFAM;
 gridDeclaration :   gridName=IDENTIFIER 'is grid with' gap=SIZE 'gap wich follows disposition' disposition;
-boxDeclaration  :   boxName=IDENTIFIER 'is box that contains' boxContent;
+boxDeclaration  :   boxName=IDENTIFIER 'is' (isFlex='flex')? 'box' ( 'with direction' direction=DIRECTION)? 'that contains' boxContent;
 
 disposition     :   columns? row+;
 columns         :   column+;
@@ -23,12 +23,12 @@ column          :   columnSize=SIZE;
 row             :   rowSize=SIZE zone+;
 zone            :   zoneName=IDENTIFIER;
 
-boxContent      :   text | textInput | button | checkBox;
+boxContent      :   (text | textInput | button | checkBox)+ ;
 text            :   'text' (quizTitleBinding | 'with value' textValue=STRING) ('with font size' fontSize=NUMBER)? globalStyle?;
 textInput       :   'text input' ('that contains place holder' textValue=STRING)? ('with font size' fontSize=NUMBER)? globalStyle?;
-button          :   'button that call' (functionName=STRING)? ('contains value' textValue=STRING)?  globalStyle?;
-checkBox        :   'checkbox that call' (functionName=STRING)? 'and contains option' (option=String)? 'with'('gap' gapanswer=SIZE)? globalStyle?;
-globalStyle     :   ('aligned' textAlign=ALIGN)? ;
+button          :   'button' ('that call' functionName=STRING)? ('contains value' textValue=STRING)?  globalStyle?;
+checkBox        :   'checkboxgroup' ('that call' functionName=STRING)? ('and contains option' option=STRING)? 'with' ('gap' gapanswer=SIZE)? globalStyle?;
+globalStyle     :   ',' ('aligned' textAlign=ALIGN)? ;
 quizTitleBinding:   'binded to quiz title';
 
 /*****************
@@ -39,6 +39,7 @@ NUMBER          :   [0-9]+;
 TIME            : [0-2][0-3]':'[0-5][0-9]':'[0-5][0-9];
 IDENTIFIER      :   LOWERCASE (LOWERCASE|UPPERCASE|NUMBER)+;
 SIZE            :   'XXSMALL' | 'XSMALL' | 'SMALL' | 'MEDIUM' | 'LARGE' | 'XLARGE' | 'AUTO' | 'FULL';
+DIRECTION       :   'ROW' | 'COLUMN' | 'ROW_REVERSE' | 'COLUMN_REVERSE' | 'ROW_RESPONSIVE';
 BORDERSTYLE     :   'SOLID' | 'DASHED' | 'DOTTED' | 'DOUBLE' | 'RIDGE';
 TEXT            :   UPPERCASE (IDENTIFIER WS* NEWLINE)+;
 LETTER          :   (LOWERCASE|UPPERCASE);

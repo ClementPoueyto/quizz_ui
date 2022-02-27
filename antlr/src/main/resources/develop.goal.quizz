@@ -1,13 +1,17 @@
 # other layouts
 
-questionList is box that contains text with value 'questionList' aligned CENTER with font size 15
-send is box that contains text with value 'send' aligned CENTER with font size 15
+questionList is box that contains text with value 'questionList' with font size 15, aligned CENTER
+send is box that contains text with value 'send' with font size 15 , aligned CENTER
 
 middleLayout is grid with SMALL gap wich follows disposition
     AUTO questionList
     SMALL send
 
-headerLayout is box that contains text binded to quiz title aligned CENTER with font size 15
+headerLayout is box that contains
+    text binded to quiz title with font size 15 , aligned CENTER
+    text input with font size 15 , aligned CENTER
+    button contains value 'salut' , aligned CENTER
+    checkboxgroup with gap SMALL
 
 # root layouts
 
