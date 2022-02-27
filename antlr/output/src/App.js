@@ -9,7 +9,7 @@ componentDidMount() {
 
 render() {
 	console.log("rootLayout1");
-	console.log("globalTheme");
+	console.log("Theme [font=SCRIPT, name=globalTheme, primaryColor=BLUE, secondaryColor=ORANGE]");
 	return (<p>{quiz.title}</p>);
 }
 }

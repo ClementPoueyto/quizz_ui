@@ -1,1 +1,7 @@
-Application SinglePageGoal from quiz './quiz.json' uses layout rootLayout1 uses theme globalTheme
+Application SinglePageGoal from quiz './quiz.json' 
+    uses layout rootLayout1 
+    uses theme globalTheme
+
+# theme
+
+globalTheme is theme with primary color BLUE secondary color ORANGE font family SCRIPT

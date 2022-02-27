@@ -44,14 +44,27 @@ public class ModelBuilder extends QuizzBaseListener {
     }
 
     @Override
-    public void enterDeclaration(QuizzParser.DeclarationContext ctx) {
+    public void enterAppDeclaration(QuizzParser.AppDeclarationContext ctx) {
         app.setName(ctx.name.getText());
         app.setQuizPath(unquote(ctx.quizPath.getText()));
     }
 
-    public void enterAppAttributes(QuizzParser.AppAttributesContext ctx) {
+    @Override
+    public void enterLayoutAttribute(QuizzParser.LayoutAttributeContext ctx) {
         app.setLayout(new Layout(ctx.layoutName.getText()));
+    }
+
+    @Override
+    public void enterThemeAttribute(QuizzParser.ThemeAttributeContext ctx) {
         app.setTheme(new Theme(ctx.themeName.getText()));
+    }
+
+    @Override
+    public void enterThemeDeclaration(QuizzParser.ThemeDeclarationContext ctx) {
+        Theme appTheme = app.getTheme();
+        appTheme.setPrimaryColor(ctx.primary.getText());
+        appTheme.setSecondaryColor(ctx.secondary.getText());
+        appTheme.setFont(ctx.fontFamily.getText());
     }
 }
 

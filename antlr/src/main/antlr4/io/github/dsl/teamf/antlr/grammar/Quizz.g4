@@ -4,10 +4,16 @@ grammar Quizz;
  ** Parser rules **
  ******************/
 
-root            :   declaration EOF;
+root            :   appDeclaration declaration* EOF;
 
-declaration     :   'Application' name=WORD 'from quiz' quizPath=STRING appAttributes;
-appAttributes   :   'uses layout' layoutName=IDENTIFIER 'uses theme' themeName=IDENTIFIER;
+appDeclaration  :   'Application' name=WORD 'from quiz' quizPath=STRING appAttributes;
+
+appAttributes   :   (layoutAttribute themeAttribute) | (layoutAttribute themeAttribute);
+layoutAttribute :   'uses layout' layoutName=IDENTIFIER;
+themeAttribute  :   'uses theme' themeName=IDENTIFIER;
+
+declaration     :   themeDeclaration;
+themeDeclaration:   IDENTIFIER 'is theme with primary color' primary=COLOR'secondary color' secondary=COLOR'font family' fontFamily=FONTFAM;
 
 /*****************
  ** Lexer rules **
