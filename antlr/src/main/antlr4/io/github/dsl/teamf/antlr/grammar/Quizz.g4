@@ -4,7 +4,7 @@ grammar Quizz;
  ** Parser rules **
  ******************/
 
-root            :   appDeclaration declaration* EOF;
+root            :   declaration* appDeclaration  EOF;
 
 appDeclaration  :   'Application' name=WORD 'from quiz' quizPath=STRING appAttributes;
 
@@ -13,7 +13,7 @@ layoutAttribute :   'uses layout' layoutName=IDENTIFIER;
 themeAttribute  :   'uses theme' themeName=IDENTIFIER;
 
 declaration     :   themeDeclaration | gridDeclaration | boxDeclaration;
-themeDeclaration:   IDENTIFIER 'is theme with primary color' primary=COLOR'secondary color' secondary=COLOR'font family' fontFamily=FONTFAM;
+themeDeclaration:   themeName=IDENTIFIER 'is theme with primary color' primary=COLOR'secondary color' secondary=COLOR'font family' fontFamily=FONTFAM;
 gridDeclaration :   gridName=IDENTIFIER 'is grid with' gap=SIZE 'gap wich follows disposition' disposition;
 boxDeclaration  :   boxName=IDENTIFIER 'is box that contains' boxContent;
 

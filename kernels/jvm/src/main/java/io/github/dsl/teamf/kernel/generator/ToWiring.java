@@ -25,7 +25,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(App app) {
 		w("import React, { Component } from 'react';\n");
-		w("import { Grommet, Grid } from 'grommet';\n");
+		w("import { Grommet, Grid, Box, Text } from 'grommet';\n");
 		w("\nvar quiz = require('" + app.getQuizPath() + "');\n");
 		w("export default class App extends Component {\n");
 		w("\ncomponentDidMount() {\n");
@@ -55,13 +55,13 @@ public class ToWiring extends Visitor<StringBuffer> {
 		w("\t\tgap=\"" + grid.getGap().toString().toLowerCase() + "\"\n");
 		w("areas={[\n");
 		for (int i = 0; i < grid.getLayouts().length; i++)
-			for (int j = 0; j < grid.getLayouts()[i].length; i++)
+			for (int j = 0; j < grid.getLayouts()[j].length; j++)
 				w("{ name: \"" + grid.getName() + i + j + "\", start: [" + i + ", " + j + "], end: [" + i + ", " + j
 						+ "] },");
 		w("]}\n");
 		w(">\n");
 		for (int i = 0; i < grid.getLayouts().length; i++)
-			for (int j = 0; j < grid.getLayouts()[i].length; i++) {
+			for (int j = 0; j < grid.getLayouts()[j].length; j++) {
 				Layout layout = grid.getLayouts()[i][j];
 				layout.setGridArea(grid.getName() + i + j);
 				layout.accept(this);

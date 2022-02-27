@@ -1,10 +1,7 @@
-Application SinglePageGoal from quiz './quiz.json' 
-    uses layout rootLayout1 
-    uses theme globalTheme
+# other layouts
 
-# theme
-
-globalTheme is theme with primary color BLUE secondary color ORANGE font family SCRIPT
+headerLayout is box that contains text binded to quiz title aligned CENTER with font size 15
+middleLayout is box that contains text with value 'middleLayout' aligned CENTER with font size 15
 
 # root layouts
 
@@ -12,5 +9,11 @@ rootLayout1 is grid with LARGE gap wich follows disposition
     SMALL headerLayout
     AUTO middleLayout
 
-# other layouts
+# theme
+
+globalTheme is theme with primary color BLUE secondary color ORANGE font family SCRIPT
+
+Application SinglePageGoal from quiz './quiz.json' 
+    uses layout rootLayout1 
+    uses theme globalTheme
 
