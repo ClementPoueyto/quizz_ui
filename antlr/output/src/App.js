@@ -17,13 +17,15 @@ render() {
 		columns={[]}
 		gap="large"
 areas={[
-{ name: "rootLayout100", start: [0, 0], end: [0, 0] },{ name: "rootLayout110", start: [1, 0], end: [1, 0] },]}
+{ name: "rootLayout100", start: [0, 0], end: [0, 0] },{ name: "rootLayout110", start: [0, 1], end: [0, 1] },]}
 >
 		<Box gridArea="rootLayout100" background="null">
-<Text>{quiz.title}</Text>
+<Text 
+alignSelf="center" >{quiz.title}</Text>
 </Box>
 		<Box gridArea="rootLayout110" background="null">
-<Text>'middleLayout'</Text>
+<Text 
+alignSelf="center" >'middleLayout'</Text>
 </Box>
 		</Grid>
 	);}}

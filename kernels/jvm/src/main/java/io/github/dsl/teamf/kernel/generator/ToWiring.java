@@ -56,7 +56,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 		w("areas={[\n");
 		for (int i = 0; i < grid.getLayouts().length; i++)
 			for (int j = 0; j < grid.getLayouts()[j].length; j++)
-				w("{ name: \"" + grid.getName() + i + j + "\", start: [" + i + ", " + j + "], end: [" + i + ", " + j
+				w("{ name: \"" + grid.getName() + i + j + "\", start: [" + j + ", " + i + "], end: [" + j + ", " + i
 						+ "] },");
 		w("]}\n");
 		w(">\n");
@@ -82,7 +82,10 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	@Override
 	public void visit(TextComponent text) {
-		w("<Text>" + text.getValue() + "</Text>\n");
+		w("<Text \n");
+		if (text.getAligment() != null)
+			w("alignSelf=\"" + text.getAligment().toString().toLowerCase() + "\" ");
+		w(">" + text.getValue() + "</Text>\n");
 	}
 
 	@Override
