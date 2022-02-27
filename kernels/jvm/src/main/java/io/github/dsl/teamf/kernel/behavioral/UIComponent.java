@@ -4,14 +4,12 @@ import io.github.dsl.teamf.kernel.generator.Visitable;
 import io.github.dsl.teamf.kernel.generator.Visitor;
 import io.github.dsl.teamf.kernel.structural.Size;
 
-import javax.swing.*;
-
 public class UIComponent implements Visitable {
-    private Alignment aligment= Alignment.CENTER;
-    private Size size=Size.AUTO;
-    private String color="unset";
+    private Alignment aligment = Alignment.CENTER;
+    private Size size = Size.AUTO;
+    private String color = "unset";
     private Size margin = Size.AUTO;
-    private Boolean primary=true;
+    private Boolean primary = true;
 
     public Alignment getAligment() {
         return aligment;
@@ -45,14 +43,15 @@ public class UIComponent implements Visitable {
         this.margin = margin;
     }
 
-    public String getGeneralStyle(){
+    public String getGeneralStyle() {
         return String.format(" primary={%s} size=\'%s\'  margin=\'%s\'  " +
-                "color=\'%s\' alignSelf=\'%s\' ",this.primary,this.size.value(),this.margin,this.color, this.aligment.value());
+                "color=\'%s\' alignSelf=\'%s\' ", this.primary, this.size.value(), this.margin, this.color,
+                this.aligment.value());
     }
+
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
-
 
 }

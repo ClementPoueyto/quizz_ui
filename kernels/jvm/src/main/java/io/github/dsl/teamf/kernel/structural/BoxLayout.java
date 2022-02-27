@@ -9,12 +9,21 @@ import java.util.List;
 
 public class BoxLayout extends Layout implements Visitable {
     private List<UIComponent> contents;
-    private boolean isFlex=true;
-    private Direction direction=Direction.COLUMN;
-    private String background="unset";
+    private boolean isFlex = true;
+    private Direction direction = Direction.COLUMN;
+    private String background = "unset";
+    private boolean bindedToQuestions = false;
 
     public BoxLayout(String name) {
         super(name);
+    }
+
+    public boolean isBindedToQuestions() {
+        return bindedToQuestions;
+    }
+
+    public void setBindedToQuestions(boolean bindedToQuestions) {
+        this.bindedToQuestions = bindedToQuestions;
     }
 
     public List<UIComponent> getContents() {

@@ -24,15 +24,89 @@ public class ToWiring extends Visitor<StringBuffer> {
 		result.append(String.format("%s", s));
 	}
 
+	private void produceSingleAnswerHelperFunction() {
+		w("renderSingleAnswerQuestion(question) {\n");
+		w("return (\n");
+
+		BoxLayout box = new BoxLayout("");
+		box.setDirection(Direction.COLUMN);
+
+		TextComponent text = new TextComponent();
+		text.bindToQuestionStatement();
+
+		RadioButtonComponent radio = new RadioButtonComponent();
+		radio.setBindedToAnswers(true);
+
+		box.setContents(
+				Arrays.asList(text, radio));
+
+		box.accept(this);
+		w(");}\n");
+	}
+
+	private void produceMultipleAnswerHelperFunction() {
+		w("renderMultipleAnswerQuestion(question) {\n");
+		w("return (\n");
+
+		BoxLayout box = new BoxLayout("");
+		box.setDirection(Direction.COLUMN);
+
+		TextComponent text = new TextComponent();
+		text.bindToQuestionStatement();
+
+		CheckBoxComponent checkBox = new CheckBoxComponent();
+		checkBox.setVariableName("question.answers");
+
+		box.setContents(Arrays.asList(text, checkBox));
+		box.accept(this);
+		w(");}\n");
+	}
+
+	private void produceOpenAnswerHelperFunction() {
+		w("renderOpenAnswerQuestion(question) {\n");
+		w("return (\n");
+
+		BoxLayout box = new BoxLayout("");
+		box.setDirection(Direction.COLUMN);
+
+		TextComponent text = new TextComponent();
+		text.bindToQuestionStatement();
+
+		TextInputComponent input = new TextInputComponent();
+
+		box.setContents(Arrays.asList(text, input));
+		box.accept(this);
+		w(");}\n");
+	}
+
+	private void produceHelperFunctions() {
+		produceSingleAnswerHelperFunction();
+		w("\n");
+		produceMultipleAnswerHelperFunction();
+		w("\n");
+		produceOpenAnswerHelperFunction();
+		w("\nrenderQuestion(question) {\n");
+		w("var type = question.type;\n\n");
+		w("switch (type) {\n");
+		w("case \"single\":\n");
+		w("return this.renderSingleAnswerQuestion(question);\n");
+		w("case \"multiple\":\n");
+		w("return this.renderMultipleAnswerQuestion(question);\n");
+		w("case \"open\":\n");
+		w("return this.renderOpenAnswerQuestion(question);\n");
+		w("}\n}\n");
+	}
+
 	@Override
 	public void visit(App app) {
 		w("import React, { Component } from 'react';\n");
-		w("import { Grommet, Grid, Box, Text, TextInput, Button, CheckBoxGroup  } from 'grommet';\n");
+		w("import { Grommet, Grid, Box, Text, TextInput, Button, CheckBoxGroup, RadioButtonGroup  } from 'grommet';\n");
 		w("\nvar quiz = require('" + app.getQuizPath() + "');\n");
 		w("export default class App extends Component {\n");
 		w("\ncomponentDidMount() {\n");
 		w("\tdocument.title = \"" + app.getName() + "\";\n");
 		w("}\n");
+		produceHelperFunctions();
 		w("\nrender() {\n");
 		w("\tconsole.log(\"" + app.getLayout().getName() + "\");\n");
 		w("\tconsole.log(\"" + app.getTheme() + "\");\n");
@@ -80,13 +154,21 @@ public class ToWiring extends Visitor<StringBuffer> {
 		w(" flex={" + box.isFlex() + "}");
 		w(" direction=\"" + box.getDirection().value() + "\"");
 		w(">\n");
-		box.getContents().forEach(uiComponent -> {uiComponent.accept(this);});
+		if (box.isBindedToQuestions()) {
+			w("{ quiz.questions.map((question) =>\n");
+			w("this.renderQuestion(question)\n");
+			w(")}\n");
+		} else {
+			box.getContents().forEach(uiComponent -> {
+				uiComponent.accept(this);
+			});
+		}
 		w("</Box>\n");
 	}
 
 	@Override
 	public void visit(TextComponent text) {
-		w("<Text"+text.getGeneralStyle()+ text.getTextStyle()+">" + text.getValue() + "</Text>\n");
+		w("<Text" + text.getGeneralStyle() + text.getTextStyle() + ">" + text.getValue() + "</Text>\n");
 	}
 
 	@Override
@@ -102,26 +184,35 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(ButtonComponent buttonComponent) {
 		w(String.format("<Button %s onClick={%s}" +
-				" label={%s} />\n", buttonComponent.getGeneralStyle(),buttonComponent.getFunctionName(),buttonComponent.getVariableName()));
+				" label={%s} />\n", buttonComponent.getGeneralStyle(), buttonComponent.getFunctionName(),
+				buttonComponent.getVariableName()));
 	}
 
 	@Override
 	public void visit(CheckBoxComponent checkBoxComponent) {
 		w(String.format("<CheckBoxGroup %s options={%s}  gap = \'%s\' />\n",
-				checkBoxComponent.getGeneralStyle(),checkBoxComponent.getVariableName(),checkBoxComponent.getGap()));
-		if(checkBoxComponent.getFunctionName() != null && !checkBoxComponent.getFunctionName().equals(""))
-			w(String.format("onChange={ () =>{%s({ value, option })}}",checkBoxComponent.getFunctionName()));
+				checkBoxComponent.getGeneralStyle(), checkBoxComponent.getVariableName(), checkBoxComponent.getGap()));
+		if (checkBoxComponent.getFunctionName() != null && !checkBoxComponent.getFunctionName().equals(""))
+			w(String.format("onChange={ () =>{%s({ value, option })}}", checkBoxComponent.getFunctionName()));
 	}
-
 
 	@Override
 	public void visit(TextInputComponent textInputComponent) {
 		w("<TextInput");
 		if (textInputComponent.getValue() != null)
 			w(String.format(" placeholder=\"%s\" ", textInputComponent.getValue()));
-		w(textInputComponent.getGeneralStyle()+ textInputComponent.getTextStyle());
+		w(textInputComponent.getGeneralStyle() + textInputComponent.getTextStyle());
 		w(String.format("/>\n"));
 	}
 
+	@Override
+	public void visit(RadioButtonComponent radioButtonComponent) {
+		w("<RadioButtonGroup ");
+		if (radioButtonComponent.isBindedToAnswers())
+			w("options={question.answers}");
+		else
+			w("option={" + radioButtonComponent.getOptions() + "}");
+		w("/>\n");
+	}
 
 }

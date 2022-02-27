@@ -118,10 +118,9 @@ public class ModelBuilder extends QuizzBaseListener {
     public void enterBoxDeclaration(QuizzParser.BoxDeclarationContext ctx) {
         box = new BoxLayout(ctx.boxName.getText());
         box.setFlex(ctx.isFlex != null);
-        if(ctx.direction != null)
+        if (ctx.direction != null)
             box.setDirection(Direction.valueOf(ctx.direction.getText()));
     }
-
 
     @Override
     public void enterQuizTitleBinding(QuizzParser.QuizTitleBindingContext ctx) {
@@ -190,7 +189,9 @@ public class ModelBuilder extends QuizzBaseListener {
             checkBox.setFunctionName(ctx.functionName.getText());
         if (ctx.option != null)
             checkBox.setVariableName(ctx.option.getText());
-        else{checkBox.setVariableName("[]"); }
+        else {
+            checkBox.setVariableName("[]");
+        }
         if (ctx.globalStyle() != null) {
             checkBox.setAligment(Alignment.valueOf(ctx.globalStyle().textAlign.getText()));
         }
@@ -203,7 +204,7 @@ public class ModelBuilder extends QuizzBaseListener {
         TextInputComponent textInput = new TextInputComponent();
         if (ctx.textValue != null)
             textInput.setValue(ctx.textValue.getText());
-        if(ctx.fontSize != null)
+        if (ctx.fontSize != null)
             textInput.setFontSize(Integer.parseInt(ctx.fontSize.getText()));
         if (ctx.globalStyle() != null) {
             textInput.setAligment(Alignment.valueOf(ctx.globalStyle().textAlign.getText()));
@@ -217,7 +218,7 @@ public class ModelBuilder extends QuizzBaseListener {
         text = new TextComponent();
         if (ctx.textValue != null)
             text.setValue(ctx.textValue.getText().substring(1, ctx.textValue.getText().length() - 1));
-        if(ctx.fontSize != null)
+        if (ctx.fontSize != null)
             text.setFontSize(Integer.parseInt(ctx.fontSize.getText()));
         if (ctx.globalStyle() != null) {
             text.setAligment(Alignment.valueOf(ctx.globalStyle().textAlign.getText()));
@@ -225,7 +226,8 @@ public class ModelBuilder extends QuizzBaseListener {
         currentBoxContents.add(text);
     }
 
-
-
-
+    @Override
+    public void enterQuestions(QuizzParser.QuestionsContext ctx) {
+        box.setBindedToQuestions(true);
+    }
 }

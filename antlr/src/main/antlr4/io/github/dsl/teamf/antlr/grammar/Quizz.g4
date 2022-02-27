@@ -23,13 +23,15 @@ column          :   columnSize=SIZE;
 row             :   rowSize=SIZE zone+;
 zone            :   zoneName=IDENTIFIER;
 
-boxContent      :   (text | textInput | button | checkBox)+ ;
+boxContent      :   ((text | textInput | button | checkBox)+ | questions);
 text            :   'text' (quizTitleBinding | 'with value' textValue=STRING) ('with font size' fontSize=NUMBER)? globalStyle?;
 textInput       :   'text input' ('that contains place holder' textValue=STRING)? ('with font size' fontSize=NUMBER)? globalStyle?;
 button          :   'button' ('that call' functionName=STRING)? ('contains value' textValue=STRING)?  globalStyle?;
 checkBox        :   'checkboxgroup' ('that call' functionName=STRING)? ('and contains option' option=STRING)? 'with' ('gap' gapanswer=SIZE)? globalStyle?;
 globalStyle     :   ',' ('aligned' textAlign=ALIGN)? ;
 quizTitleBinding:   'binded to quiz title';
+
+questions       :   'the questions';
 
 /*****************
  ** Lexer rules **

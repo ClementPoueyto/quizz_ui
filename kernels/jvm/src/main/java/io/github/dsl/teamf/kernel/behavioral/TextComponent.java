@@ -3,7 +3,7 @@ package io.github.dsl.teamf.kernel.behavioral;
 import io.github.dsl.teamf.kernel.generator.Visitable;
 import io.github.dsl.teamf.kernel.generator.Visitor;
 
-public class TextComponent extends UIComponent  {
+public class TextComponent extends UIComponent {
     private String value;
     private int fontSize;
 
@@ -34,13 +34,17 @@ public class TextComponent extends UIComponent  {
         this.value = "{quiz.title}";
     }
 
+    public void bindToQuestionStatement() {
+        this.value = "{question.statement}";
+    }
+
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
 
-    public String getTextStyle(){
-        return String.format(" fontSize=\'%s\' ",this.fontSize);
+    public String getTextStyle() {
+        return String.format(" fontSize=\'%s\' ", this.fontSize);
 
     }
 }

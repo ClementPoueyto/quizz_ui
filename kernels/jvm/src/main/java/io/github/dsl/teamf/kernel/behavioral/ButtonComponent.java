@@ -1,10 +1,9 @@
 package io.github.dsl.teamf.kernel.behavioral;
 
-import io.github.dsl.teamf.kernel.generator.Visitable;
 import io.github.dsl.teamf.kernel.generator.Visitor;
 import io.github.dsl.teamf.kernel.structural.Size;
 
-public class ButtonComponent extends UIComponent  {
+public class ButtonComponent extends UIComponent {
     private String functionName;
     private String variableName;
 

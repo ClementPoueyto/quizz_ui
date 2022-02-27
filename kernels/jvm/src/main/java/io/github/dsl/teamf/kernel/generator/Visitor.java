@@ -29,6 +29,8 @@ public abstract class Visitor<T> {
 
 	public abstract void visit(TextInputComponent textInputComponent);
 
+	public abstract void visit(RadioButtonComponent radioButtonComponent);
+
 	/***********************
 	 ** Helper mechanisms **
 	 ***********************/
