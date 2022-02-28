@@ -5,10 +5,10 @@
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] 
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ external-antlr ---
-[INFO] Deleting C:\Users\pouey\Documents\cours\SI5\DSL\labs\quizz_ui\antlr\target
+[INFO] Deleting C:\Users\sylva\Desktop\SI5\DSL\quizz_ui\antlr\target
 [INFO] 
 [INFO] --- antlr4-maven-plugin:4.7:antlr4 (antlr) @ external-antlr ---
-[INFO] ANTLR 4: Processing source directory C:\Users\pouey\Documents\cours\SI5\DSL\labs\quizz_ui\antlr\src\main\antlr4
+[INFO] ANTLR 4: Processing source directory C:\Users\sylva\Desktop\SI5\DSL\quizz_ui\antlr\src\main\antlr4
 [INFO] Processing grammar: io\github\dsl\teamf\antlr\grammar\Quizz.g4
 [INFO] 
 [INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ external-antlr ---
@@ -17,23 +17,495 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ external-antlr ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 8 source files to C:\Users\pouey\Documents\cours\SI5\DSL\labs\quizz_ui\antlr\target\classes
-[INFO] 
-[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ external-antlr ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] skip non existing resourceDirectory C:\Users\pouey\Documents\cours\SI5\DSL\labs\quizz_ui\antlr\src\test\resources
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.6.1:testCompile (default-testCompile) @ external-antlr ---
-[INFO] No sources to compile
-[INFO] 
-[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ external-antlr ---
-[INFO] No tests to run.
-[INFO] 
-[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ external-antlr ---
-[INFO] Building jar: C:\Users\pouey\Documents\cours\SI5\DSL\labs\quizz_ui\antlr\target\external-antlr-1.0-SNAPSHOT.jar
+[INFO] Compiling 8 source files to C:\Users\sylva\Desktop\SI5\DSL\quizz_ui\antlr\target\classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[10,51] package io.github.dsl.teamf.kernel.structural.quizz does not exist
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[35,13] cannot find symbol
+  symbol:   class Grid
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[36,18] cannot find symbol
+  symbol:   class Layout
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[37,25] cannot find symbol
+  symbol:   class Zone
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[38,13] cannot find symbol
+  symbol:   class Question
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[39,13] cannot find symbol
+  symbol:   class SingleAnswer
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[40,13] cannot find symbol
+  symbol:   class MultipleAnswer
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[41,13] cannot find symbol
+  symbol:   class OpenAnswer
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[42,13] cannot find symbol
+  symbol:   class PictureStatement
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[43,13] cannot find symbol
+  symbol:   class TextStatement
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[44,13] cannot find symbol
+  symbol:   class QuizInfo
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[47,13] cannot find symbol
+  symbol:   class ProgressBar
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[49,13] cannot find symbol
+  symbol:   class Zone
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[50,13] cannot find symbol
+  symbol:   class Border
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[52,18] cannot find symbol
+  symbol:   class QuizElement
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[53,18] cannot find symbol
+  symbol:   class UiComponent
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[58,13] cannot find symbol
+  symbol:   class ClockComponent
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[60,13] cannot find symbol
+  symbol:   class MeterComponent
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[62,13] cannot find symbol
+  symbol:   class QuizElement
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[63,13] cannot find symbol
+  symbol:   class Layout
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[64,18] cannot find symbol
+  symbol:   class Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[65,18] cannot find symbol
+  symbol:   class Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[67,23] cannot find symbol
+  symbol:   class Zone
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[9,1] package io.github.dsl.teamf.kernel.structural.quizz does not exist
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[11,1] package io.github.dsl.teamf.kernel.structural.ui does not exist
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[92,20] cannot find symbol
+  symbol:   class Grid
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[99,28] cannot find symbol
+  symbol:   class Layout
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[118,31] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[121,38] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[130,35] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[153,28] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[158,9] cannot find symbol
+  symbol:   class ScreenSize
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[158,32] cannot find symbol
+  symbol:   variable ScreenSize
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[159,9] cannot find symbol
+  symbol:   class ScreenCondition
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[159,47] cannot find symbol
+  symbol:   class ScreenCondition
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[168,9] cannot find symbol
+  symbol:   class Zone
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[168,25] cannot find symbol
+  symbol:   class Zone
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[179,32] cannot find symbol
+  symbol:   variable TextAlign
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[183,30] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[189,22] cannot find symbol
+  symbol:   class Border
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[197,28] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[219,33] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[224,9] cannot find symbol
+  symbol:   class Page
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[224,25] cannot find symbol
+  symbol:   class Page
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[226,15] cannot find symbol
+  symbol:   variable showAll
+  location: variable ctx of type io.github.dsl.teamf.antlr.grammar.QuizzParser.PageContext
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[236,19] cannot find symbol
+  symbol:   class Question
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[242,29] cannot find symbol
+  symbol:   class QuizInfo
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[279,40] cannot find symbol
+  symbol:   variable TextAlign
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[281,31] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[289,26] cannot find symbol
+  symbol:   class SingleAnswer
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[298,28] cannot find symbol
+  symbol:   class MultipleAnswer
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[315,39] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[318,37] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[327,38] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[335,9] cannot find symbol
+  symbol:   class ClockComponent
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[335,36] cannot find symbol
+  symbol:   class ClockComponent
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[336,23] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[338,32] cannot find symbol
+  symbol:   variable TextAlign
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[341,37] cannot find symbol
+  symbol:   variable ClockDirection
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[344,37] cannot find symbol
+  symbol:   variable ClockDirection
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[347,27] cannot find symbol
+  symbol:   variable ClockType
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[353,61] cannot find symbol
+  symbol:   variable ClockDirection
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[360,9] cannot find symbol
+  symbol:   class FontStyle
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[360,29] cannot find symbol
+  symbol:   class FontStyle
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[368,16] no suitable constructor found for Theme(no arguments)
+    constructor io.github.dsl.teamf.kernel.behavioral.Theme.Theme(java.lang.String) is not applicable
+      (actual and formal argument lists differ in length)
+    constructor io.github.dsl.teamf.kernel.behavioral.Theme.Theme(java.lang.String,java.lang.String,java.lang.String,java.lang.String) is not applicable
+      (actual and formal argument lists differ in length)
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[383,26] cannot find symbol
+  symbol:   class ProgressBar
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[392,30] cannot find symbol
+  symbol:   class MeterComponent
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[403,36] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[406,36] cannot find symbol
+  symbol:   variable MeterType
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[409,41] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[413,28] cannot find symbol
+  symbol:   class TextStatement
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[423,30] cannot find symbol
+  symbol:   class PictureStatement
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[431,9] cannot find symbol
+  symbol:   class PictureComponent
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[431,38] cannot find symbol
+  symbol:   class PictureComponent
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[433,27] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[434,26] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[445,45] cannot find symbol
+  symbol:   variable TextAlign
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[450,31] cannot find symbol
+  symbol:   method setPlaceholder(java.lang.String)
+  location: variable textInputComponent of type io.github.dsl.teamf.kernel.behavioral.TextInputComponent
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[453,36] cannot find symbol
+  symbol:   variable Size
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[460,26] cannot find symbol
+  symbol:   class OpenAnswer
+  location: class io.github.dsl.teamf.antlr.ModelBuilder
+[INFO] 80 errors 
+[INFO] -------------------------------------------------------------
 [INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
+[INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.321 s
-[INFO] Finished at: 2022-02-28T11:56:48+01:00
+[INFO] Total time:  3.191 s
+[INFO] Finished at: 2022-02-28T19:54:25+01:00
 [INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.6.1:compile (default-compile) on project external-antlr: Compilation failure: Compilation failure: 
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[10,51] package io.github.dsl.teamf.kernel.structural.quizz does not exist
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[35,13] cannot find symbol
+[ERROR]   symbol:   class Grid
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[36,18] cannot find symbol
+[ERROR]   symbol:   class Layout
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[37,25] cannot find symbol
+[ERROR]   symbol:   class Zone
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[38,13] cannot find symbol
+[ERROR]   symbol:   class Question
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[39,13] cannot find symbol
+[ERROR]   symbol:   class SingleAnswer
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[40,13] cannot find symbol
+[ERROR]   symbol:   class MultipleAnswer
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[41,13] cannot find symbol
+[ERROR]   symbol:   class OpenAnswer
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[42,13] cannot find symbol
+[ERROR]   symbol:   class PictureStatement
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[43,13] cannot find symbol
+[ERROR]   symbol:   class TextStatement
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[44,13] cannot find symbol
+[ERROR]   symbol:   class QuizInfo
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[47,13] cannot find symbol
+[ERROR]   symbol:   class ProgressBar
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[49,13] cannot find symbol
+[ERROR]   symbol:   class Zone
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[50,13] cannot find symbol
+[ERROR]   symbol:   class Border
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[52,18] cannot find symbol
+[ERROR]   symbol:   class QuizElement
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[53,18] cannot find symbol
+[ERROR]   symbol:   class UiComponent
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[58,13] cannot find symbol
+[ERROR]   symbol:   class ClockComponent
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[60,13] cannot find symbol
+[ERROR]   symbol:   class MeterComponent
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[62,13] cannot find symbol
+[ERROR]   symbol:   class QuizElement
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[63,13] cannot find symbol
+[ERROR]   symbol:   class Layout
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[64,18] cannot find symbol
+[ERROR]   symbol:   class Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[65,18] cannot find symbol
+[ERROR]   symbol:   class Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[67,23] cannot find symbol
+[ERROR]   symbol:   class Zone
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[9,1] package io.github.dsl.teamf.kernel.structural.quizz does not exist
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[11,1] package io.github.dsl.teamf.kernel.structural.ui does not exist
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[92,20] cannot find symbol
+[ERROR]   symbol:   class Grid
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[99,28] cannot find symbol
+[ERROR]   symbol:   class Layout
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[118,31] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[121,38] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[130,35] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[153,28] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[158,9] cannot find symbol
+[ERROR]   symbol:   class ScreenSize
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[158,32] cannot find symbol
+[ERROR]   symbol:   variable ScreenSize
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[159,9] cannot find symbol
+[ERROR]   symbol:   class ScreenCondition
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[159,47] cannot find symbol
+[ERROR]   symbol:   class ScreenCondition
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[168,9] cannot find symbol
+[ERROR]   symbol:   class Zone
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[168,25] cannot find symbol
+[ERROR]   symbol:   class Zone
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[179,32] cannot find symbol
+[ERROR]   symbol:   variable TextAlign
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[183,30] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[189,22] cannot find symbol
+[ERROR]   symbol:   class Border
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[197,28] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[219,33] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[224,9] cannot find symbol
+[ERROR]   symbol:   class Page
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[224,25] cannot find symbol
+[ERROR]   symbol:   class Page
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[226,15] cannot find symbol
+[ERROR]   symbol:   variable showAll
+[ERROR]   location: variable ctx of type io.github.dsl.teamf.antlr.grammar.QuizzParser.PageContext
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[236,19] cannot find symbol
+[ERROR]   symbol:   class Question
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[242,29] cannot find symbol
+[ERROR]   symbol:   class QuizInfo
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[279,40] cannot find symbol
+[ERROR]   symbol:   variable TextAlign
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[281,31] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[289,26] cannot find symbol
+[ERROR]   symbol:   class SingleAnswer
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[298,28] cannot find symbol
+[ERROR]   symbol:   class MultipleAnswer
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[315,39] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[318,37] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[327,38] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[335,9] cannot find symbol
+[ERROR]   symbol:   class ClockComponent
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[335,36] cannot find symbol
+[ERROR]   symbol:   class ClockComponent
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[336,23] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[338,32] cannot find symbol
+[ERROR]   symbol:   variable TextAlign
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[341,37] cannot find symbol
+[ERROR]   symbol:   variable ClockDirection
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[344,37] cannot find symbol
+[ERROR]   symbol:   variable ClockDirection
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[347,27] cannot find symbol
+[ERROR]   symbol:   variable ClockType
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[353,61] cannot find symbol
+[ERROR]   symbol:   variable ClockDirection
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[360,9] cannot find symbol
+[ERROR]   symbol:   class FontStyle
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[360,29] cannot find symbol
+[ERROR]   symbol:   class FontStyle
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[368,16] no suitable constructor found for Theme(no arguments)
+[ERROR]     constructor io.github.dsl.teamf.kernel.behavioral.Theme.Theme(java.lang.String) is not applicable
+[ERROR]       (actual and formal argument lists differ in length)
+[ERROR]     constructor io.github.dsl.teamf.kernel.behavioral.Theme.Theme(java.lang.String,java.lang.String,java.lang.String,java.lang.String) is not applicable
+[ERROR]       (actual and formal argument lists differ in length)
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[383,26] cannot find symbol
+[ERROR]   symbol:   class ProgressBar
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[392,30] cannot find symbol
+[ERROR]   symbol:   class MeterComponent
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[403,36] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[406,36] cannot find symbol
+[ERROR]   symbol:   variable MeterType
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[409,41] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[413,28] cannot find symbol
+[ERROR]   symbol:   class TextStatement
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[423,30] cannot find symbol
+[ERROR]   symbol:   class PictureStatement
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[431,9] cannot find symbol
+[ERROR]   symbol:   class PictureComponent
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[431,38] cannot find symbol
+[ERROR]   symbol:   class PictureComponent
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[433,27] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[434,26] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[445,45] cannot find symbol
+[ERROR]   symbol:   variable TextAlign
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[450,31] cannot find symbol
+[ERROR]   symbol:   method setPlaceholder(java.lang.String)
+[ERROR]   location: variable textInputComponent of type io.github.dsl.teamf.kernel.behavioral.TextInputComponent
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[453,36] cannot find symbol
+[ERROR]   symbol:   variable Size
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] /C:/Users/sylva/Desktop/SI5/DSL/quizz_ui/antlr/src/main/java/io/github/dsl/teamf/antlr/ModelBuilder.java:[460,26] cannot find symbol
+[ERROR]   symbol:   class OpenAnswer
+[ERROR]   location: class io.github.dsl.teamf.antlr.ModelBuilder
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

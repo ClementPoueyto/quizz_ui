@@ -5,6 +5,7 @@ application exampleOne
     background DARK-2
         rounding SMALL
       border with size SMALL, style DASHED, color DARK-3
+      contains questions
       statement with text with size MEDIUM,  align CENTER
       answer with single choice with size LARGE, color LIGHT-2 ,margin SMALL
 

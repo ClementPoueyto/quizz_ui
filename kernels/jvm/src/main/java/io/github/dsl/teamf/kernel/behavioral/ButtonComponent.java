@@ -11,10 +11,19 @@ public class ButtonComponent extends UiComponent{
     private Size margin;
     private Boolean primary=true;
     private String variableName;
+    private Align align;
 
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
+    }
+
+    public Align getAlign() {
+        return align;
+    }
+
+    public void setAlign(Align align) {
+        this.align = align;
     }
 
     public Size getSize() {

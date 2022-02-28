@@ -17,6 +17,8 @@ zone: header
 zone: middle
     alignment CENTER
     background DARK-2
+            contains questions navigable forward with size SMALL, margin AUTO, align START, label 'next'
+            and backward with size SMALL, margin AUTO , align END, label 'previous'
             statement with picture with height SMALL, width XSMALL
             answer with multiple choice with gap LARGE
 
@@ -28,7 +30,7 @@ layout  {
     arrangement{
               MEDIUM LARGE,
       XSMALL  left header,
-      MEDIUM  left middle,
+      LARGE  left middle,
     }
 }
 
@@ -38,7 +40,7 @@ layout  {
     {           
             MEDIUM,
        SMALL header,
-       MEDIUM middle,
+       LARGE middle,
     }
  }
 

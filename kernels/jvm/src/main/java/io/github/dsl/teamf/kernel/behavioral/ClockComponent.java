@@ -7,7 +7,7 @@ public class ClockComponent extends UiComponent{
 
     private Size size;
 
-    private TextAlign selfAlign = TextAlign.center;
+    private Align selfAlign = Align.center;
 
     private ClockDirection clockDirection = ClockDirection.forward;
 
@@ -32,11 +32,11 @@ public class ClockComponent extends UiComponent{
         this.size = size;
     }
 
-    public TextAlign getSelfAlign() {
+    public Align getSelfAlign() {
         return selfAlign;
     }
 
-    public void setSelfAlign(TextAlign selfAlign) {
+    public void setSelfAlign(Align selfAlign) {
         this.selfAlign = selfAlign;
     }
 

@@ -11,6 +11,7 @@ zone: header
     description with size LARGE
 
 zone: middle
+    contains questions
     statement with text with size MEDIUM,  align CENTER
     answer with single choice with size SMALL, margin SMALL
 

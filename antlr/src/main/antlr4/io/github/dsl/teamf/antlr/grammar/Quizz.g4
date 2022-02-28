@@ -29,8 +29,10 @@ arrangement     :   'arrangement' '{' columns? line+ '}';
 
 quizz_element   : page | quiz_info | timer | progressbar;
     quiz_info   : ('title' 'with' title=text) ('description' 'with' description=text)?;
-    page        : (showAll='show all questions')? question;
+    page        : 'contains questions' (navigable)? question;
     question    : statement+ 'answer' 'with' answer+;
+    navigable   :   'navigable forward' ('with' button) (backward)?;
+    backward        :   'and backward with' button;
 
     statement   : 'statement' 'with' (text_statement|picture_statement);
     answer      : single_answer | multiple_answer | open_answer;
@@ -42,10 +44,11 @@ quizz_element   : page | quiz_info | timer | progressbar;
     timer       : 'timer' 'with' clock;
     progressbar : 'progress' 'with' meter;
 
+
 uiElement : button | text | clock | checkboxgroup | meter | textInput | picture;
     checkboxgroup : ('gap' gapanswer=SIZE)?;
     text :  'size' size=SIZE  (',' 'align' textAlign=ALIGN)? (',' 'color' color=(COLOR|HEX|SHADE))?;
-    button : 'size' size=SIZE (',' 'color' color=(COLOR|HEX|SHADE))?  (',' 'margin' margin=SIZE)?;
+    button : 'size' size=SIZE (',' 'color' color=(COLOR|HEX|SHADE))?  (',' 'margin' margin=SIZE)? (',''align' buttonAlign=ALIGN)? (',''label' labelValue=STRING)? (',''function 'function=STRING)?;
     clock :  (chrono=('chrono'|'countdown'))? (',' 'size' size=SIZE)? (',' 'align' textAlign=ALIGN)? (',' 'start' startTime=TIME)? (',' 'type' type=('DIGITAL'|'ANALOG'))?;
     meter :  'size' size=SIZE (',' 'type' type=('CIRCLE'|'BAR'|'PIE'|'SEMICIRCLE'))? (',' 'thickness' thickness=SIZE)? (',' 'color' color=(COLOR|HEX|SHADE))? (',' 'background' background=(COLOR|HEX|SHADE))?;
     textInput : 'size' size=SIZE (',' 'align' textAlign=ALIGN)? (',' 'placeholder' placeholder=STRING)?;

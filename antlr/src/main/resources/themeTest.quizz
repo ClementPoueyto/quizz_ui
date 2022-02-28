@@ -17,7 +17,7 @@ zone: header
 zone: middle
     alignment CENTER
     background DARK-2
-    element :
+    element : 
             statement : text : size MEDIUM  align CENTER
             answer : multiple gap LARGE
 

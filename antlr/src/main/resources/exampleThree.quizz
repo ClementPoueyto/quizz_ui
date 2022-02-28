@@ -1,4 +1,4 @@
-application gridCreation
+application gridCreations
 
 theme {
     primary color : #50148C
@@ -17,7 +17,8 @@ zone: header
 
 zone: middle
     rounding SMALL
-            show all questions
+            contains questions navigable forward with size SMALL, margin AUTO, align START, label 'next'
+            and backward with size SMALL, margin AUTO , align END, label 'previous'
             statement with text with size MEDIUM,  align CENTER
             answer with multiple choice with gap  MEDIUM
 
