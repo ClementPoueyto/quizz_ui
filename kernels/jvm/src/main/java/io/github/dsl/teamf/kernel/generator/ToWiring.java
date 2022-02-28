@@ -320,17 +320,8 @@ public class ToWiring extends Visitor<StringBuffer> {
 				w("\t\t\t\t\t</>)\n");			}
 			w("\t}\n");
 		}
-		if (context.get("pass") == PASS.FUNCTION) {
-			if(page.getNavigation() != null){
-				page.getNavigation().accept(this);
-			}
-		}
 		if (context.get("pass") == PASS.JSX) {
 			w("\t\t\t\t\t\t\t{this.renderQuestion()}\n");
-			if(page.getNavigation() != null) {
-				page.getNavigation().accept(this);
-			}
-
 		}
 	}
 	@Override
@@ -376,8 +367,8 @@ public class ToWiring extends Visitor<StringBuffer> {
 				w("}\n");
 			}
 		}
-		if(context.get("pass") == PASS.JSX || context.get("pass") == PASS.FUNCTIONJSX){
-			w("\t\t<Box  background=\"unset\" flex={true} direction=\"row\" basis=\"auto\"  margin=\"small\" >\n");
+		if(context.get("pass") == PASS.JSX){
+			w("\t\t<Box  background=\"unset\" flex={true} fill={true} direction=\"row\" basis=\"auto\" >\n");
 			if(navigation.getPrecedent() != null){
 				w("\t\t\t{this.state.indexQuestion!==0 && \n");
 				navigation.getPrecedent().setFunctionName("this.previousQuestion()");

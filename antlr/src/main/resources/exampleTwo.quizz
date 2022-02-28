@@ -15,6 +15,10 @@ zone: middle
     statement with text with size MEDIUM,  align CENTER
     answer with single choice with size SMALL, margin SMALL
 
+zone: nav
+    navigable forward with size SMALL, margin AUTO, align START, label 'next'
+                and backward with size SMALL, margin AUTO , align END, label 'previous'
+
 zone: left
     progress with size SMALL, type CIRCLE, thickness MEDIUM
 
@@ -22,22 +26,22 @@ zone: leftbottom
       timer with chrono, size LARGE, type ANALOG
 
 layout {
-    gap SMALL
     arrangement{
 
             MEDIUM AUTO,
     SMALL  left header,
-    LARGE  leftbottom middle,
+    MEDIUM  leftbottom middle,
+    XSMALL      nav  nav,
     }
 }
 
 layout {
     when screen is TABLET
-    gap SMALL
     arrangement{
                MEDIUM AUTO,
         MEDIUM left header,
-        LARGE left middle,
+        MEDIUM left middle,
+        XSMALL   nav  nav,
     }
 }
 
@@ -47,7 +51,8 @@ layout {
     {
                AUTO,
         SMALL header,
-        LARGE  middle,
+        MEDIUM  middle,
+        XSMALL     nav,
     }
 }
 

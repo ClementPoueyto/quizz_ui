@@ -48,6 +48,7 @@ public class ModelBuilder extends QuizzBaseListener {
 
     private Zone currentZone;
     private Border border;
+    private Navigation navigation;
 
     private List<QuizElement> quizElements = new ArrayList<>();
     private List<UiComponent> componentList=new ArrayList<>();
@@ -64,7 +65,8 @@ public class ModelBuilder extends QuizzBaseListener {
     private List<Size> currentRows = new ArrayList<>();
     private List<Size> currentColumn = new ArrayList<>();
     private int countLineArrangement;
-    private List<List<Zone>> arrangement =null; 
+    private List<List<Zone>> arrangement =null;
+    private Page page = new Page();
 
     /**************************
      ** Listening mechanisms **
@@ -221,8 +223,10 @@ public class ModelBuilder extends QuizzBaseListener {
 
     @Override
     public void enterPage(QuizzParser.PageContext ctx) {
-        Page page = new Page();
+        page = new Page();
         this.currentQuizElement = page;
+        if(navigation != null)
+            page.setNavigation(navigation);
         quizElements.add(page);
     }
 
@@ -235,8 +239,11 @@ public class ModelBuilder extends QuizzBaseListener {
         this.componentList.clear();
     }
     @Override public void exitNavigable(QuizzParser.NavigableContext ctx) {
-        Navigation navigation = new Navigation();
-        ((Page)this.currentQuizElement).setNavigation(navigation);
+        navigation = new Navigation();
+        this.currentQuizElement = navigation;
+        if(page != null)
+            page.setNavigation(navigation);
+
         if(ctx.button() != null){
             navigation.setSuivant((ButtonComponent) this.componentList.get(0));
         }

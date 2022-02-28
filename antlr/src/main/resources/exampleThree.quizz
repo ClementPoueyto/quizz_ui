@@ -1,4 +1,4 @@
-application gridCreations
+application gridCreation
 
 theme {
     primary color : #50148C
@@ -17,28 +17,35 @@ zone: header
 
 zone: middle
     rounding SMALL
-            contains questions navigable forward with size SMALL, margin AUTO, align START, label 'next'
-            and backward with size SMALL, margin AUTO , align END, label 'previous'
+            contains questions
             statement with text with size MEDIUM,  align CENTER
             answer with multiple choice with gap  MEDIUM
 
 zone: clock
 
-    background LIGHT-4
+    background WHITE
     rounding SMALL
         timer with countdown, size LARGE, type ANALOG
+
+zone: nav
+rounding SMALL
+    navigable forward with size SMALL, margin AUTO, align START, label 'next'
+                and backward with size SMALL, margin AUTO , align END, label 'previous'
 
 zone: clockz
     background LIGHT-4
         rounding SMALL
         timer with countdown, size LARGE, type DIGITAL
 
+
+
 layout {
     gap LARGE
     arrangement{
             MEDIUM LARGE,
     SMALL  clock header,
-    LARGE   clock middle,
+    MEDIUM   middle middle,
+    SMALL   nav nav,
     }
 }
 
@@ -47,7 +54,8 @@ layout {
     gap SMALL
     arrangement{
             clock header,
-    LARGE   clock middle,
+    MEDIUM   middle middle,
+    SMALL     nav nav,
     }
 }
 
@@ -59,7 +67,8 @@ layout {
              FULL,
     XSMALL  header ,
     XSMALL clockz,
-    LARGE  middle,
+    MEDIUM  middle,
+    SMALL nav,
     }
 }
 
