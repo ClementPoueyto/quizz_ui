@@ -31,8 +31,10 @@ checkBox        :   'checkboxgroup' ('that call' functionName=STRING)? ('and con
 globalStyle     :   ',' ('aligned' textAlign=ALIGN)? ;
 quizTitleBinding:   'binded to quiz title';
 
-questions       :   'the questions';
-
+questions       :   'the questions:' navigable?;
+navigable       :   'questions are navigable forward' (label)? (backward)?;
+backward        :   'and backward' (label)?;
+label           :   'with labels' value=STRING;
 /*****************
  ** Lexer rules **
  *****************/

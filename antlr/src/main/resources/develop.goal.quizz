@@ -1,6 +1,7 @@
-# other layouts
+# other layout
 
-questionList is box that contains the questions
+questionList is flex box that contains the questions:
+
 send is box that contains text with value 'send' with font size 15 , aligned CENTER
 
 middleLayout is grid with SMALL gap wich follows disposition
@@ -13,7 +14,7 @@ headerLayout is box that contains
 # root layouts
 
 rootLayout1 is grid with LARGE gap wich follows disposition
-    SMALL headerLayout
+    XXSMALL headerLayout
     AUTO middleLayout
 
 # theme

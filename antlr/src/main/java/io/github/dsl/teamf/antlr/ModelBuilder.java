@@ -230,4 +230,22 @@ public class ModelBuilder extends QuizzBaseListener {
     public void enterQuestions(QuizzParser.QuestionsContext ctx) {
         box.setBindedToQuestions(true);
     }
+
+    @Override
+    public void enterNavigable(QuizzParser.NavigableContext ctx) {
+        Navigation navigation= new Navigation();
+        if(ctx.label() != null)
+            navigation.setNextLabel(ctx.label().getText());
+        if(ctx.backward() != null){
+            navigation.setOnlyNext(false);}
+        else{
+            navigation.setOnlyNext(true);}
+        box.setNavigation(navigation);
+        box.setBindedToQuestions(true);
+    }
+    @Override
+    public void enterBackward(QuizzParser.BackwardContext ctx) {
+        if(ctx.label() != null)
+            box.getNavigation().setPreviousLabel(ctx.label().getText());
+    }
 }

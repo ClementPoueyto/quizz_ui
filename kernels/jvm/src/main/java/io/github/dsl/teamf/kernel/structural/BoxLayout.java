@@ -1,6 +1,7 @@
 package io.github.dsl.teamf.kernel.structural;
 
 import io.github.dsl.teamf.kernel.behavioral.Direction;
+import io.github.dsl.teamf.kernel.behavioral.Navigation;
 import io.github.dsl.teamf.kernel.behavioral.UIComponent;
 import io.github.dsl.teamf.kernel.generator.Visitable;
 import io.github.dsl.teamf.kernel.generator.Visitor;
@@ -13,9 +14,26 @@ public class BoxLayout extends Layout implements Visitable {
     private Direction direction = Direction.COLUMN;
     private String background = "unset";
     private boolean bindedToQuestions = false;
-
+    private Navigation navigation;
+    private  String basis="auto";
     public BoxLayout(String name) {
         super(name);
+    }
+
+    public String getBasis() {
+        return basis;
+    }
+
+    public void setBasis(String basis) {
+        this.basis = basis;
+    }
+
+    public Navigation getNavigation() {
+        return navigation;
+    }
+
+    public void setNavigation(Navigation navigation) {
+        this.navigation = navigation;
     }
 
     public boolean isBindedToQuestions() {

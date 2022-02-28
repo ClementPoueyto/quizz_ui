@@ -31,6 +31,8 @@ public abstract class Visitor<T> {
 
 	public abstract void visit(RadioButtonComponent radioButtonComponent);
 
+	public abstract void visit(Navigation navigation);
+
 	/***********************
 	 ** Helper mechanisms **
 	 ***********************/

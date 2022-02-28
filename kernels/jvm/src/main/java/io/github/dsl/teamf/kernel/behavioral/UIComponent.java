@@ -45,7 +45,7 @@ public class UIComponent implements Visitable {
 
     public String getGeneralStyle() {
         return String.format(" primary={%s} size=\'%s\'  margin=\'%s\'  " +
-                "color=\'%s\' alignSelf=\'%s\' ", this.primary, this.size.value(), this.margin, this.color,
+                "color=\'%s\' alignSelf=\'%s\' ", this.primary, this.size.value(), this.margin.value(), this.color,
                 this.aligment.value());
     }
 

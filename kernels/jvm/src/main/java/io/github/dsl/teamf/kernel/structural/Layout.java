@@ -7,9 +7,17 @@ import io.github.dsl.teamf.kernel.generator.Visitor;
 public class Layout implements NamedElement, Visitable {
     private String name;
     private String gridArea;
-
+    private Size margin=Size.SMALL;
     public Layout(String name) {
         this.name = name;
+    }
+
+    public Size getMargin() {
+        return margin;
+    }
+
+    public void setMargin(Size margin) {
+        this.margin = margin;
     }
 
     @Override
