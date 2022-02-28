@@ -175,16 +175,8 @@ public class ToWiring extends Visitor<StringBuffer> {
 				}
 			w("\t\t</Grid>\n");
 		}
-		if(context.get("pass") == PASS.FUNCTION) {
-			for (int i = 0; i < grid.getLayouts().length; i++)
-				for (int j = 0; j < grid.getLayouts()[i].length; j++) {
-					Layout layout = grid.getLayouts()[i][j];
-					layout.setGridArea(grid.getName() + i + j);
-					w("\t\t\t");
-					layout.accept(this);
-				}
-		}
-		if(context.get("pass") == PASS.STATE) {
+		if(context.get("pass") == PASS.FUNCTION ||
+				context.get("pass") == PASS.STATE || context.get("pass") == PASS.VARIABLE) {
 			for (int i = 0; i < grid.getLayouts().length; i++)
 				for (int j = 0; j < grid.getLayouts()[i].length; j++) {
 					Layout layout = grid.getLayouts()[i][j];
@@ -225,14 +217,8 @@ public class ToWiring extends Visitor<StringBuffer> {
 			}
 			w("\t\t</Box>\n");
 		}
-		if(context.get("pass") == PASS.FUNCTION) {
-			box.getContents().forEach(uiComponent -> {
-				uiComponent.accept(this);
-			});
-			if (box.getNavigation() != null)
-				box.getNavigation().accept(this);
-		}
-		if(context.get("pass") == PASS.STATE) {
+		if(context.get("pass") == PASS.STATE || context.get("pass") == PASS.FUNCTION
+		|| context.get("pass") == PASS.VARIABLE) {
 			box.getContents().forEach(uiComponent -> {
 				uiComponent.accept(this);
 			});
@@ -264,9 +250,9 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(ButtonComponent buttonComponent) {
 		if(context.get("pass") == PASS.FUNCTION)
-			w(String.format("%s(){}", buttonComponent.getFunctionName()));
+			w(String.format("%s(e){}", buttonComponent.getFunctionName()));
 		if(context.get("pass") == PASS.JSX || context.get("pass") == PASS.FUNCTION_WITH_JSX) {
-			w(String.format("<Button %s onClick={()=>this.%s()}" +
+			w(String.format("<Button %s onClick={(e)=>this.%s(e)}" +
 							" label=\'%s\' />\n", buttonComponent.getGeneralStyle(), buttonComponent.getFunctionName(),
 					buttonComponent.getVariableName()));
 		}
@@ -316,7 +302,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w("index: 0,\n");
 		}
 		if(context.get("pass") == PASS.FUNCTION) {
-			w("nextQuestion(){\n");
+			w("nextQuestion(e){\n");
 			w("\tif(this.state.index !== this.state.quiz.questions.length-1){\n");
 			w("\t\tthis.setState(prevState => {\n");
 			w("\t\t\treturn {index: prevState.index + 1}\n");
@@ -324,7 +310,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w("\t}\n");
 			w("}\n");
 			if(!navigation.isOnlyNext()){
-				w("previousQuestion(){\n");
+				w("previousQuestion(e){\n");
 				w("\tif(this.state.index !== 0){ \n");
 				w("\t\tthis.setState(prevState => {\n");
 				w("\t\t\treturn {index: prevState.index - 1}\n");

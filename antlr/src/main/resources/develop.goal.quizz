@@ -1,4 +1,4 @@
-# other layout
+# other layouts
 
 questionList is flex box that contains the questions:
 questions are navigable forward with label 'next' and backward with label 'previous'

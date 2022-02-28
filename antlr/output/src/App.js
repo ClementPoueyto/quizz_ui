@@ -51,21 +51,25 @@ case "open":
 return this.renderOpenAnswerQuestion(question);
 }
 }
-									nextQuestion(){
+									nextQuestion(e){
 	if(this.state.index !== this.state.quiz.questions.length-1){
+		e.currentTarget.style.visibility = "visible"
 		this.setState(prevState => {
 			return {index: prevState.index + 1}
 		})
 	}
+	else{e.currentTarget.style.visibility = "hidden"}
 }
-previousQuestion(){
+previousQuestion(e){
 	if(this.state.index !== 0){ 
+		e.currentTarget.style.visibility = "visible"
 		this.setState(prevState => {
-			return {index: prevState.index + 1}
+			return {index: prevState.index - 1}
 		})
 	}
+	else{e.currentTarget.style.visibility = "hidden"}
 }
-			
+															
 render() {
 	console.log("rootLayout1");
 	console.log("Theme [font=SCRIPT, name=globalTheme, primaryColor=BLUE, secondaryColor=ORANGE]");
@@ -90,8 +94,8 @@ render() {
 					<Box  gridArea="middleLayout00"  background="unset" flex={true} direction="column" basis="auto"  margin="small" >
 			{this.renderQuestion(this.state.quiz.questions[this.state.index])
 }		<Box  background="unset" flex={true} direction="row" basis="auto"  margin="small" >
-			<Button  primary={true} size='medium'  margin='auto'  color='unset' alignSelf='start'  onClick={()=>this.previousQuestion()} label='previous' />
-			<Button  primary={true} size='medium'  margin='auto'  color='unset' alignSelf='end'  onClick={()=>this.nextQuestion()} label='next' />
+			<Button  primary={true} size='medium'  margin='auto'  color='unset' alignSelf='start'  onClick={(e)=>this.previousQuestion(e)} label='previous' />
+			<Button  primary={true} size='medium'  margin='auto'  color='unset' alignSelf='end'  onClick={(e)=>this.nextQuestion(e)} label='next' />
 		</Box>
 		</Box>
 					<Box  gridArea="middleLayout10"  background="unset" flex={false} direction="column" basis="auto"  margin="small" >
