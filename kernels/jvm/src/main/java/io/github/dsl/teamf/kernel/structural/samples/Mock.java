@@ -116,7 +116,7 @@ public class Mock {
 
 		TextComponent textStatement = new TextComponent();
 		textStatement.setSize(Size.medium);
-		statement.setStatement(textStatement);
+		statement.setTextStatement(textStatement);
 
 	/*	PictureComponent picture=new PictureComponent();
 		picture.setPath("./Hello");

@@ -1,8 +1,6 @@
 package io.github.dsl.teamf.kernel.generator;
 
-import java.io.Console;
 import java.util.List;
-import java.util.Locale;
 
 import io.github.dsl.teamf.kernel.App;
 import io.github.dsl.teamf.kernel.behavioral.*;
@@ -94,12 +92,6 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w("\t\t\t\t\t{\n");
 			w("\t\t\t\t\t\tc_areas =  areas[size] ? areas[size] : areas[\"default\"],\n");
 			w(String.format("\t\t\t\t\t\tc_areas.find((row) => row.indexOf(\"%s\") >=0) ?\n",zone.getName()));
-			
-	/*		if(zone.getQuizElement() instanceof Question)
-			{
-				if(((Question) zone.getQuizElement()).getStatement() instanceof PictureStatement)
-					context.put("pass",PASS.EIGHT);
-			}*/
 
 			w(String.format("\t\t\t\t\t\t<Box overflow='auto' gridArea=\'%s\' align=\'%s\'  ", zone.getName(),zone.getAlignement()));
 			if(zone.getColor()!=null){
@@ -112,13 +104,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 				zone.getBorder().accept(this);
 			}
 			w(">\n");
-			
-		/*	w(String.format("\t\t\t\t\t\t<Box "));
-			if(context.get("pass")==PASS.EIGHT)
-				zone.getQuizElement().accept(this);
-			context.put("pass",PASS.EIGHT);
-			w(String.format("gridArea=\'%s\' align=\'%s\' background=\'%s\'>\n", zone.getName(),zone.getAlignement(), zone.getColor()));
-		*/
+
 			if(zone.getQuizElement()!=null){
 				zone.getQuizElement().accept(this);
 			}
@@ -356,15 +342,11 @@ public class ToWiring extends Visitor<StringBuffer> {
 
 	public void visit(TextStatement textStatement) {
 		if(context.get("pass")==PASS.EIGHT || context.get("pass") == PASS.TWO)
-		textStatement.getStatement().accept(this);
+		textStatement.getTextStatement().accept(this);
 	}
 
 	@Override
 	public void visit(PictureStatement pictureStatement){
-		/*if(context.get("pass")==PASS.ONE){
-			w(String.format("Image, "));
-		}*/
-
 			pictureStatement.getPicture().accept(this);
 
 	}

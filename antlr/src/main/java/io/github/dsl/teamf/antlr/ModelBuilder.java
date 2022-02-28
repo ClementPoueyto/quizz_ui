@@ -415,7 +415,7 @@ public class ModelBuilder extends QuizzBaseListener {
     }
 
     @Override public void exitText_statement(QuizzParser.Text_statementContext ctx) {
-        textStatement.setStatement(textComponent);
+        textStatement.setTextStatement(textComponent);
         ques.setStatement(textStatement);
     }
 
