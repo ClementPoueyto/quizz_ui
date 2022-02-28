@@ -267,7 +267,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w(String.format("%s(){}", buttonComponent.getFunctionName()));
 		if(context.get("pass") == PASS.JSX || context.get("pass") == PASS.FUNCTION_WITH_JSX) {
 			w(String.format("<Button %s onClick={()=>this.%s()}" +
-							" label='%s' />\n", buttonComponent.getGeneralStyle(), buttonComponent.getFunctionName(),
+							" label=\'%s\' />\n", buttonComponent.getGeneralStyle(), buttonComponent.getFunctionName(),
 					buttonComponent.getVariableName()));
 		}
 	}
@@ -327,7 +327,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 				w("previousQuestion(){\n");
 				w("\tif(this.state.index !== 0){ \n");
 				w("\t\tthis.setState(prevState => {\n");
-				w("\t\t\treturn {index: prevState.index + 1}\n");
+				w("\t\t\treturn {index: prevState.index - 1}\n");
 				w("\t\t})\n");
 				w("\t}\n");
 				w("}\n");
@@ -339,12 +339,6 @@ public class ToWiring extends Visitor<StringBuffer> {
 			boxLayout.setFlex(true);
 			boxLayout.setDirection(Direction.ROW);
 			List<UIComponent> components = new ArrayList<>();
-
-			ButtonComponent buttonNext = new ButtonComponent();
-			components.add(buttonNext);
-			buttonNext.setFunctionName("nextQuestion");
-			buttonNext.setVariableName(navigation.getNextLabel());
-			buttonNext.setAligment(Alignment.END);
 			if(!navigation.isOnlyNext()) {
 				ButtonComponent buttonPrevious = new ButtonComponent();
 				components.add(buttonPrevious);
@@ -352,6 +346,12 @@ public class ToWiring extends Visitor<StringBuffer> {
 				buttonPrevious.setVariableName(navigation.getPreviousLabel());
 				buttonPrevious.setAligment(Alignment.START);
 			}
+			ButtonComponent buttonNext = new ButtonComponent();
+			components.add(buttonNext);
+			buttonNext.setFunctionName("nextQuestion");
+			buttonNext.setVariableName(navigation.getNextLabel());
+			buttonNext.setAligment(Alignment.END);
+
 			boxLayout.setContents(components);
 			boxLayout.accept(this);
 		}

@@ -7,7 +7,8 @@ export default class App extends Component {
 		super();
 		this.state = { 
 			quiz : quiz,
-														};
+									index: 0,
+					};
 	}
 
 
@@ -50,7 +51,21 @@ case "open":
 return this.renderOpenAnswerQuestion(question);
 }
 }
-												
+									nextQuestion(){
+	if(this.state.index !== this.state.quiz.questions.length-1){
+		this.setState(prevState => {
+			return {index: prevState.index + 1}
+		})
+	}
+}
+previousQuestion(){
+	if(this.state.index !== 0){ 
+		this.setState(prevState => {
+			return {index: prevState.index + 1}
+		})
+	}
+}
+			
 render() {
 	console.log("rootLayout1");
 	console.log("Theme [font=SCRIPT, name=globalTheme, primaryColor=BLUE, secondaryColor=ORANGE]");
@@ -73,9 +88,11 @@ render() {
 		{ name: "middleLayout00", start: [0, 0], end: [0, 0] },		{ name: "middleLayout10", start: [0, 1], end: [0, 1] },]}
 		>
 					<Box  gridArea="middleLayout00"  background="unset" flex={true} direction="column" basis="auto"  margin="small" >
-			{ this.state.quiz.questions.map((question) =>
-				this.renderQuestion(question)
-			)}
+			{this.renderQuestion(this.state.quiz.questions[this.state.index])
+}		<Box  background="unset" flex={true} direction="row" basis="auto"  margin="small" >
+			<Button  primary={true} size='medium'  margin='auto'  color='unset' alignSelf='start'  onClick={()=>this.previousQuestion()} label='previous' />
+			<Button  primary={true} size='medium'  margin='auto'  color='unset' alignSelf='end'  onClick={()=>this.nextQuestion()} label='next' />
+		</Box>
 		</Box>
 					<Box  gridArea="middleLayout10"  background="unset" flex={false} direction="column" basis="auto"  margin="small" >
 			<Text primary={true} size='auto'  margin='auto'  color='unset' alignSelf='center'  fontSize='15' >send</Text>

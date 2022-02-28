@@ -34,7 +34,7 @@ quizTitleBinding:   'binded to quiz title';
 questions       :   'the questions:' navigable?;
 navigable       :   'questions are navigable forward' (label)? (backward)?;
 backward        :   'and backward' (label)?;
-label           :   'with labels' value=STRING;
+label           :   'with label' labelValue=STRING;
 /*****************
  ** Lexer rules **
  *****************/

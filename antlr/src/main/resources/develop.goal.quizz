@@ -1,6 +1,7 @@
 # other layout
 
 questionList is flex box that contains the questions:
+questions are navigable forward with label 'next' and backward with label 'previous'
 
 send is box that contains text with value 'send' with font size 15 , aligned CENTER
 

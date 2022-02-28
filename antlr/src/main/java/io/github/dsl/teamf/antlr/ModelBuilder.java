@@ -235,7 +235,8 @@ public class ModelBuilder extends QuizzBaseListener {
     public void enterNavigable(QuizzParser.NavigableContext ctx) {
         Navigation navigation= new Navigation();
         if(ctx.label() != null)
-            navigation.setNextLabel(ctx.label().getText());
+            navigation.setNextLabel(ctx.label().labelValue.getText()
+                    .substring(1, ctx.label().labelValue.getText().length() - 1));
         if(ctx.backward() != null){
             navigation.setOnlyNext(false);}
         else{
@@ -246,6 +247,7 @@ public class ModelBuilder extends QuizzBaseListener {
     @Override
     public void enterBackward(QuizzParser.BackwardContext ctx) {
         if(ctx.label() != null)
-            box.getNavigation().setPreviousLabel(ctx.label().getText());
+            box.getNavigation().setPreviousLabel(ctx.label().labelValue.getText()
+                    .substring(1, ctx.label().labelValue.getText().length() - 1));
     }
 }
