@@ -17,7 +17,7 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ external-antlr ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 7 source files to C:\Users\pouey\Documents\cours\SI5\DSL\labs\quizz_ui\antlr\target\classes
+[INFO] Compiling 8 source files to C:\Users\pouey\Documents\cours\SI5\DSL\labs\quizz_ui\antlr\target\classes
 [INFO] 
 [INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ external-antlr ---
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
@@ -34,6 +34,6 @@
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.812 s
-[INFO] Finished at: 2022-02-26T15:29:22+01:00
+[INFO] Total time:  4.321 s
+[INFO] Finished at: 2022-02-28T11:56:48+01:00
 [INFO] ------------------------------------------------------------------------

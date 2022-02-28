@@ -4,10 +4,10 @@
   "questions" : [
     {
       "statement": {
-        "text":"Quel animal est le plus moche ?"
+        "text":"Quel animal fait parti la famille des mustélidés ?"
       } ,
       "answers": ["le scorpion", "le pikachu", "le renard", "la loutre"],
-      "rightAnswer": ["le scorpion"]
+      "rightAnswer": ["la loutre"]
     },
     {
       "statement": {

@@ -20,7 +20,6 @@ zone: left
 zone: leftbottom
       timer with chrono, size LARGE, type ANALOG
 
-
 layout {
     gap SMALL
     arrangement{
@@ -50,7 +49,6 @@ layout {
         LARGE  middle,
     }
 }
-
 
 
 
