@@ -1,4 +1,4 @@
-Application MultiplePageGoal from quiz 'C://mescouilles.quiz.json'
+Application MultiplePageGoal from quiz 'C://un_super_quiz.quiz.json'
     uses layout rootLayout1 as default 
     uses layout rootLayout2 when screen is TABLET
     uses layout rootLayout3 when screen is PHONE
