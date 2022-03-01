@@ -8,7 +8,7 @@ export function onQuizEnd(state){
 }
 
 // exemple de function pour gérer les questions avec la navigation
-/*export function onAnswerClick(state,item, index,i){
+export function onAnswerClick(state,item, index,i){
 
     if(item == state.questions[i].rightAnswer ){
         if(state.indexQuestion < state.questions.length-1){
@@ -21,10 +21,10 @@ export function onQuizEnd(state){
         state.questions[state.indexQuestion].answers[index] = " X "
     }
     return state;
-}*/
+}
 
 // exemple de function pour gérer toutes les questions sur la page
-export function onAnswerClick(state,item, index,i){
+/**export function onAnswerClick(state,item, index,i){
 
     if(item == state.questions[i].rightAnswer ){
         if(state.indexQuestion < state.questions.length-1){
@@ -36,7 +36,7 @@ export function onAnswerClick(state,item, index,i){
         state.questions[state.indexQuestion].answers[index] = " X "
     }
     return state;
-}
+}*/
 
 export function onMultipleAnswerChange(state ,value, option,setState,i){
     console.log(state)

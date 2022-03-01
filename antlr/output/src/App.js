@@ -13,18 +13,32 @@ export default class App extends Component {
 		indexQuestion : 0}
 	}
 
+nextQuestion(){
+	if(this.state.indexQuestion !== this.state.quiz.questions.length-1){
+		this.setState(prevState => {
+			return {indexQuestion: prevState.indexQuestion + 1}
+		})
+	}
+}
+previousQuestion(){
+	if(this.state.indexQuestion !== 0){ 
+		this.setState(prevState => {
+			return {indexQuestion: prevState.indexQuestion - 1}
+		})
+	}
+}
 	renderQuestion(){
-		return this.state.quiz.questions.map((question,i)=>{
-		return(<>
+		let i = this.state.indexQuestion;
+				return(<>
 					{this.state.quiz.questions[i].statement.text !== undefined &&<Text size='medium'  textAlign='center'  color='light-2'  >{this.state.quiz.questions[i].statement.text}</Text>
 }
 {this.state.quiz.questions[i].statement.image !== undefined &&  <Box height="auto" width="auto">
 <Image src= {this.state.quiz.questions[i].statement.image} /></Box>}					{this.state.quiz.questions[i].answers===undefined &&<TextInput size="medium" textAlign="center"/>
 }{this.state.quiz.questions[i].rightAnswer?.length===1 && this.state.quiz.questions[i].answers.map((item,index)=>{
-							return <Button primary={true}  size='small'  margin='small'  alignSelf='center'  onClick={()=>{this.setState(onAnswerClick(this.state.quiz,item,index,i))}}  label={this.state.quiz.questions[i].answers[index]}  />
+							return <Button primary={true}  size='small'  margin='small'  color='light-2'  alignSelf='center'  onClick={()=>{this.setState(onAnswerClick(this.state.quiz,item,index,i))}}  label={this.state.quiz.questions[i].answers[index]}  />
 					})}
-{this.state.quiz.questions[i].rightAnswer?.length>1 && <CheckBoxGroup options = { this.state.quiz.questions[i].answers } onChange={ ({ value, option }) => { this.setState(onMultipleAnswerChange(this.state.quiz,value,option,i))}} gap = 'medium'  />}
-					</>)})
+{this.state.quiz.questions[i].rightAnswer?.length>1 && <CheckBoxGroup options = { this.state.quiz.questions[i].answers } onChange={ ({ value, option }) => { this.setState(onMultipleAnswerChange(this.state.quiz,value,option,i))}} gap = 'small'  />}
+					</>)
 	}
 	render() {
 		var customBreakpoints = deepMerge(grommet, {
@@ -38,44 +52,40 @@ export default class App extends Component {
 					},
 					large: 3000
 				},
-				font: {
-					family: 'SCRIPT'
-				}
 			}
 		});
 		var c_areas= []
 		const areas = {
 			default: [
-				["clock","header",],
-				["middle","middle",],
+				["left","header",],
+				["leftbottom","middle",],
 				["nav","nav",],
 			],
 			medium: [
-				["clock","header",],
-				["middle","middle",],
+				["left","header",],
+				["left","middle",],
 				["nav","nav",],
 			],
 			small: [
 				["header",],
-				["clockz",],
 				["middle",],
 				["nav",],
 			],
 		}
 		const rows = {
-			default:['small','auto','small',],
-			medium:['auto','auto','small',],
-			small:['xsmall','xsmall','auto','small',],
+			default:['small','medium','xsmall',],
+			medium:['medium','medium','xsmall',],
+			small:['small','medium','xsmall',],
 		}
 		const columns = {
-			default:['medium','large',],
-			medium:['auto','auto',],
-			small:['full',],
+			default:['medium','auto',],
+			medium:['medium','auto',],
+			small:['auto',],
 }
 		const gaps = {
-			default:'large',
-			medium:'small',
-			small:'small',
+			default:'null',
+			medium:'null',
+			small:'null',
 }
 		return (
 			<Grommet theme={customBreakpoints}>
@@ -89,8 +99,8 @@ export default class App extends Component {
 					{
 						c_areas =  areas[size] ? areas[size] : areas["default"],
 						c_areas.find((row) => row.indexOf("header") >=0) ?
-						<Box overflow='auto' gridArea='header' align='center'   background='#50148c' round='small' border={{color: "#ffffff",size: "medium",}}>
-						<Text size='large'  textAlign='center'  color='#00bfb2'  >{this.state.quiz.title}</Text>
+						<Box overflow='auto' gridArea='header' align='center'   background='dark-2' >
+						<Text size='xlarge'  textAlign='center'  color='light-2'  >{this.state.quiz.title}</Text>
 						<Text size='large'  textAlign='center'  color='light-2'  >{this.state.quiz.theme}</Text>
 						</Box>
 						:
@@ -99,7 +109,7 @@ export default class App extends Component {
 					{
 						c_areas =  areas[size] ? areas[size] : areas["default"],
 						c_areas.find((row) => row.indexOf("middle") >=0) ?
-						<Box overflow='auto' gridArea='middle' align='center'   background='#50148c' round='small' >
+						<Box overflow='auto' gridArea='middle' align='center'   background='dark-2' >
 							{this.renderQuestion()}
 						</Box>
 						:
@@ -107,27 +117,36 @@ export default class App extends Component {
 					}
 					{
 						c_areas =  areas[size] ? areas[size] : areas["default"],
-						c_areas.find((row) => row.indexOf("clock") >=0) ?
-						<Box overflow='auto' gridArea='clock' align='center'   background='white' round='small' >
-						<Clock run='backward'  type='analog'  size='large'  time='T00:01:00'  alignSelf='center'  precision='seconds'  onChange={(time)=>{ this.setState({ quiz : onTimerChange(this.state.quiz,time)})}}  />
-						</Box>
-						:
-						<Box/>
-					}
-					{
-						c_areas =  areas[size] ? areas[size] : areas["default"],
 						c_areas.find((row) => row.indexOf("nav") >=0) ?
-						<Box overflow='auto' gridArea='nav' align='center'   background='#50148c' round='small' >
-						<Meter size='small'  type='semicircle'  color='light-2'  thickness='medium' value = {this.state.indexQuestion*100/this.state.quiz.questions.length}  />
+						<Box overflow='auto' gridArea='nav' align='center'   background='dark-2' >
+						<Box  background="unset" flex={true} fill={true} direction="row" basis="auto" >
+						{this.state.indexQuestion!==0 && 
+							<Button primary={true}  size='small'  margin='auto'  color='light-2'  alignSelf='end'  onClick={()=>{this.previousQuestion()}}  label={'previous'}  />
+						}
+						{this.state.indexQuestion!==this.state.quiz.questions.length-1?
+								<Button primary={true}  size='small'  margin='auto'  color='light-2'  alignSelf='start'  onClick={()=>{this.nextQuestion()}}  label={'next'}  />
+							:
+								<Button primary={true}  size='small'  margin='auto'  color='light-2'  alignSelf='start'  onClick={()=>{onQuizEnd(this.state)}}  label={'next'}  />
+							}
+						</Box>
 						</Box>
 						:
 						<Box/>
 					}
 					{
 						c_areas =  areas[size] ? areas[size] : areas["default"],
-						c_areas.find((row) => row.indexOf("clockz") >=0) ?
-						<Box overflow='auto' gridArea='clockz' align='center'   background='light-4' round='small' >
-						<Clock run='backward'  type='digital'  size='large'  time='T00:01:00'  alignSelf='center'  precision='seconds'  onChange={(time)=>{ this.setState({ quiz : onTimerChange(this.state.quiz,time)})}}  />
+						c_areas.find((row) => row.indexOf("left") >=0) ?
+						<Box overflow='auto' gridArea='left' align='center'   background='dark-2' >
+						<Meter size='small'  type='circle'  color='light-2'  thickness='medium' value = {this.state.indexQuestion*100/this.state.quiz.questions.length}  />
+						</Box>
+						:
+						<Box/>
+					}
+					{
+						c_areas =  areas[size] ? areas[size] : areas["default"],
+						c_areas.find((row) => row.indexOf("leftbottom") >=0) ?
+						<Box overflow='auto' gridArea='leftbottom' align='center'   background='dark-2' >
+						<Clock run='forward'  type='analog'  size='large'  time='T00:00:00'  alignSelf='center'  precision='seconds'  onChange={(time)=>{ this.setState({ quiz : onTimerChange(this.state.quiz,time)})}}  />
 						</Box>
 						:
 						<Box/>
