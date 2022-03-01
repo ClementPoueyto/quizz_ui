@@ -48,6 +48,7 @@ public class ModelBuilder extends QuizzBaseListener {
 
     private Zone currentZone;
     private Border border;
+    private Navigation navigation;
 
     private List<QuizElement> quizElements = new ArrayList<>();
     private List<UiComponent> componentList=new ArrayList<>();
@@ -64,7 +65,8 @@ public class ModelBuilder extends QuizzBaseListener {
     private List<Size> currentRows = new ArrayList<>();
     private List<Size> currentColumn = new ArrayList<>();
     private int countLineArrangement;
-    private List<List<Zone>> arrangement =null; 
+    private List<List<Zone>> arrangement =null;
+    private Page page = new Page();
 
     /**************************
      ** Listening mechanisms **
@@ -173,10 +175,10 @@ public class ModelBuilder extends QuizzBaseListener {
         if(ctx.color!=null)
         zone.setColor(ctx.color.getText().toLowerCase());
         else
-            if (theApp.getTheme()!=null&theApp.getTheme().getPrimaryColor()!=null)
+            if (theApp.getTheme()!=null)
                 zone.setColor(theApp.getTheme().getPrimaryColor());
         if(ctx.alignement!=null){
-            zone.setAlignement(TextAlign.valueOf(ctx.alignement.getText().toLowerCase()));
+            zone.setAlignement(Align.valueOf(ctx.alignement.getText().toLowerCase()));
         }
         zone.setName(ctx.name.getText());
         if(ctx.rounding !=null){
@@ -220,16 +222,49 @@ public class ModelBuilder extends QuizzBaseListener {
     }
 
     @Override
-    public void exitPage(QuizzParser.PageContext ctx) {
-        Page page = new Page();
-        page.setQuestion(ques);
-        if(ctx.showAll!=null)
-            page.setAllOnPage(true);
-        else
-            page.setAllOnPage(false);
-        quizElements.add(page);
+    public void enterPage(QuizzParser.PageContext ctx) {
+        page = new Page();
         this.currentQuizElement = page;
+        if(navigation != null)
+            page.setNavigation(navigation);
+        quizElements.add(page);
     }
+    @Override
+    public void enterSend(QuizzParser.SendContext ctx) {
+        this.componentList.clear();
+
+    }
+    @Override
+    public void exitSend(QuizzParser.SendContext ctx) {
+        Send send = new Send();
+        if(ctx.button() != null)
+            send.setSend((ButtonComponent) this.componentList.get(0));
+        this.componentList.clear();
+        this.currentQuizElement = send;
+    }
+    @Override
+    public void exitPage(QuizzParser.PageContext ctx) {
+        Page page = (Page)this.currentQuizElement;
+        page.setQuestion(ques);
+    }
+    @Override public void enterNavigable(QuizzParser.NavigableContext ctx) {
+        this.componentList.clear();
+    }
+    @Override public void exitNavigable(QuizzParser.NavigableContext ctx) {
+        navigation = new Navigation();
+        this.currentQuizElement = navigation;
+        if(page != null)
+            page.setNavigation(navigation);
+
+        if(ctx.button() != null){
+            navigation.setSuivant((ButtonComponent) this.componentList.get(0));
+        }
+        if(ctx.backward() != null) {
+            navigation.setPrecedent((ButtonComponent) this.componentList.get(1));
+        }
+        this.componentList.clear();
+    }
+
 
 
     @Override public void enterQuestion(QuizzParser.QuestionContext ctx) {
@@ -276,7 +311,7 @@ public class ModelBuilder extends QuizzBaseListener {
             if(theApp.getTheme()!=null&&theApp.getTheme().getSecondaryColor()!=null)
                 textComponent.setColor(theApp.getTheme().getSecondaryColor());
         if(ctx.textAlign!=null){
-            textComponent.setTextAlign(TextAlign.valueOf(ctx.textAlign.getText().toLowerCase()));
+            textComponent.setTextAlign(Align.valueOf(ctx.textAlign.getText().toLowerCase()));
         }
         textComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
         this.componentList.add(textComponent);
@@ -317,6 +352,12 @@ public class ModelBuilder extends QuizzBaseListener {
         if(ctx.size!=null){
             buttonComponent.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
         }
+        if(ctx.labelValue!=null){
+            buttonComponent.setVariableName(ctx.labelValue.getText());
+        }
+        if(ctx.buttonAlign!=null){
+            buttonComponent.setAlign(Align.valueOf(ctx.buttonAlign.getText().toLowerCase()));
+        }
         this.buttonComponent = buttonComponent;
         componentList.add(buttonComponent);
     }
@@ -335,7 +376,7 @@ public class ModelBuilder extends QuizzBaseListener {
         ClockComponent clock = new ClockComponent();
         clock.setSize(Size.valueOf(ctx.size.getText().toLowerCase()));
         if(ctx.textAlign!=null){
-            clock.setSelfAlign(TextAlign.valueOf(ctx.textAlign.getText().toLowerCase()));
+            clock.setSelfAlign(Align.valueOf(ctx.textAlign.getText().toLowerCase()));
         }
         if(ctx.chrono!=null&&ctx.chrono.getText().equals("countdown")){
             clock.setClockDirection(ClockDirection.backward);
@@ -442,7 +483,7 @@ public class ModelBuilder extends QuizzBaseListener {
     public void enterTextInput(QuizzParser.TextInputContext ctx) {
         TextInputComponent textInputComponent = new TextInputComponent();
         if (ctx.textAlign != null)
-            textInputComponent.setTextAlign(TextAlign.valueOf(ctx.textAlign.getText().toLowerCase()));
+            textInputComponent.setTextAlign(Align.valueOf(ctx.textAlign.getText().toLowerCase()));
         if (ctx.placeholder != null) {
             String placeHolder = ctx.placeholder.getText();
             placeHolder = placeHolder.substring(1);

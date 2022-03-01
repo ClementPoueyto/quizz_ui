@@ -5,7 +5,7 @@ import io.github.dsl.teamf.kernel.structural.ui.Size;
 
 public class TextComponent extends UiComponent{
     private Size size;
-    private TextAlign textAlign = TextAlign.center;
+    private Align textAlign = Align.center;
     private String color;
     private String variableName;
 
@@ -17,11 +17,11 @@ public class TextComponent extends UiComponent{
         this.size = size;
     }
 
-    public TextAlign getTextAlign() {
+    public Align getTextAlign() {
         return textAlign;
     }
 
-    public void setTextAlign(TextAlign textAlign) {
+    public void setTextAlign(Align textAlign) {
         this.textAlign = textAlign;
     }
 

@@ -1,11 +1,11 @@
 package io.github.dsl.teamf.kernel.structural.quizz;
 
+import io.github.dsl.teamf.kernel.behavioral.Navigation;
 import io.github.dsl.teamf.kernel.generator.Visitor;
 
 public class Page extends QuizElement {
     Question question;
-    boolean allOnPage = true;
-
+    private Navigation navigation;
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
@@ -19,11 +19,11 @@ public class Page extends QuizElement {
         this.question = question;
     }
 
-    public boolean isAllOnPage() {
-        return allOnPage;
+    public Navigation getNavigation() {
+        return navigation;
     }
 
-    public void setAllOnPage(boolean allOnPage) {
-        this.allOnPage = allOnPage;
+    public void setNavigation(Navigation navigation) {
+        this.navigation = navigation;
     }
 }

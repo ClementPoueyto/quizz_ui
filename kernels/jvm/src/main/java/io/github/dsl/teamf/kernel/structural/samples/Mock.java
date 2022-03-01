@@ -94,12 +94,12 @@ public class Mock {
 		QuizInfo quizInfo = new QuizInfo();
 		TextComponent title = new TextComponent();
 		title.setSize(Size.large);
-		title.setTextAlign(TextAlign.center);
+		title.setTextAlign(Align.center);
 		quizInfo.setTitle(title);
 		
 		TextComponent theme = new TextComponent();
 		theme.setSize(Size.medium);
-		theme.setTextAlign(TextAlign.center);
+		theme.setTextAlign(Align.center);
 		quizInfo.setTheme(theme);
 		
 		header.setQuizElement(quizInfo);

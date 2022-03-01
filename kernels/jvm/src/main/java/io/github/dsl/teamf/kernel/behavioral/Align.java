@@ -1,6 +1,6 @@
 package io.github.dsl.teamf.kernel.behavioral;
 
-public enum TextAlign {
+public enum Align {
     start,
     center,
     end,

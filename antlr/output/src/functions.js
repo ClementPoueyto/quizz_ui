@@ -3,6 +3,10 @@ export function onTimerChange(state,time){
     return state;
 }
 
+export function onQuizEnd(state){
+    console.log(state)
+}
+
 export function onAnswerClick(state,item, index){
 
     if(item == state.questions[state.indexQuestion].rightAnswer ){
@@ -18,6 +22,7 @@ export function onAnswerClick(state,item, index){
     return state;
 }
 
-export function onMultipleAnswerChange(state ,value, option){
+export function onMultipleAnswerChange(state ,value, option,setState){
+    console.log(state)
     return state;
 }

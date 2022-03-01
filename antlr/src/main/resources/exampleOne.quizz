@@ -5,6 +5,7 @@ application exampleOne
     background DARK-2
         rounding SMALL
       border with size SMALL, style DASHED, color DARK-3
+      contains questions
       statement with text with size MEDIUM,  align CENTER
       answer with single choice with size LARGE, color LIGHT-2 ,margin SMALL
 
@@ -23,13 +24,17 @@ application exampleOne
                 rounding SMALL
         progress with size FULL, type BAR, thickness MEDIUM
 
+zone: send
+rounding SMALL
+    send quiz with size SMALL, color DARK-4, margin AUTO, align START, label 'send'
+
 layout {
     gap SMALL
     arrangement{
              AUTO AUTO,
        XSMALL left header,
        MEDIUM middle middle,
-       SMALL footer footer,
+       SMALL send send,
        }
     }
 
