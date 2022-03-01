@@ -27,13 +27,13 @@ arrangement     :   'arrangement' '{' columns? line+ '}';
     line        :   row=SIZE? zone_name+ ',';
     zone_name   :   IDENTIFIER ;
 
-quizz_element   : page | quiz_info | timer | progressbar | navigable;
+quizz_element   : page | quiz_info | timer | progressbar | navigable | send;
     quiz_info   : ('title' 'with' title=text) ('description' 'with' description=text)?;
     page        : 'contains questions' question;
     question    : statement+ 'answer' 'with' answer+;
     navigable   :   'navigable forward' ('with' button) (backward)?;
-    backward        :   'and backward with' button;
-
+    backward    :   'and backward with' button;
+    send        :   'send quiz with' button;
     statement   : 'statement' 'with' (text_statement|picture_statement);
     answer      : single_answer | multiple_answer | open_answer;
     single_answer:  'single choice' 'with' button;

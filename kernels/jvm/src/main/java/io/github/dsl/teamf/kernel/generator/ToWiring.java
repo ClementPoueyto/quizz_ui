@@ -368,26 +368,26 @@ public class ToWiring extends Visitor<StringBuffer> {
 			}
 		}
 		if(context.get("pass") == PASS.JSX){
-			w("\t\t<Box  background=\"unset\" flex={true} fill={true} direction=\"row\" basis=\"auto\" >\n");
+			w("\t\t\t\t\t\t<Box  background=\"unset\" flex={true} fill={true} direction=\"row\" basis=\"auto\" >\n");
 			if(navigation.getPrecedent() != null){
-				w("\t\t\t{this.state.indexQuestion!==0 && \n");
+				w("\t\t\t\t\t\t{this.state.indexQuestion!==0 && \n");
 				navigation.getPrecedent().setFunctionName("this.previousQuestion()");
-				w("\t\t\t\t");
+				w("\t\t\t\t\t\t\t");
 				navigation.getPrecedent().accept(this);
-				w("\t\t\t}\n");
+				w("\t\t\t\t\t\t}\n");
 			}
-			w("\t\t\t{this.state.indexQuestion!==this.state.quiz.questions.length-1?\n");
+			w("\t\t\t\t\t\t{this.state.indexQuestion!==this.state.quiz.questions.length-1?\n");
 
 			navigation.getSuivant().setFunctionName("this.nextQuestion()");
-			w("\t\t\t\t");
+			w("\t\t\t\t\t\t\t\t");
 			navigation.getSuivant().accept(this);
-			w("\t\t\t:\n");
-			w("\t\t\t\t");
+			w("\t\t\t\t\t\t\t:\n");
+			w("\t\t\t\t\t\t\t\t");
 			navigation.getSuivant().setFunctionName("onQuizEnd(this.state)");
 			navigation.getSuivant().accept(this);
-			w("\t\t\t}\n");
+			w("\t\t\t\t\t\t\t}\n");
 
-			w("\t\t</Box>\n");
+			w("\t\t\t\t\t\t</Box>\n");
 		}
 	}
 
@@ -597,4 +597,14 @@ public class ToWiring extends Visitor<StringBuffer> {
 		
 	}
 
+	@Override
+	public void visit(Send send) {
+		if(context.get("pass") == PASS.JSX){
+			w("\t\t\t\t\t\t");
+			if(send.getSend() != null)
+				send.getSend().accept(this);
+			w("\n");
+
+		}
+	}
 }

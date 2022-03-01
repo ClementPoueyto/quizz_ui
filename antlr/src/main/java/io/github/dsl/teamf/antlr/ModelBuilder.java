@@ -175,7 +175,7 @@ public class ModelBuilder extends QuizzBaseListener {
         if(ctx.color!=null)
         zone.setColor(ctx.color.getText().toLowerCase());
         else
-            if (theApp.getTheme()!=null&theApp.getTheme().getPrimaryColor()!=null)
+            if (theApp.getTheme()!=null)
                 zone.setColor(theApp.getTheme().getPrimaryColor());
         if(ctx.alignement!=null){
             zone.setAlignement(Align.valueOf(ctx.alignement.getText().toLowerCase()));
@@ -229,7 +229,19 @@ public class ModelBuilder extends QuizzBaseListener {
             page.setNavigation(navigation);
         quizElements.add(page);
     }
+    @Override
+    public void enterSend(QuizzParser.SendContext ctx) {
+        this.componentList.clear();
 
+    }
+    @Override
+    public void exitSend(QuizzParser.SendContext ctx) {
+        Send send = new Send();
+        if(ctx.button() != null)
+            send.setSend((ButtonComponent) this.componentList.get(0));
+        this.componentList.clear();
+        this.currentQuizElement = send;
+    }
     @Override
     public void exitPage(QuizzParser.PageContext ctx) {
         Page page = (Page)this.currentQuizElement;
