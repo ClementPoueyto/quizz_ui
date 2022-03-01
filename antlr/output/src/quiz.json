@@ -22,14 +22,6 @@
       } ,
       "answers": ["le chat", "le chien", "la poule", "la baleine"],
       "rightAnswer": ["la baleine"]
-    },
-    {
-      "statement":
-      {
-        "image" :"https://media.istockphoto.com/photos/mallard-duck-on-white-background-picture-id464988959?k=20&m=464988959&s=612x612&w=0&h=J1Xy59x7bGH01hlt0YDdxXlBHlRX87KqvghQRepuo_o="
-      },
-      "answers": ["Canard", "Pigeon"],
-      "rightAnswer": ["Canard"]
     }
   ],
   "indexQuestion" : 0,

@@ -16,7 +16,7 @@ do
         err=$(grep -F '[ERROR]' ./log_execution.txt)
         err_size=$(expr length "$err")
         if [ "$err_size" = "0" ] ; then
-            echo "generation done for file $f"
+            echo -e "[\033[32mSUCESS\033[0m] generation done for file $f"
         else
             echo "$err"
         fi

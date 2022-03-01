@@ -1,0 +1,30 @@
+{
+  "title": "Choisir le nom du quizz",
+  "theme": "et son theme",
+  "questions" : [
+    {
+      "statement": {
+        "text":"On peut choisir d'ajouter un ennoncé pour notre question"
+      } ,
+      "answers": ["avec une reponse", "ou deux", "..."],
+      "rightAnswer": ["on definit la bonne reponse","on peut avoir plusieurs bonnes reponses"]
+    },
+    {
+      "statement": {
+        "image":"ou une image : il faut ajouter le path"
+      } ,
+      "answers": ["reponse1", "reponse2"],
+      "rightAnswer": ["la bonne reponse"]
+    },
+    {
+      "statement": {
+        "text":"ou utiliser le text",
+        "image":"et l'image"
+      } ,
+      "answers": ["on peut ne pas avoir de bonne reponse"],
+      "rightAnswer": ["si c'est une réponse ouverte"]
+    }
+  ],
+  "indexQuestion" : 0,
+  "score": 0
+}
