@@ -1,3 +1,16 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------< io.github.mosser.arduinoml:external-antlr >--------------
+[INFO] Building external-antlr 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- exec-maven-plugin:1.6.0:java (default-cli) @ external-antlr ---
+
+
+Running the ANTLR compiler for Quizz UI
+Using input file: C:\Users\sylva\Desktop\SI5\DSL\quizz_ui\antlr\src\main\resources\exampleOne.quizz
+COLORDARK-2COLORDARK-5COLORLIGHT-2COLORDARK-3IT's NULLIT's NULLAUTO
+AUTO
 import React, { Component } from 'react'
 import {  onAnswerClick,  onTimerChange, onMultipleAnswerChange, onQuizEnd} from './functions'
 import { Grommet, Grid, Box, CheckBoxGroup, Text, Button, Clock, Image, ResponsiveContext, TextInput, Meter } from 'grommet'
@@ -141,3 +154,10 @@ previousQuestion(){
 		);
 	}
 }
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.769 s
+[INFO] Finished at: 2022-03-01T20:25:46+01:00
+[INFO] ------------------------------------------------------------------------

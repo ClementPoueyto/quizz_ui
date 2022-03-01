@@ -4,7 +4,7 @@ import io.github.dsl.teamf.kernel.generator.Visitor;
 import io.github.dsl.teamf.kernel.structural.ui.Size;
 
 public class PictureComponent extends UiComponent{
-    private String path="this.state.quiz.questions[this.state.quiz.indexQuestion].statement.image";
+    private String path="this.state.quiz.questions[i].statement.image";
     private Size height;
     private Size width;
 

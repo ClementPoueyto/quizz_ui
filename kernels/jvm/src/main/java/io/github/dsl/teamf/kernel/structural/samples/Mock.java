@@ -131,9 +131,12 @@ public class Mock {
 
 		answer.setAnswer(checkBoxComponent);
 
-
-		question.setAnswer(answer);
-		question.setStatement(statement);
+		List<Answer> answers = new ArrayList<>();
+		List<Statement> statements = new ArrayList<>();
+		statements.add(statement);
+		answers.add(answer);
+		question.setAnswers(answers);
+		question.setStatements(statements);
 
 		middle.setQuizElement(page);
 

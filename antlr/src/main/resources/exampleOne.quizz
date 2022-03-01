@@ -5,8 +5,10 @@ application exampleOne
         rounding SMALL
       border with size SMALL, style DASHED, color DARK-3
       contains questions
-      statement with text with size MEDIUM,  align CENTER
+      statement with text with size MEDIUM
+                        picture with height XSMALL,  width XSMALL
       answer with single choice with size LARGE, color LIGHT-2 ,margin SMALL
+                    multiple choice with gap SMALL
 
     zone : header
         background DARK-5
@@ -22,6 +24,10 @@ application exampleOne
         background DARK-3
                 rounding SMALL
         progress with size FULL, type BAR, thickness MEDIUM
+zone: nav
+rounding SMALL
+    navigable forward with size SMALL, margin AUTO, align START, label 'next'
+                and backward with size SMALL, margin AUTO , align END, label 'previous'
 
 zone: send
 rounding SMALL
@@ -32,8 +38,8 @@ layout {
     arrangement{
              AUTO AUTO,
        XSMALL left header,
-       MEDIUM middle middle,
-       SMALL send send,
+       AUTO middle middle,
+       SMALL nav nav,
        }
     }
 

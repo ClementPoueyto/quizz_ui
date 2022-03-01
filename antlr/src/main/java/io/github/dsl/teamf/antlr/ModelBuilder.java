@@ -52,6 +52,8 @@ public class ModelBuilder extends QuizzBaseListener {
 
     private List<QuizElement> quizElements = new ArrayList<>();
     private List<UiComponent> componentList=new ArrayList<>();
+    private List<Answer> answers=new ArrayList<>();
+    private List<Statement> statements=new ArrayList<>();
 
     private TextComponent textComponent;
     private ButtonComponent buttonComponent;
@@ -270,7 +272,10 @@ public class ModelBuilder extends QuizzBaseListener {
     @Override public void enterQuestion(QuizzParser.QuestionContext ctx) {
          ques=new Question();
     }
-
+    @Override public void exitQuestion(QuizzParser.QuestionContext ctx) {
+        ques.setStatements(statements);
+        ques.setAnswers(answers);
+    }
 
     @Override
     public void enterQuiz_info(QuizzParser.Quiz_infoContext ctx) {
@@ -325,7 +330,7 @@ public class ModelBuilder extends QuizzBaseListener {
     }
     @Override public void exitSingle_answer(QuizzParser.Single_answerContext ctx) {
         singleAnswer.setAnswer(buttonComponent);
-        ques.setAnswer(singleAnswer);
+        answers.add(singleAnswer);
 
     }
 
@@ -334,7 +339,7 @@ public class ModelBuilder extends QuizzBaseListener {
     }
     @Override public void exitMultiple_answer(QuizzParser.Multiple_answerContext ctx) {
         multipleAnswer.setAnswer(checkBoxComponent);
-        ques.setAnswer(multipleAnswer);
+        answers.add(multipleAnswer);
     }
 
     @Override public void enterButton(QuizzParser.ButtonContext ctx) {
@@ -456,8 +461,8 @@ public class ModelBuilder extends QuizzBaseListener {
     }
 
     @Override public void exitText_statement(QuizzParser.Text_statementContext ctx) {
-        textStatement.setTextStatement(textComponent);
-        ques.setStatement(textStatement);
+        textStatement.setStatement(textComponent);
+        statements.add(textStatement);
     }
 
     @Override public void enterPicture_statement(QuizzParser.Picture_statementContext ctx) {
@@ -465,7 +470,7 @@ public class ModelBuilder extends QuizzBaseListener {
     }
 
     @Override public void exitPicture_statement(QuizzParser.Picture_statementContext ctx) {
-        ques.setStatement(pictureStatement);
+        statements.add(pictureStatement);
     }
 
     @Override public void enterPicture(QuizzParser.PictureContext ctx) {
@@ -504,7 +509,7 @@ public class ModelBuilder extends QuizzBaseListener {
     @Override
     public void exitOpen_answer(QuizzParser.Open_answerContext ctx) {
         openAnswer.setAnswer(textInputComponent);
-        ques.setAnswer(openAnswer);
+        answers.add(openAnswer);
     }
 
 }

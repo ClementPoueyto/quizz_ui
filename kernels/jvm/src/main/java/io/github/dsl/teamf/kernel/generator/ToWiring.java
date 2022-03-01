@@ -315,9 +315,13 @@ public class ToWiring extends Visitor<StringBuffer> {
 	public void visit(Question question) {
 		if(context.get("pass") == PASS.FUNCTIONJSX) {
 			w("\t\t\t\t\t");
-			question.getStatement().accept(this);
+			for(Statement statement: question.getStatements()) {
+				statement.accept(this);
+			}
 			w("\t\t\t\t\t");
-			question.getAnswer().accept(this);
+			for(Answer answer :question.getAnswers()){
+				answer.accept(this);
+			}
 		}
 	}
 
@@ -328,7 +332,7 @@ public class ToWiring extends Visitor<StringBuffer> {
 			w(String.format(" onAnswerClick, "));
 		}
 		if(context.get("pass") == PASS.JSX || context.get("pass") == PASS.FUNCTIONJSX) {
-			w("{this.state.quiz.questions[i].answers.map((item,index)=>{\n\t\t\t\t\t\t\treturn ");
+			w("{this.state.quiz.questions[i].rightAnswer.length===1 && this.state.quiz.questions[i].answers.map((item,index)=>{\n\t\t\t\t\t\t\treturn ");
 			singleAnswer.getAnswer().accept(this);
 			w("\t\t\t\t\t})}\n");
 		}
@@ -393,7 +397,9 @@ public class ToWiring extends Visitor<StringBuffer> {
 	public void visit(TextStatement textStatement) {
 
 		if(context.get("pass")==PASS.JSX || context.get("pass") == PASS.FUNCTIONJSX)
-		textStatement.getTextStatement().accept(this);
+			w("{this.state.quiz.questions[i].statement.text !== undefined &&");
+		textStatement.getStatement().accept(this);
+		w("}\n");
 
 	}
 
@@ -469,12 +475,12 @@ public class ToWiring extends Visitor<StringBuffer> {
 	public void visit(PictureComponent pictureComponent)
 	{
 		if(context.get("pass")==PASS.JSX || context.get("pass") == PASS.FUNCTIONJSX){
-			w(String.format("<Box height=\"%s\" width=\"%s\">\n",pictureComponent.getHeight(),pictureComponent.getWidth()));
+			w(String.format("{this.state.quiz.questions[i].statement.image !== undefined &&  <Box height=\"%s\" width=\"%s\">\n",pictureComponent.getHeight(),pictureComponent.getWidth()));
 
 			w("<Image ");
 			w(String.format("src= {%s} ", pictureComponent.getPath()));
 			w(String.format("/>"));
-			w("</Box>");
+			w("</Box>}");
 		}
 /*
 		if(context.get("pass")==PASS.JSX)
@@ -513,13 +519,13 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(CheckBoxComponent checkBoxComponent) {
 		if(context.get("pass") == PASS.JSX || context.get("pass") == PASS.FUNCTIONJSX) {
-			w("<CheckBoxGroup");
+			w("{this.state.quiz.questions[i].rightAnswer.length>1 && <CheckBoxGroup");
 			w(String.format(" options = { %s }", checkBoxComponent.getVariableName()));
 			w(String.format(" onChange={ ({ value, option }) => { %s}}", checkBoxComponent.getFunctionName()));
 			w(String.format(" gap = \'%s\' ", checkBoxComponent.getGap()));
 
 
-			w(String.format(" />\n"));
+			w(String.format(" />}\n"));
 		}
 	}
 
@@ -560,7 +566,9 @@ public class ToWiring extends Visitor<StringBuffer> {
 	@Override
 	public void visit(OpenAnswer openAnswer) {
 		if (context.get("pass") == PASS.JSX || context.get("pass") == PASS.FUNCTIONJSX)
+			w("{this.state.quiz.questions[i].answers===undefined");
 			openAnswer.getAnswer().accept(this);
+			w("}");
 	}
 
 	@Override

@@ -2,10 +2,12 @@ package io.github.dsl.teamf.kernel.structural.quizz;
 
 import io.github.dsl.teamf.kernel.generator.Visitor;
 
-public class Question extends QuizElement {
-    private Statement statement;
+import java.util.List;
 
-    private Answer answer;
+public class Question extends QuizElement {
+    private List<Statement> statements;
+
+    private List<Answer> answers;
 
 
     @Override
@@ -13,19 +15,19 @@ public class Question extends QuizElement {
         visitor.visit(this);
     }
 
-    public Statement getStatement() {
-        return statement;
+    public List<Statement> getStatements() {
+        return statements;
     }
 
-    public void setStatement(Statement statement) {
-        this.statement = statement;
+    public void setStatements(List<Statement> statements) {
+        this.statements = statements;
     }
 
-    public Answer getAnswer() {
-        return answer;
+    public List<Answer> getAnswers() {
+        return answers;
     }
 
-    public void setAnswer(Answer answer) {
-        this.answer = answer;
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 }
