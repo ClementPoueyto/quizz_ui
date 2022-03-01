@@ -22,15 +22,14 @@ zone: middle
             answer with multiple choice with gap  MEDIUM
 
 zone: clock
-
     background WHITE
     rounding SMALL
         timer with countdown, size LARGE, type ANALOG
 
 zone: nav
 rounding SMALL
-    navigable forward with size SMALL, margin AUTO, align START, label 'next'
-                and backward with size SMALL, margin AUTO , align END, label 'previous'
+        progress with size SMALL, type SEMICIRCLE, thickness MEDIUM
+
 
 zone: clockz
     background LIGHT-4
@@ -52,7 +51,7 @@ layout {
     gap SMALL
     arrangement{
             clock header,
-    MEDIUM   middle middle,
+    AUTO   middle middle,
     SMALL     nav nav,
     }
 }
@@ -65,7 +64,7 @@ layout {
              FULL,
     XSMALL  header ,
     XSMALL clockz,
-    MEDIUM  middle,
+    AUTO  middle,
     SMALL nav,
     }
 }
