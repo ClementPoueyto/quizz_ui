@@ -1,6 +1,5 @@
 application exampleOne
 
-
     zone : middle
     background DARK-2
         rounding SMALL
@@ -37,8 +36,6 @@ layout {
        SMALL send send,
        }
     }
-
-
 
 
 

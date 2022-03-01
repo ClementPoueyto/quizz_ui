@@ -8,7 +8,7 @@
 
 
 Running the ANTLR compiler for Quizz UI
-Using input file: C:\Users\sylva\Desktop\SI5\DSL\quizz_ui\antlr\src\main\resources\exampleOne.quizz
+Using input file: C:\Users\pouey\Documents\cours\SI5\DSL\labs\quizz_ui\antlr\src\main\resources\exampleOne.quizz
 COLORDARK-2COLORDARK-5COLORLIGHT-2COLORDARK-3IT's NULLAUTO
 AUTO
 import React, { Component } from 'react'
@@ -123,6 +123,6 @@ export default class App extends Component {
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  0.578 s
-[INFO] Finished at: 2022-03-01T01:22:49+01:00
+[INFO] Total time:  1.114 s
+[INFO] Finished at: 2022-03-01T19:36:39+01:00
 [INFO] ------------------------------------------------------------------------
