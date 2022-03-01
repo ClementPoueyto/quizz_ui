@@ -4,7 +4,7 @@ import io.github.dsl.teamf.kernel.generator.Visitor;
 import io.github.dsl.teamf.kernel.structural.ui.Size;
 
 public class TextComponent extends UiComponent{
-    private Size size;
+    private Size size=Size.medium;
     private Align textAlign = Align.center;
     private String color;
     private String variableName;

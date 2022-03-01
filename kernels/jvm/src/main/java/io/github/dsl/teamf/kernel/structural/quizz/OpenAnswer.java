@@ -7,6 +7,10 @@ public class OpenAnswer extends Answer {
 
     private TextInputComponent answer;
 
+    public  OpenAnswer(){
+        this.setAnswer(new TextInputComponent());
+    }
+
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);

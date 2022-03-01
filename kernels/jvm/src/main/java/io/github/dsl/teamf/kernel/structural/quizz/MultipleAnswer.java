@@ -8,6 +8,10 @@ public class MultipleAnswer extends Answer{
 
     private CheckBoxComponent answer;
 
+    public MultipleAnswer(){
+        this.setAnswer(new CheckBoxComponent());
+    }
+
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);

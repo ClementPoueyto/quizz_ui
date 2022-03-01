@@ -36,11 +36,11 @@ public class ModelBuilder extends QuizzBaseListener {
     private List<Layout> layouts = new ArrayList<>();
     private Map<String, Zone>   zones= new HashMap<>();
     private Question ques;
-    private SingleAnswer singleAnswer;
-    private MultipleAnswer multipleAnswer;
-    private OpenAnswer openAnswer;
-    private PictureStatement pictureStatement;
-    private TextStatement textStatement;
+    private SingleAnswer singleAnswer = new SingleAnswer();
+    private MultipleAnswer multipleAnswer = new MultipleAnswer();
+    private OpenAnswer openAnswer = new OpenAnswer();
+    private PictureStatement pictureStatement = new PictureStatement();
+    private TextStatement textStatement = new TextStatement();
     private QuizInfo quizInfo;
     private Timer timer;
     private Theme theme;
@@ -61,7 +61,6 @@ public class ModelBuilder extends QuizzBaseListener {
     private ClockComponent clockComponent;
     private TextInputComponent textInputComponent;
     private MeterComponent meterComponent;
-
     private QuizElement currentQuizElement;
     private Layout currenLayout;
     private List<Size> currentRows = new ArrayList<>();
@@ -270,7 +269,14 @@ public class ModelBuilder extends QuizzBaseListener {
 
 
     @Override public void enterQuestion(QuizzParser.QuestionContext ctx) {
-         ques=new Question();
+
+        ques=new Question();
+        answers.add(openAnswer);
+        answers.add(singleAnswer);
+        answers.add(multipleAnswer);
+        statements.add(textStatement);
+        statements.add(pictureStatement);
+
     }
     @Override public void exitQuestion(QuizzParser.QuestionContext ctx) {
         ques.setStatements(statements);
@@ -325,21 +331,13 @@ public class ModelBuilder extends QuizzBaseListener {
     }
 
 
-    @Override public void enterSingle_answer(QuizzParser.Single_answerContext ctx) {
-        singleAnswer=new SingleAnswer();
-    }
     @Override public void exitSingle_answer(QuizzParser.Single_answerContext ctx) {
         singleAnswer.setAnswer(buttonComponent);
-        answers.add(singleAnswer);
 
     }
 
-    @Override public void enterMultiple_answer(QuizzParser.Multiple_answerContext ctx) {
-        multipleAnswer=new MultipleAnswer();
-    }
     @Override public void exitMultiple_answer(QuizzParser.Multiple_answerContext ctx) {
         multipleAnswer.setAnswer(checkBoxComponent);
-        answers.add(multipleAnswer);
     }
 
     @Override public void enterButton(QuizzParser.ButtonContext ctx) {
@@ -455,23 +453,12 @@ public class ModelBuilder extends QuizzBaseListener {
             meterComponent.setThickness(Size.valueOf(ctx.thickness.getText().toLowerCase()));
         }
     }
-    @Override public void enterText_statement(QuizzParser.Text_statementContext ctx) {
-        textStatement= new TextStatement();
 
-    }
 
     @Override public void exitText_statement(QuizzParser.Text_statementContext ctx) {
-        textStatement.setStatement(textComponent);
-        statements.add(textStatement);
+        textStatement.setTextStatement(textComponent);
     }
 
-    @Override public void enterPicture_statement(QuizzParser.Picture_statementContext ctx) {
-        pictureStatement=new PictureStatement();
-    }
-
-    @Override public void exitPicture_statement(QuizzParser.Picture_statementContext ctx) {
-        statements.add(pictureStatement);
-    }
 
     @Override public void enterPicture(QuizzParser.PictureContext ctx) {
         PictureComponent picture=new PictureComponent();
@@ -502,14 +489,8 @@ public class ModelBuilder extends QuizzBaseListener {
     }
 
     @Override
-    public void enterOpen_answer(QuizzParser.Open_answerContext ctx) {
-        openAnswer = new OpenAnswer();
-    }
-
-    @Override
     public void exitOpen_answer(QuizzParser.Open_answerContext ctx) {
         openAnswer.setAnswer(textInputComponent);
-        answers.add(openAnswer);
     }
 
 }

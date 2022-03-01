@@ -9,6 +9,8 @@ application exampleOne
                         picture with height XSMALL,  width XSMALL
       answer with single choice with size LARGE, color LIGHT-2 ,margin SMALL
                     multiple choice with gap SMALL
+                    open size XLARGE
+
 
     zone : header
         background DARK-5

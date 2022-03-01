@@ -30,6 +30,12 @@
       },
       "answers": ["Canard", "Pigeon"],
       "rightAnswer": ["Canard"]
+    },
+    {
+      "statement":
+      {
+        "text" :"Qu'avez-vous pensé de notre quiz ?"
+      }
     }
   ],
   "indexQuestion" : 0,

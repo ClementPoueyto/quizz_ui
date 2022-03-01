@@ -6,6 +6,9 @@ import io.github.dsl.teamf.kernel.generator.Visitor;
 public class TextStatement extends Statement{
     private TextComponent textStatement;
 
+    public TextStatement(){
+        setTextStatement(new TextComponent());
+    }
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);

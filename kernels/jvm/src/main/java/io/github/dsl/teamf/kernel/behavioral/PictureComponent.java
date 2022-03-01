@@ -5,8 +5,8 @@ import io.github.dsl.teamf.kernel.structural.ui.Size;
 
 public class PictureComponent extends UiComponent{
     private String path="this.state.quiz.questions[i].statement.image";
-    private Size height;
-    private Size width;
+    private Size height=Size.auto;
+    private Size width=Size.auto;
 
     public String getPath() {
         return path;

@@ -5,13 +5,13 @@ import io.github.dsl.teamf.kernel.structural.ui.Size;
 
 public class ButtonComponent extends UiComponent{
 
-    private Size size;
+    private Size size=Size.small;
     private String color;
     private String functionName;
-    private Size margin;
+    private Size margin=Size.small;
     private Boolean primary=true;
     private String variableName;
-    private Align align;
+    private Align align=Align.center;
 
     @Override
     public void accept(Visitor visitor) {

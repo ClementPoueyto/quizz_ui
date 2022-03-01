@@ -7,6 +7,11 @@ public class PictureStatement extends Statement{
 
     private PictureComponent picture;
 
+    public PictureStatement(){
+        setPicture(new PictureComponent());
+
+    }
+
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);

@@ -7,6 +7,9 @@ public class SingleAnswer extends Answer{
 
     private ButtonComponent answer;
 
+    public SingleAnswer(){
+        setAnswer(new ButtonComponent());
+    }
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);

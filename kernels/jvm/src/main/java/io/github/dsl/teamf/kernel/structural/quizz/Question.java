@@ -1,7 +1,10 @@
 package io.github.dsl.teamf.kernel.structural.quizz;
 
+import io.github.dsl.teamf.kernel.behavioral.PictureComponent;
+import io.github.dsl.teamf.kernel.behavioral.TextComponent;
 import io.github.dsl.teamf.kernel.generator.Visitor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Question extends QuizElement {
@@ -9,6 +12,9 @@ public class Question extends QuizElement {
 
     private List<Answer> answers;
 
+    public Question() {
+
+    }
 
     @Override
     public void accept(Visitor visitor) {
