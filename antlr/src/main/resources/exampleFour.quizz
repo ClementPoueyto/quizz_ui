@@ -41,7 +41,7 @@ layout {
     arrangement{
             MEDIUM LARGE,
     SMALL  clock header,
-    MEDIUM   middle middle,
+    AUTO   middle middle,
     SMALL   nav nav,
     }
 }
@@ -68,7 +68,6 @@ layout {
     SMALL nav,
     }
 }
-
 
 
 

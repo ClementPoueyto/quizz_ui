@@ -71,7 +71,7 @@ export default class App extends Component {
 			],
 		}
 		const rows = {
-			default:['small','medium','small',],
+			default:['small','auto','small',],
 			medium:['auto','auto','small',],
 			small:['xsmall','xsmall','auto','small',],
 		}
@@ -151,6 +151,6 @@ export default class App extends Component {
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  0.875 s
-[INFO] Finished at: 2022-03-01T19:41:06+01:00
+[INFO] Total time:  0.902 s
+[INFO] Finished at: 2022-03-01T20:09:11+01:00
 [INFO] ------------------------------------------------------------------------
